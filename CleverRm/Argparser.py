@@ -12,14 +12,13 @@ import Logwriter
 # print ("must write clever -rm")
 def main():
     parser = argparse.ArgumentParser()
-    group_del = parser.add_argument_group('group_del', 'used for deleting')
-    group_del.add_argument('-cleverrm', '-myrm', help='This will be option removal', action="store_true")
-    group_del.add_argument('-path', help='a path of file or directory to remove'
-                           , type=lambda s: unicode(s, 'utf-8'), metavar=''
-                           , required=False)
-    group_watch = parser.add_argument_group('group_watch', 'to watch a trash bucket')
-    group_watch.add_argument('-lstrash', help='watch everything in trash bucket', action='store_true')
-
+    # group_del = parser.add_argument_group('group_del', 'used for deleting')
+    parser.add_argument('-cleverrm', '-myrm', help='This will be option removal', nargs='+')
+    parser.add_argument('path', help='a path of file or directory to remove', type=lambda s: unicode(s, 'utf-8'))
+    # group_watch = parser.add_argument_group('group_watch', 'to watch a trash bucket')
+    # parser.add_argument('-lstrash', help='watch everything in trash bucket', action='store_true')
+    podparser = parser.add_subparsers('trash')
+    
     args = parser.parse_args()
     if args.cleverrm:
         this_path = unicode(os.path.abspath(args.path))
