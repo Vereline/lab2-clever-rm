@@ -9,14 +9,14 @@ import json
 def remove_to_trash(path):
     print 'trying to move file'
 
-   # try:
-    config = json.load(open('CleverRm/Configure.json', 'r'))
-    trash_path = config['path']
+    try:
+        config = json.load(open('CleverRm/Configure.json', 'r'))
+        trash_path = config['path']
 
-    shutil.move(path, trash_path)
-    print 'succeed'
-    #except:
-    print 'something is going wrong'
+        shutil.move(path, trash_path)
+        print 'succeed'
+    except:
+        print 'something is going wrong'
 
 
 def remove_directly(path):
@@ -28,7 +28,7 @@ def clean_trash():
 
 
 def watch_trash():
-    config = json.load('CleverRm/Configure.json')
+    config = json.load(open('CleverRm/Configure.json', 'r'))
     trash_path = config['path']
 
     file_list = os.listdir(trash_path)

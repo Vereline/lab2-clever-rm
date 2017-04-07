@@ -20,25 +20,28 @@ def add_parser():
     parser_remove.add_argument('-i', nargs='+')
     parser_remove.add_argument('-f', nargs='+')
     parser_remove.add_argument('-v', nargs='+')
-
     parser_remove.add_argument('path', nargs='*')
 
     parser_trash = subparsers.add_parser('trash')
-    trash_subparers = parser_trash.add_subparsers()
+    trash_subparsers = parser_trash.add_subparsers()
 
     # cleaning trash
-    parser_clean_trash = trash_subparers.add_parser('clean_trash')
+    parser_clean_trash = trash_subparsers.add_parser('clean')
     parser_clean_trash.add_argument('-i', nargs='+')
     parser_clean_trash.add_argument('-f', nargs='+')
     parser_clean_trash.add_argument('-v', nargs='+')
     parser_clean_trash.add_argument('path', nargs='*')
 
     # restore trash
-    parser_restore_trash = trash_subparers.add_parser('restore_trash')
+    parser_restore_trash = trash_subparsers.add_parser('restore')
     parser_restore_trash.add_argument('-i', nargs='+')
     parser_restore_trash.add_argument('-f', nargs='+')
     parser_restore_trash.add_argument('-v', nargs='+')
     parser_restore_trash.add_argument('path', nargs='*')
+
+    # show trash
+    parser_trash_show = trash_subparsers.add_parser('show')
+    parser_trash_show.add_argument('show_trash')
 
     # configure files
     parser_configure = subparsers.add_parser('configure')
@@ -57,6 +60,10 @@ def main():
     parser = add_parser()
     args = parser.parse_args()
 
+# how to control namespaces???
+
+    if args.show_trash:
+        Clever_rm.watch_trash()
     if args.f:
         for path in args.f:
             try:
