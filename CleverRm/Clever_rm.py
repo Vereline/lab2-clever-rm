@@ -3,29 +3,38 @@
 
 import shutil  #  Contains functions for operating files
 import os  # imports the os
+import json
 
 
-def simple_move(path):
-    print("trying to move file")
-    try:
-        path2 = unicode('testbucket')  # move this thing to confg file
-        shutil.move(path, path2)
-        print('succeed')
-    except:
-        s = os.path.abspath(os.curdir)
-        print s
-        print os.getcwd()
-        print os.listdir(os.curdir)
-        print os.listdir(os.getcwd())
-        print ('something is going wrong')
+def remove_to_trash(path):
+    print 'trying to move file'
+
+   # try:
+    config = json.load(open('CleverRm/Configure.json', 'r'))
+    trash_path = config['path']
+
+    shutil.move(path, trash_path)
+    print 'succeed'
+    #except:
+    print 'something is going wrong'
+
+
+def remove_directly(path):
+    return None
+
+
+def clean_trash():
+    return None
 
 
 def watch_trash():
-    path = unicode('testbucket')
-    filelist = os.listdir(path)
-    if not filelist:
-        print 'the trash bucket is empty'
+    config = json.load('CleverRm/Configure.json')
+    trash_path = config['path']
+
+    file_list = os.listdir(trash_path)
+    if not file_list:
+        print 'trash bucket is empty'
     else:
-        for item in filelist:
+        for item in file_list:
             print item
 
