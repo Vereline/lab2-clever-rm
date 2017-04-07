@@ -9,7 +9,6 @@ import os         #imports the os
 import Logwriter
 
 
-# print ("must write clever -rm")
 def add_parser():
     parser = argparse.ArgumentParser()
     subparsers = parser.add_subparsers()
@@ -73,6 +72,22 @@ def main():
                 Clever_rm.remove_to_trash(file_path)
             except:
                 print 'error, no such file or directory'
+    if args.i:
+        for path in args.f:
+            try:
+                answer = raw_input('Do you want to delete '+path+'?')
+                if 'Yes' in answer or 'YES' in answer or 'yes' in answer:
+                    file_path = os.path.abspath(path)
+                    Logwriter.write_json_log(file_path)
+                    Logwriter.write_txt_log(file_path)
+                    Clever_rm.remove_to_trash(file_path)
+                elif 'No' in answer or 'NO' in answer or 'no' in answer:
+                    continue
+                else:
+                    print 'did not understand the input'
+            except:
+                print 'error, no such file or directory'
+
 
     # if args.cleverrm:
     #     this_path = unicode(os.path.abspath(args.path))

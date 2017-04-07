@@ -38,3 +38,18 @@ def watch_trash():
         for item in file_list:
             print item
 
+
+def restore_trash(path):
+    return None
+
+
+def check_politics(path):
+    config = json.load(open('CleverRm/Configure.json', 'r'))
+    politics = config['politics']
+
+    if politics == 'time':
+        print 'time'
+    elif politics == 'size':
+        print 'size'
+    elif politics == 'combined':
+        print 'combined'
