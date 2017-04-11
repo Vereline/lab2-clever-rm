@@ -7,14 +7,18 @@ from datetime import datetime
 
 
 class Logwriter():
-    def __init__(self, path):
-        self.file_dict = {}
+    def __init__(self, path, txt_path):
+        self.file_dict_arr = []  # what's in the trash
+        self.file_dict = {}  # for temporary issues
         self.file_dict_path = path
+        self.file_dict_path_txt = txt_path # redo for path from config
+        self.load_from_json()
 
     def create_file_dict(self, path):
-        self.file_dict = self.write_json_log(path)
+        self.file_dict = self.write_file_dict(path)
+        self.file_dict_arr.append(self.file_dict)
 
-    def write_json_log(self, path):
+    def write_file_dict(self, path):
         file_dict = {}
         file_dict['path'] = path
         file_dict['id'] = str(path.__hash__())
@@ -25,42 +29,43 @@ class Logwriter():
             file_dict['name'] = name[1]
             return file_dict
         elif os.path.isdir(path):
+            index = 0
+            for i in reversed(range(len(path))):
+                if path[i] == '/':
+                    index = i
+                    break
+            dirname = path[index+1:]
+            file_dict['name'] = dirname
             file_list = []
-            tree = os.walk(path)
-            for d in tree:
-                if len(d[1]) != 0:
-                    for dir in d[1]:
-                        subpath_d = os.path.join(d[0], dir)  # формирование адреса
-                        subdict = self.write_json_log(subpath_d)
-                        file_list.append(subdict)
-                if len([d[2]]) != 0:
-                    for f in d[2]:
-                        subpath_f = os.path.join(d[0], f)  # формирование адреса
-                        subfile = self.write_json_log(subpath_f)
-                        file_list.append(subfile)
-            # for d, dirs, files in os.walk(path):
-            #     for dir in dirs:
-            #         file_path = os.path.join(d, dir)  # формирование адреса
-            #         subdict = self.write_json_log(file_path)
-            #         file_list.append(subdict)
+            d = os.listdir(path)
+            print d
+            for item in d:
+                subpath = os.path.join(path, item)  # формирование адреса
+                if os.path.isdir(subpath):
+                    subfile = self.write_file_dict(subpath)
+                    file_list.append(subfile)
+                    # print subfile
+                elif not os.path.isdir(subpath):
+                    subdict = self.write_file_dict(subpath)
+                    file_list.append(subdict)
+                    # print subdict
 
-            # for d, dirs, files in os.walk(path):
-            #     for f in files:
-            #         file_path = os.path.join(d, f)  # формирование адреса
-            #         subdict = self.write_json_log(file_path)
-            #         file_list.append(subdict)
-
-            # for d, dirs, files in os.walk(path):
-            #     for f in files:
-            #         file_path = os.path.join(d, f)  # формирование адреса
-            #         subdict = self.write_json_log(file_path)
-            #         file_list.append(subdict)
-
-                    # path_f.append(path)  # добавление адреса в список
-            # names = os.listdir(path)
-            # for name in names:
-            #     name_dict = write_json_log(self, name)
-            #     file_list.append(name_dict)
+            # tree = os.walk(path)
+            # for d in tree:
+            #     print ('\n')
+            #     print d
+            #     if d[2].__len__() != 0:
+            #         for f in d[2]:
+            #             subpath_f = os.path.join(d[0], f)  # формирование адреса
+            #             subfile = self.write_json_log(subpath_f)
+            #             file_list.append(subfile)
+            #             print subfile
+            #     if d[1].__len__() != 0:
+            #         for dir in d[1]:
+            #             subpath_d = os.path.join(d[0], dir)  # формирование адреса
+            #             subdict = self.write_json_log(subpath_d)
+            #             file_list.append(subdict)
+            #             print subdict
             file_dict['content'] = file_list
         return file_dict
     # def write_json_log(self, file_path):
@@ -106,3 +111,65 @@ class Logwriter():
     #         txt_file.write(str(item)+'\n')
     #     txt_file.close()
     #     print 'succeed'
+
+    def load_from_json(self):
+        if os.path.exists(self.file_dict_path):
+            with open(self.file_dict_path) as json_data:
+                if os.path.getsize(self.file_dict_path) > 0:
+                    self.file_dict_arr = json.load(json_data)
+        else:
+            self.file_dict_arr = []
+            newpath = os.path.split(self.file_dict_path)
+            if not os.path.exists(newpath[0]):
+                os.makedirs(newpath[0])
+            open(self.file_dict_path, 'w')
+
+    def write_to_json(self):
+        json.dump(self.file_dict_arr, open(self.file_dict_path, 'w'))
+
+    def get_id_by_name(self, array, name): # not checked
+        file_id = ''
+
+        for item in array:
+                if item['name'] == name:
+                    file_id = item['id']
+                    break
+                elif item['content'] is not None:
+                    file_id = self.get_id_by_name(item['content'], name)
+
+        return file_id
+
+    def get_id_by_path(self, array, path): # not checked
+        file_id = ''
+
+        for item in array:
+                if item['path'] == path:
+                    file_id = item['id']
+                    break
+                elif item['content'] is not None:
+                    file_id = self.get_id_by_name(item['content'], path)
+
+        return file_id
+
+    def get_id(self, name): # not checked
+        return self.get_id_by_name(self.file_dict_arr, name)
+
+    def delete_by_id(self, array, file_id): # not checked
+        for item in array:
+                if item['id'] == file_id:
+                    array.pop(array.index(item))
+                    break
+                elif item['content'] is not None:
+                    self.delete_by_id(item['content'], file_id)
+
+    def write_to_txt(self, array):  # not checked
+        for item in array:
+            txt_file = open(self.file_dict_path_txt, 'a')
+            txt_file.write('Name:' + item['name'])
+            txt_file.write('Id:' + item['id'])
+            txt_file.write('Path:' + item['path'])
+            txt_file.write('\n'+'\n')
+            txt_file.close()
+            if item['content'] is not None:
+                self.write_to_txt(item['content'])
+
