@@ -127,7 +127,7 @@ class Logwriter():
     def write_to_json(self):
         json.dump(self.file_dict_arr, open(self.file_dict_path, 'w'))
 
-    def get_id_by_name(self, array, name): # not checked
+    def get_id_by_name(self, array, name):  # not checked
         file_id = ''
 
         for item in array:
@@ -139,7 +139,7 @@ class Logwriter():
 
         return file_id
 
-    def get_id_by_path(self, array, path): # not checked
+    def get_id_by_path(self, array, path):  # not checked
         file_id = ''
 
         for item in array:
@@ -151,16 +151,41 @@ class Logwriter():
 
         return file_id
 
-    def get_id(self, name): # not checked
+    def get_id(self, name):  # not checked
         return self.get_id_by_name(self.file_dict_arr, name)
 
-    def delete_by_id(self, array, file_id): # not checked
+    def delete_by_id(self, array, file_id):  # not checked
         for item in array:
                 if item['id'] == file_id:
                     array.pop(array.index(item))
                     break
                 elif item['content'] is not None:
                     self.delete_by_id(item['content'], file_id)
+
+    def delete_elem_by_id(self, file_id):
+        self.delete_by_id(self.file_dict_arr, file_id)
+
+    def get_path(self, file_id):  # not checked
+        return self.get_path_by_id(self.file_dict_arr, file_id)
+
+    def get_path_by_id(self, array, file_id):  # not checked
+        path = ''
+        for item in array:
+                if item['id'] == file_id:
+                    return item['path']
+                elif item['content'] is not None:
+                    return self.get_path_by_id(item['content'], file_id)
+
+    def get_name(self, file_id):  # not checked
+        return self.get_name_by_id(self.file_dict_arr, file_id)
+
+    def get_name_by_id(self, array, file_id):  # not checked
+        path = ''
+        for item in array:
+                if item['id'] == file_id:
+                    return item['name']
+                elif item['content'] is not None:
+                    return self.get_path_by_id(item['content'], file_id)
 
     def write_to_txt(self, array):  # not checked
         for item in array:

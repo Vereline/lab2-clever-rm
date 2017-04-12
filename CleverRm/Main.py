@@ -18,8 +18,9 @@ def main():
 #    print outlist
 
     if outlist[0][0] == 'remove':
+        # original logwriter is in trash
         config = json.load(open('CleverRm/Configure.json', 'r'))
-        lo = Logwriter.Logwriter(config['trash_log_path'])
+        lo = Logwriter.Logwriter(config['trash_log_path'], config['trash_log_path_txt'])
         lo.create_file_dict(outlist[1][0])
         lo_id = lo.get_id('filefile')
         print lo_id
