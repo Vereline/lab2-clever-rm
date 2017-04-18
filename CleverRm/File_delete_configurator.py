@@ -27,6 +27,7 @@ class File_delete_configurator():
         # ...
 
     def check_path(self, path):
-        if not os.access(os.path.split(os.path.abspath(path))[0], OS: W_OK) # ????????????
+        #if not os.access(os.path.split(os.path.abspath(path))[0], OS: W_OK): # ????????????
+            pass
         # ...
 

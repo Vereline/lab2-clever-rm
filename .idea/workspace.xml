@@ -2,19 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="69e705f1-a8a3-48ec-9ea3-5f55d5647bfe" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CleverRm/File_delete_configurator.py" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/testfolder/lections/lection005/lection005/lection005.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/testfolder/lections/lection005/lection005/lection005.ipynb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/testfolder/lections/lection006/lection006/lection006.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/testfolder/lections/lection006/lection006/lection006.ipynb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/testfolder/lections/lection007/lection007/lection007.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/testfolder/lections/lection007/lection007/lection007.ipynb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/testfolder/lections/lection008/lection008/lection008.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/testfolder/lections/lection008/lection008/lection008.ipynb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/testfolder/lections/lection009/lection009/lection009.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/testfolder/lections/lection009/lection009/lection009.ipynb" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CleverRm/Configurator.py" afterPath="$PROJECT_DIR$/CleverRm/Configurator.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CleverRm/Clever_rm.py" afterPath="$PROJECT_DIR$/CleverRm/Clever_rm.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CleverRm/Configure.json" afterPath="$PROJECT_DIR$/CleverRm/Configure.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CleverRm/File_delete_configurator.py" afterPath="$PROJECT_DIR$/CleverRm/File_delete_configurator.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CleverRm/Trash.py" afterPath="$PROJECT_DIR$/CleverRm/Trash.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -51,8 +43,8 @@
       <file leaf-file-name="Logwriter.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/CleverRm/Logwriter.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="582">
-              <caret line="164" column="40" lean-forward="false" selection-start-line="164" selection-start-column="40" selection-end-line="164" selection-end-column="40" />
+            <state relative-caret-position="562">
+              <caret line="68" column="44" lean-forward="true" selection-start-line="21" selection-start-column="8" selection-end-line="68" selection-end-column="44" />
               <folding>
                 <element signature="e#450#543#0" expanded="false" />
                 <element signature="e#1805#1827#0" expanded="false" />
@@ -75,11 +67,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="File_delete_configurator.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="File_delete_configurator.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/CleverRm/File_delete_configurator.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="540">
-              <caret line="30" column="13" lean-forward="false" selection-start-line="30" selection-start-column="13" selection-end-line="30" selection-end-column="13" />
+            <state relative-caret-position="436">
+              <caret line="29" column="9" lean-forward="false" selection-start-line="29" selection-start-column="9" selection-end-line="29" selection-end-column="9" />
               <folding>
                 <element signature="e#47#58#0" expanded="true" />
               </folding>
@@ -87,11 +79,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Configure.json" pinned="false" current-in-tab="false">
+      <file leaf-file-name="ExeptionListener.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/CleverRm/ExeptionListener.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="378">
+              <caret line="21" column="33" lean-forward="false" selection-start-line="21" selection-start-column="33" selection-end-line="21" selection-end-column="33" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Configure.json" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/CleverRm/Configure.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="36">
-              <caret line="2" column="21" lean-forward="false" selection-start-line="2" selection-start-column="21" selection-end-line="2" selection-end-column="21" />
+            <state relative-caret-position="72">
+              <caret line="4" column="26" lean-forward="false" selection-start-line="4" selection-start-column="26" selection-end-line="4" selection-end-column="26" />
               <folding />
             </state>
           </provider>
@@ -100,12 +102,12 @@
       <file leaf-file-name="Trash.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/CleverRm/Trash.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1224">
-              <caret line="74" column="58" lean-forward="true" selection-start-line="74" selection-start-column="58" selection-end-line="74" selection-end-column="58" />
+            <state relative-caret-position="382">
+              <caret line="103" column="36" lean-forward="false" selection-start-line="103" selection-start-column="36" selection-end-line="103" selection-end-column="36" />
               <folding>
                 <element signature="e#48#110#0" expanded="true" />
                 <element signature="e#2246#2301#0" expanded="false" />
-                <element signature="e#3355#3633#0" expanded="false" />
+                <element signature="e#4630#4908#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -135,13 +137,13 @@
         <option value="$PROJECT_DIR$/Clever_rm.py" />
         <option value="$PROJECT_DIR$/CleverRm/ExeptionListener.py" />
         <option value="$PROJECT_DIR$/CleverRm/Argparser.py" />
-        <option value="$PROJECT_DIR$/CleverRm/Clever_rm.py" />
-        <option value="$PROJECT_DIR$/CleverRm/Configure.json" />
         <option value="$PROJECT_DIR$/CleverRm/Main.py" />
         <option value="$PROJECT_DIR$/CleverRm/Logwriter.py" />
-        <option value="$PROJECT_DIR$/CleverRm/Trash.py" />
         <option value="$PROJECT_DIR$/CleverRm/Configurator.py" />
         <option value="$PROJECT_DIR$/CleverRm/File_delete_configurator.py" />
+        <option value="$PROJECT_DIR$/CleverRm/Clever_rm.py" />
+        <option value="$PROJECT_DIR$/CleverRm/Trash.py" />
+        <option value="$PROJECT_DIR$/CleverRm/Configure.json" />
       </list>
     </option>
   </component>
@@ -172,7 +174,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
       <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
@@ -202,6 +203,7 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -542,7 +544,7 @@
     <frame x="65" y="24" width="1301" height="744" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1808765" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18406375" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32972136" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -905,44 +907,39 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/CleverRm/Main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="10" selection-end-column="16" />
+          <folding>
+            <element signature="e#47#58#0" expanded="true" />
+            <element signature="e#757#777#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/CleverRm/ExeptionListener.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="378">
           <caret line="21" column="33" lean-forward="false" selection-start-line="21" selection-start-column="33" selection-end-line="21" selection-end-column="33" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/CleverRm/Clever_rm.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="14" column="65" lean-forward="false" selection-start-line="14" selection-start-column="65" selection-end-line="14" selection-end-column="65" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CleverRm/Configure.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="36">
-          <caret line="2" column="21" lean-forward="false" selection-start-line="2" selection-start-column="21" selection-end-line="2" selection-end-column="21" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CleverRm/Trash.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1224">
-          <caret line="74" column="58" lean-forward="true" selection-start-line="74" selection-start-column="58" selection-end-line="74" selection-end-column="58" />
+        <state relative-caret-position="472">
+          <caret line="30" column="47" lean-forward="false" selection-start-line="30" selection-start-column="47" selection-end-line="30" selection-end-column="47" />
           <folding>
-            <element signature="e#48#110#0" expanded="true" />
-            <element signature="e#2246#2301#0" expanded="false" />
-            <element signature="e#3355#3633#0" expanded="false" />
+            <element signature="e#47#103#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/CleverRm/Logwriter.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="582">
-          <caret line="164" column="40" lean-forward="false" selection-start-line="164" selection-start-column="40" selection-end-line="164" selection-end-column="40" />
+        <state relative-caret-position="562">
+          <caret line="68" column="44" lean-forward="true" selection-start-line="21" selection-start-column="8" selection-end-line="68" selection-end-column="44" />
           <folding>
             <element signature="e#450#543#0" expanded="false" />
             <element signature="e#1805#1827#0" expanded="false" />
@@ -950,6 +947,28 @@
             <element signature="e#4266#4722#0" expanded="false" />
             <element signature="e#4761#4822#0" expanded="false" />
             <element signature="e#4947#5161#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CleverRm/Trash.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="382">
+          <caret line="103" column="36" lean-forward="false" selection-start-line="103" selection-start-column="36" selection-end-line="103" selection-end-column="36" />
+          <folding>
+            <element signature="e#48#110#0" expanded="true" />
+            <element signature="e#2246#2301#0" expanded="false" />
+            <element signature="e#4630#4908#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CleverRm/File_delete_configurator.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="436">
+          <caret line="29" column="9" lean-forward="false" selection-start-line="29" selection-start-column="9" selection-end-line="29" selection-end-column="9" />
+          <folding>
+            <element signature="e#47#58#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -962,24 +981,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/CleverRm/Main.py">
+    <entry file="file://$PROJECT_DIR$/CleverRm/Configure.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="10" selection-end-column="16" />
-          <folding>
-            <element signature="e#47#58#0" expanded="true" />
-            <element signature="e#757#777#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CleverRm/File_delete_configurator.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="540">
-          <caret line="30" column="13" lean-forward="false" selection-start-line="30" selection-start-column="13" selection-end-line="30" selection-end-column="13" />
-          <folding>
-            <element signature="e#47#58#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="72">
+          <caret line="4" column="26" lean-forward="false" selection-start-line="4" selection-start-column="26" selection-end-line="4" selection-end-column="26" />
+          <folding />
         </state>
       </provider>
     </entry>

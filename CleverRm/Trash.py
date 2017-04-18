@@ -70,7 +70,40 @@ class Trash():
 
     def restore_trash_automatically(self):  # not done
         # restore the the whole trash
+        allfiles = os.listdir(self.path)
+        for f in allfiles:
+            if not os.path.isdir(self.path+f):
+                new_name = self.log_writer.get_name(f)
         return None
+
+    def rename_all_directory_content(self, path):  # not checked
+
+        if not os.path.isdir(path):
+            name = os.path.split(path)
+            newname = self.log_writer.get_name(name[1])
+            os.rename(path, name[0]+newname)
+
+        elif os.path.isdir(path):
+            index = 0
+            for i in reversed(range(len(path))):
+                if path[i] == '/':
+                    index = i
+                    break
+            dirname = path[index + 1:]
+            d = os.listdir(path)
+            print d
+            for item in d:
+                subpath = os.path.join(path, item)  # формирование адреса
+                if os.path.isdir(subpath):
+                    self.rename_all_directory_content(subpath)
+                    #subfile = self.write_file_dict(subpath)
+
+                elif not os.path.isdir(subpath):
+                    self.rename_all_directory_content(subpath)
+                    #subdict = self.write_file_dict(subpath)
+            newname = self.log_writer.get_name(dirname)
+            os.rename(path, path[:path.__sizeof__() - (index+1)]+newname)
+
 
     def restore_trash_manually(self, path):  # not checked
         # restore one file in the trash
