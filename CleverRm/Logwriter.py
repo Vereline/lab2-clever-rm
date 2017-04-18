@@ -187,6 +187,18 @@ class Logwriter():
                 elif item['content'] is not None:
                     return self.get_path_by_id(item['content'], file_id)
 
+    def get_date(self, file_id):  # not checked
+        return self.get_date_by_id(self.file_dict_arr, file_id)
+
+    def get_date_by_id(self, array, file_id):  # not checked
+        path = ''
+        for item in array:
+                if item['id'] == file_id:
+                    return item['date']
+                elif item['content'] is not None:
+                    return self.get_path_by_id(item['content'], file_id)
+
+
     def write_to_txt(self, array):  # not checked
         for item in array:
             txt_file = open(self.file_dict_path_txt, 'a')

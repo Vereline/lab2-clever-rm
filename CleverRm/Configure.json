@@ -4,6 +4,7 @@
   "politics_time":"true",
   "politics_size":"false",
   "max_size":100000,
+  "cur_size":0,
   "max_capacity":"100%",
   "max_time":7
 }

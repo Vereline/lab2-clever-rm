@@ -5,6 +5,7 @@
 import shutil         # Contains functions for operating files
 import os         # imports the os
 import Logwriter
+from datetime import datetime
 
 class Trash():
     def __init__(self, path_trash, path_log_j, path_log_t, p, s, cap, t):
@@ -70,6 +71,7 @@ class Trash():
 
     def restore_trash_automatically(self):  # not done
         # restore the the whole trash
+        self.rename_all_directory_content(self.path)
         allfiles = os.listdir(self.path)
         for f in allfiles:
             if not os.path.isdir(self.path+f):
@@ -132,3 +134,18 @@ class Trash():
             print 'size'
         elif politics == 'combined':
             print 'combined'
+
+    def check_date(self, path):
+        name = os.path.split(path)
+        if name[1] != '':
+            file_id = self.log_writer.get_id(name[1])
+            file_date = self.log_writer.get_date(file_id)
+            cur_date = datetime.strftime(datetime.now(), '%Y.%m.%d %H:%M:%S')
+            years = ((int)(file_date[0]+file_date[1]) - (int)(cur_date[0]+cur_date[1]))
+            months = ((int)(file_date[4] + file_date[5]) - (int)(cur_date[4] + cur_date[5]))
+            days = ((int)(file_date[7] + file_date[8]) - (int)(cur_date[7] + cur_date[8]))
+            days_common = years*365+months*30+days
+        return days_common
+
+    def check_size(self):
+        return None
