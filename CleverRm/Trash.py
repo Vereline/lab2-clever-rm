@@ -93,16 +93,16 @@ class Trash():
                     break
             dirname = path[index + 1:]
             d = os.listdir(path)
-            print d
-            for item in d:
-                subpath = os.path.join(path, item)  # формирование адреса
-                if os.path.isdir(subpath):
-                    self.rename_all_directory_content(subpath)
-                    #subfile = self.write_file_dict(subpath)
-
-                elif not os.path.isdir(subpath):
-                    self.rename_all_directory_content(subpath)
-                    #subdict = self.write_file_dict(subpath)
+            # print d
+            # for item in d:
+            #     subpath = os.path.join(path, item)  # формирование адреса
+            #     if os.path.isdir(subpath):
+            #         self.rename_all_directory_content(subpath)
+            #         #subfile = self.write_file_dict(subpath)
+            #
+            #     elif not os.path.isdir(subpath):
+            #         self.rename_all_directory_content(subpath)
+            #         #subdict = self.write_file_dict(subpath)
             newname = self.log_writer.get_name(dirname)
             os.rename(path, path[:path.__sizeof__() - (index+1)]+newname)
 
