@@ -11,9 +11,10 @@ import Logwriter
 import Argparser
 
 # тут обрабатывать декораторы dry-run + i,v,f
-#redo and refactor all the code
+# redo and refactor all the code
 
 # rename here deleted file to the id
+# -i - confirm every your deletion / restore
 
 class File_delete_configurator():
     def __init__(self, dict):

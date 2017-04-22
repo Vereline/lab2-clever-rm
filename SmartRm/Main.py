@@ -33,7 +33,7 @@ def main():
         smartrm = Smart_rm.Smart_rm(config['path'])
         smartrm.remove_to_trash_file(outlist[1][0])
         tr.watch_trash()
-        tr.restore_trash_manually('lection001.pdf')
+        # tr.restore_trash_manually('lection001.pdf')
         # print lo.file_dict
         # for y in lo.file_dict:
         #     if type(y) == type(list):

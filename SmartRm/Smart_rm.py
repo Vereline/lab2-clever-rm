@@ -6,7 +6,7 @@ import os  # imports the os
 import json
 import Logwriter
 import ExeptionListener
-
+import re
 
 class Smart_rm():
     def __init__(self, path):
@@ -17,11 +17,16 @@ class Smart_rm():
         # self.trash_log_path = self.config['trash_log_path']
         # self.logwriter = Logwriter.Logwriter(self.trash_log_path)
 
+    def remove_by_regular(self, path):
+
+        pass
+
     def remove_to_trash_file(self, path):
         #  print 'trying to move file'
         try:
             shutil.move(path, self.trash_path)
-
+            if '*' or '?' in path:
+                self.remove_by_regular(path)
             #print 'succeed'
         except:
             self.exeption_listener.check_capacity()
