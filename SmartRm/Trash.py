@@ -7,6 +7,9 @@ import os         # imports the os
 import Logwriter
 from datetime import datetime
 
+
+# new procedure if trash does not exist ( create new trash)
+
 class Trash():
     def __init__(self, path_trash, path_log_j, path_log_t, p, s, cap, t):
         self.path = path_trash
@@ -49,18 +52,21 @@ class Trash():
             subpath = os.path.join(path, item)  # формирование адреса
             if file_id in subpath:
                 return subpath
-            else:
-                if os.path.isdir(subpath):
-                    return self.get_path_by_id(file_id, subpath)
-                elif not os.path.isdir(subpath):
-                    continue
+            # else:
+            #     if os.path.isdir(subpath):
+            #         return self.get_path_by_id(file_id, subpath)
+            #     elif not os.path.isdir(subpath):
+            #         continue
 
     def watch_trash(self):  # not checked
         if self.log_writer.file_dict_arr is [] or self.log_writer.file_dict_arr is None:
             print 'trash bucket is empty'
         else:
             txt_file = open(self.log_writer.file_dict_path_txt, 'r')
-            print txt_file
+            print(txt_file.read())
+            # for line in txt_file:
+            #     print line
+
         # file_list = json.load(open(self.trash_log_path, 'r'))
         # if not file_list:
         #     print 'trash bucket is empty'
@@ -84,7 +90,6 @@ class Trash():
             name = os.path.split(path)
             newname = self.log_writer.get_name(name[1])
             os.rename(path, name[0]+newname)
-
         elif os.path.isdir(path):
             index = 0
             for i in reversed(range(len(path))):
@@ -106,7 +111,6 @@ class Trash():
             newname = self.log_writer.get_name(dirname)
             os.rename(path, path[:path.__sizeof__() - (index+1)]+newname)
 
-
     def restore_trash_manually(self, path):  # not checked
         # restore one file in the trash
         file_id = self.log_writer.get_id(path)
@@ -126,7 +130,7 @@ class Trash():
         return None
 
     def check_politics(self):
-        # config = json.load(open('CleverRm/Configure.json', 'r'))
+        # config = json.load(open('SmartRm/Configure.json', 'r'))
         # politics = config['politics']
         if politics == 'time':
             print 'time'

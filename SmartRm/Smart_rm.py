@@ -8,11 +8,11 @@ import Logwriter
 import ExeptionListener
 
 
-class Clever_rm():
+class Smart_rm():
     def __init__(self, path):
         self.trash_path = path
         self.exeption_listener = ExeptionListener.ExceptionListener
-        # self.config = json.load(open('CleverRm/Configure.json', 'r'))
+        # self.config = json.load(open('SmartRm/Configure.json', 'r'))
         # self.trash_path = self.config['path']
         # self.trash_log_path = self.config['trash_log_path']
         # self.logwriter = Logwriter.Logwriter(self.trash_log_path)

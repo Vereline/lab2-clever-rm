@@ -4,11 +4,12 @@
 import json
 import argparse
 from argparse import *
-import Clever_rm
+import Smart_rm
 import shutil         #Contains functions for operating files
 import os         #imports the os
 import Logwriter
 import Argparser
+import Trash
 
 
 def main():
@@ -19,11 +20,20 @@ def main():
 
     if outlist[0][0] == 'remove':
         # original logwriter is in trash
-        config = json.load(open('CleverRm/Configure.json', 'r'))
-        lo = Logwriter.Logwriter(config['trash_log_path'], config['trash_log_path_txt'])
-        lo.create_file_dict(outlist[1][0])
-        lo_id = lo.get_id('filefile')
-        print lo_id
+        config = json.load(open('SmartRm/Configure.json', 'r'))
+        # lo = Logwriter.Logwriter(config['trash_log_path'], config['trash_log_path_txt'])
+        # lo.create_file_dict(outlist[1][0])
+        # lo.write_to_json()
+        # lo.write_to_txt()
+
+        tr = Trash.Trash(config['path'], config['trash_log_path'], config['trash_log_path_txt'], config['politics_time'],config['politics_size'], config['max_capacity'], config['max_time'])
+        tr.log_writer.create_file_dict(outlist[1][0])
+        tr.log_writer.write_to_json()
+        tr.log_writer.write_to_txt()
+        smartrm = Smart_rm.Smart_rm(config['path'])
+        smartrm.remove_to_trash_file(outlist[1][0])
+        tr.watch_trash()
+        tr.restore_trash_manually('lection001.pdf')
         # print lo.file_dict
         # for y in lo.file_dict:
         #     if type(y) == type(list):

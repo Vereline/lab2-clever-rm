@@ -4,7 +4,7 @@
 import json
 import argparse
 from argparse import *
-import Clever_rm
+import Smart_rm
 import shutil         #Contains functions for operating files
 import os         #imports the os
 import Logwriter
@@ -12,6 +12,8 @@ import Argparser
 
 # тут обрабатывать декораторы dry-run + i,v,f
 #redo and refactor all the code
+
+# rename here deleted file to the id
 
 class File_delete_configurator():
     def __init__(self, dict):
@@ -26,8 +28,8 @@ class File_delete_configurator():
         print self.path
         # ...
 
-    def check_path(self, path):
-        #if not os.access(os.path.split(os.path.abspath(path))[0], OS: W_OK): # ????????????
+    def check_file_path(self, path):
+
             pass
         # ...
 

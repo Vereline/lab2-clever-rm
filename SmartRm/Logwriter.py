@@ -134,8 +134,8 @@ class Logwriter():
                 if item['name'] == name:
                     file_id = item['id']
                     break
-                elif item['content'] is not None:
-                    file_id = self.get_id_by_name(item['content'], name)
+                # elif item['content'] is not None:
+                #     file_id = self.get_id_by_name(item['content'], name)
 
         return file_id
 
@@ -198,15 +198,14 @@ class Logwriter():
                 # elif item['content'] is not None:
                 #     return self.get_path_by_id(item['content'], file_id)
 
-
-    def write_to_txt(self, array):  # not checked
-        for item in array:
+    def write_to_txt(self):  # not checked
+        for item in self.file_dict_arr:
             txt_file = open(self.file_dict_path_txt, 'a')
-            txt_file.write('Name:' + item['name'])
-            txt_file.write('Id:' + item['id'])
-            txt_file.write('Path:' + item['path'])
-            txt_file.write('\n'+'\n')
+            txt_file.write('Name:' + item['name']+'\n')
+            txt_file.write('Id:' + item['id']+'\n')
+            txt_file.write('Path:' + item['path']+'\n')
+            txt_file.write('Date:' + item['date']+'\n')
+            txt_file.write('\n')
             txt_file.close()
             # if item['content'] is not None:
             #     self.write_to_txt(item['content'])
-

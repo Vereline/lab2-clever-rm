@@ -3,7 +3,7 @@
 
 import argparse
 from argparse import *
-import Clever_rm
+import Smart_rm
 import shutil         #Contains functions for operating files
 import os         #imports the os
 import Logwriter
