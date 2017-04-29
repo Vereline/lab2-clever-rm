@@ -36,20 +36,19 @@ class Logwriter():
                     break
             dirname = path[index+1:]
             file_dict['name'] = dirname
-            # file_list = []
-            # # d = os.listdir(path)
-            # print d
-            # for item in d:
-            #     subpath = os.path.join(path, item)  # формирование адреса
-            #     if os.path.isdir(subpath):
-            #         subfile = self.write_file_dict(subpath)
-            #         file_list.append(subfile)
-            #         # print subfile
-            #     elif not os.path.isdir(subpath):
-            #         subdict = self.write_file_dict(subpath)
-            #         file_list.append(subdict)
-            #         # print subdict
-
+            file_list = []  # просто хранить, но не использовать content
+            d = os.listdir(path)
+            print d
+            for item in d:
+                subpath = os.path.join(path, item)  # формирование адреса
+                if os.path.isdir(subpath):
+                    subfile = self.write_file_dict(subpath)
+                    file_list.append(subfile)
+                    # print subfile
+                elif not os.path.isdir(subpath):
+                    subdict = self.write_file_dict(subpath)
+                    file_list.append(subdict)
+                    # print subdict
             # tree = os.walk(path)
             # for d in tree:
             #     print ('\n')
@@ -66,7 +65,7 @@ class Logwriter():
             #             subdict = self.write_json_log(subpath_d)
             #             file_list.append(subdict)
             #             print subdict
-            # file_dict['content'] = file_list
+            file_dict['content'] = file_list
         return file_dict
     # def write_json_log(self, file_path):
     #     print 'trying to write log'
@@ -199,13 +198,20 @@ class Logwriter():
                 #     return self.get_path_by_id(item['content'], file_id)
 
     def write_to_txt(self):  # not checked
+        txt_file = open(self.file_dict_path_txt, 'w')
         for item in self.file_dict_arr:
-            txt_file = open(self.file_dict_path_txt, 'a')
             txt_file.write('Name:' + item['name']+'\n')
             txt_file.write('Id:' + item['id']+'\n')
             txt_file.write('Path:' + item['path']+'\n')
             txt_file.write('Date:' + item['date']+'\n')
             txt_file.write('\n')
-            txt_file.close()
+        txt_file.close()
             # if item['content'] is not None:
             #     self.write_to_txt(item['content'])
+
+    # def rewrite_json(self):
+    #     self.write_to_json(self)
+    #     pass
+    #
+    # def rewrite_txt(self):
+    #     pass

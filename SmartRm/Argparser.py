@@ -16,46 +16,80 @@ class Argparser():
 
     def add_parser(self):
         parser = argparse.ArgumentParser()
-        subparsers = parser.add_subparsers()
+        # subparsers = parser.add_subparsers()
+        # nargs поменять и см, как это правильно сделать
+        parser.add_argument('-smrm', nargs='*', help='remove file or directory(also make a mask type as *.py)')
+        parser.add_argument('-smrmr', nargs='*', help='remove file or directory by regular expression')
+        parser.add_argument('-smtrc', nargs='*', help='clean trash')
+        parser.add_argument('-smtrr', nargs='*', help='restore trash')
+        parser.add_argument('-smtrrm', nargs='*', help='remove from trash')
+        parser.add_argument('-smtrs', nargs='*', help='show trash')
+        parser.add_argument('-smcs', nargs='*', help='show config')
+        parser.add_argument('-smcc', nargs='*', help='change config')  # только для 1 запуска
+
+        # интерактивно спрашивает, хочешь удалить или нет
+        parser.add_argument('-i', 'interactive', nargs='+', help='interactive mode')
+        parser.add_argument('-f', 'force', nargs='+', help='force mode')  # ничего не спрашивает
+        parser.add_argument('-v', 'verbose', nargs='+', help='verbose mode')  # отображает состояние текущее программы(противоположно сайленту)
+        parser.add_argument('-s', 'silent', nargs='+', help='silent mode')
+        parser.add_argument('-d', 'dryrun', nargs='+', help='dry-run mode')
+
+        parser.add_argument('path', nargs='*', help='path of file or directory')
+
+        # -smrm - remove
+        # -smrmr - remove regular
+        # -smtrc - trash clean
+        # -smtrr - trash restore
+        # -smtrs - trash show
+        # -smcs  - config show
+        # -smcc  - config change
+        #
+        # -i - interactive
+        # -v - verbose
+        # -f - force
+        # -s - silent
+        # -d - dryrun
+        #
+        # path - path of file/directory
 
         # remove files
-        parser_remove = subparsers.add_parser('remove')
-
-        parser_remove.add_argument('-i', nargs='+')
-        parser_remove.add_argument('-f', nargs='+')
-        parser_remove.add_argument('-v', nargs='+')
-        parser_remove.add_argument('path', nargs='*')
-
-        parser_trash = subparsers.add_parser('trash')
-        trash_subparsers = parser_trash.add_subparsers()
-
-        # cleaning trash
-        parser_clean_trash = trash_subparsers.add_parser('clean')
-        parser_clean_trash.add_argument('-i', nargs='+')
-        parser_clean_trash.add_argument('-f', nargs='+')
-        parser_clean_trash.add_argument('-v', nargs='+')
-        parser_clean_trash.add_argument('path', nargs='*')
-
-        # restore trash
-        parser_restore_trash = trash_subparsers.add_parser('restore')
-        parser_restore_trash.add_argument('-i', nargs='+')
-        parser_restore_trash.add_argument('-f', nargs='+')
-        parser_restore_trash.add_argument('-v', nargs='+')
-        parser_restore_trash.add_argument('path', nargs='*')
-
-        # show trash
-        parser_trash_show = trash_subparsers.add_parser('show')
-        parser_trash_show.add_argument('show_trash')
-
-        # configure files
-        parser_configure = subparsers.add_parser('configure')
-        parser_configure_subparsers = parser_configure.add_subparsers()
-
-        parser_configure_show = parser_configure_subparsers.add_parser('show')
-        parser_configure_show.add_argument('show_options ', nargs='+', choices=['path', 'capacity','position'])
-
-        parser_configure_setter = parser_configure_subparsers.add_parser('setter')
-        parser_configure_setter.add_argument('set_options', nargs='+')
+        # parser_remove = subparsers.add_parser('remove')
+        #
+        # parser_remove.add_argument('-i', nargs='+')
+        # parser_remove.add_argument('-f', nargs='+')
+        # parser_remove.add_argument('-v', nargs='+')
+        # parser_remove.add_argument('path', nargs='*')
+        #
+        # parser_trash = subparsers.add_parser('trash')
+        # trash_subparsers = parser_trash.add_subparsers()
+        #
+        # # cleaning trash
+        # parser_clean_trash = trash_subparsers.add_parser('clean')
+        # parser_clean_trash.add_argument('-i', nargs='+')
+        # parser_clean_trash.add_argument('-f', nargs='+')
+        # parser_clean_trash.add_argument('-v', nargs='+')
+        # parser_clean_trash.add_argument('path', nargs='*')
+        #
+        # # restore trash
+        # parser_restore_trash = trash_subparsers.add_parser('restore')
+        # parser_restore_trash.add_argument('-i', nargs='+')
+        # parser_restore_trash.add_argument('-f', nargs='+')
+        # parser_restore_trash.add_argument('-v', nargs='+')
+        # parser_restore_trash.add_argument('path', nargs='*')
+        #
+        # # show trash
+        # parser_trash_show = trash_subparsers.add_parser('show')
+        # parser_trash_show.add_argument('show_trash')
+        #
+        # # configure files
+        # parser_configure = subparsers.add_parser('configure')
+        # parser_configure_subparsers = parser_configure.add_subparsers()
+        #
+        # parser_configure_show = parser_configure_subparsers.add_parser('show')
+        # parser_configure_show.add_argument('show_options ', nargs='+', choices=['path', 'capacity', 'position'])
+        #
+        # parser_configure_setter = parser_configure_subparsers.add_parser('setter')
+        # parser_configure_setter.add_argument('set_options', nargs='+')
 
         return parser
 
@@ -69,7 +103,8 @@ class Argparser():
 
     def define_path(self, rm_file):
         if rm_file.find('/') == -1:
-            path = os.path.abspath(os.getcwd()+'/()'.format(rm_file))
+            path = os.path.abspath(rm_file)
+            # path = os.path.abspath(os.getcwd()+'/()'.format(rm_file))
         else:
             path = os.path.abspath(os.path.expanduser(rm_file))
         return path
@@ -77,21 +112,23 @@ class Argparser():
     def create_outlist(self, args, command):
         outlist = []
         outlist.append(command)
-        if command[0] == 'remove' or (command[0] == 'trash' and (command[1] == 'clean' or command[1] == 'restore')):
+        if command[0] == '-smrm' or (command[0] == '-smrmr' or (command[0] == '-smtrrm')):
+        # if command[0] == 'remove' or (command[0] == 'trash' and (command[1] == 'clean' or command[1] == 'restore')):
             outlist.append(self.get_files_arguments(args))
-        elif command[0] == 'trash' and command[1] == 'show':
+        # elif command[0] == 'trash' and command[1] == 'show':
+        elif command[0] == '-smtrr' or command[0] == '-smtrc' or command[0] == '-smtrs' or command[0] == '-smcs':
             show_keys = []
             for show_key in args.show_trash:
                 show_keys.append(show_key)
             outlist.append(show_keys)
-        elif command[0] == 'config':
-            if command[1] == 'setter':
+        elif command[0] == '-smcc':
+            # if command[1] == 'setter':
                 set_options = []
                 for option in args.set_options:
                     set_options.append(option)
                 outlist.append(set_options)
-            else:
-                outlist.append(args.show_options)
+             # else:
+                # outlist.append(args.show_options)
         return outlist
 
     def get_files_arguments(self, args):

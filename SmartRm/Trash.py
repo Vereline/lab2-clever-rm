@@ -120,13 +120,16 @@ class Trash():
 
         index = 0
         for i in reversed(range(len(clean_path))):
-            if path[i] == '/':
+            if clean_path[i] == '/':
                 index = i
                 break
-        dirname = path[:len(clean_path) - index] + new_name
+        dirname = clean_path[:(index+1)] + new_name
 
+        os.rename(clean_path, dirname)
         shutil.move(dirname, destination_path)
         self.log_writer.delete_elem_by_id(file_id)
+        self.log_writer.write_to_json()
+        self.log_writer.write_to_txt()
         return None
 
     def check_politics(self):

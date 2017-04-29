@@ -26,5 +26,6 @@ class ExceptionListener():
         return None
 
     def check_if_conflict(path):
+        # if in restore path this file already exists
         return None
 

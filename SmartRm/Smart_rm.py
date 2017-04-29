@@ -18,15 +18,20 @@ class Smart_rm():
         # self.logwriter = Logwriter.Logwriter(self.trash_log_path)
 
     def remove_by_regular(self, path):
+        regular_arr = self.search_all_by_regular()
+        for item in regular_arr:
+            self.remove_to_trash_file(item)
+        pass
 
+    def search_all_by_regular(self, path):
         pass
 
     def remove_to_trash_file(self, path):
         #  print 'trying to move file'
         try:
-            shutil.move(path, self.trash_path)
-            if '*' or '?' in path:
-                self.remove_by_regular(path)
+              shutil.move(path, self.trash_path)
+        #     if '*' or '?' in path:
+        #        self.remove_by_regular(path)
             #print 'succeed'
         except:
             self.exeption_listener.check_capacity()

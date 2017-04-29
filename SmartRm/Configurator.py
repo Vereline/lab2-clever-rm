@@ -15,13 +15,19 @@ import Argparser
 
 class Configurator():
     def __init__(self, dict):
-        if dict.get('i') != None:
-            dict = {'key': 'r'}
-        file_list = []
-        file_path = None
-        self.dict = dict
+        self.dry_run = False
+        self.silent = False
+        self.configure = {}  # сделать конфигурации на 1 раз, если передан параметр
+
 
     def configure_arguments(self, dict):
+        if dict[0] == '-smrm' or dict[0] == '-smrmr':
+            self.define_removal()
+        elif dict[0] == '-smcc':
+            self.define_change_configure()
+        elif dict[0] == '-smcc':
+            self.define_change_configure()
+            # ...
         pass
 
     def define_dry_run(self):

@@ -27,13 +27,13 @@ def main():
         # lo.write_to_txt()
 
         tr = Trash.Trash(config['path'], config['trash_log_path'], config['trash_log_path_txt'], config['politics_time'],config['politics_size'], config['max_capacity'], config['max_time'])
-        tr.log_writer.create_file_dict(outlist[1][0])
-        tr.log_writer.write_to_json()
-        tr.log_writer.write_to_txt()
-        smartrm = Smart_rm.Smart_rm(config['path'])
-        smartrm.remove_to_trash_file(outlist[1][0])
-        tr.watch_trash()
-        # tr.restore_trash_manually('lection001.pdf')
+        # tr.log_writer.create_file_dict(outlist[1][0])  # that's working
+        # tr.log_writer.write_to_json()  # that's working
+        # tr.log_writer.write_to_txt()  # that's working
+        # smartrm = Smart_rm.Smart_rm(config['path'])  # that's working
+        # smartrm.remove_to_trash_file(outlist[1][0])  # that's working
+        # tr.watch_trash()  # that's working
+        # tr.restore_trash_manually('testfolder')  # that's working
         # print lo.file_dict
         # for y in lo.file_dict:
         #     if type(y) == type(list):
