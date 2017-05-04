@@ -19,9 +19,10 @@ import Trash
 # -i - confirm every your deletion / restore
 
 class File_delete_configurator():
-    def __init__(self, dict):
-        # self.trash = Trash.Trash("add here arguments")
-        # self.smartrm = Smart_rm.Smart_rm("add here arguments")
+    def __init__(self, argparser, paths):
+        self.config = json.load(open('SmartRm/Configure.json', 'r'))
+        self.trash = Trash.Trash(self.config['path'], self.config['trash_log_path'], self.config['trash_log_path_txt'], self.config['politics_time'],self.config['politics_size'], self.config['max_capacity'], self.config['max_time'])
+        self.smartrm = Smart_rm.Smart_rm(self.config['path'])
         self.exit_codes = {
              'success': 0,
              'conflict': 1,
@@ -33,31 +34,25 @@ class File_delete_configurator():
         self.interactive = False
         self.verbose = False
         self.force = False
-        if dict.get('-i') != None:
+        if argparser.args.interactive:  # если нету интерэктив, спрашиваем только если прав не хватает
             self.interactive = True
-        if dict.get('-s') != None:
+        if argparser.args.silent:
             self.silent = True
-        if dict.get('-f') != None:
+        if argparser.args.force:
             self.force = True
-        if dict.get('-v') != None:
+        if argparser.args.verbose:
             self.verbose = True
-        if dict.get('-d') != None:
+        if argparser.args.dryrun:
             self.dry_run = True
 
+        self.paths = paths
 
-        #     dict = {'key': 'r'}
-        # file_list = []
-        # file_path = None
+    def define_action(self):
+        pass
 
-        self.dict = dict
-
-    def make_list(self):
-        self.path = self.dict.get('r')
-        print self.path
-        # ...
 
     def check_file_path(self, path):
-
+        # if the file is already doesnt exist
             pass
         # ...
 

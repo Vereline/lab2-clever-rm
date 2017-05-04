@@ -17,28 +17,31 @@ class Smart_rm():
         # self.trash_log_path = self.config['trash_log_path']
         # self.logwriter = Logwriter.Logwriter(self.trash_log_path)
 
-    def remove_by_regular(self, path):
+    def remove_by_regular(self, path, dryrun):
         regular_arr = self.search_all_by_regular()
         for item in regular_arr:
-            self.remove_to_trash_file(item)
+            self.remove_to_trash_file(item, dryrun)
         pass
 
     def search_all_by_regular(self, path):
         pass
 
-    def remove_to_trash_file(self, path):
+    def remove_to_trash_file(self, path, dryrun):
         #  print 'trying to move file'
         try:
-              shutil.move(path, self.trash_path)
+            if dryrun == False:
+                 shutil.move(path, self.trash_path)
+            else:
+                print 'remove file'
         #     if '*' or '?' in path:
         #        self.remove_by_regular(path)
             #print 'succeed'
         except:
             self.exeption_listener.check_capacity()
-            self.exeption_listener.check_cycles()
-            self.exeption_listener.check_if_conflict()
-            self.exeption_listener.check_is_system_directory()
-            self.exeption_listener.check_size()
+            # self.exeption_listener.check_cycles()
+            # self.exeption_listener.check_if_conflict()
+            # self.exeption_listener.check_is_system_directory()
+            # self.exeption_listener.check_size()
             #print 'something is going wrong'
     #
     # def remove_to_trash_directory(self, path):

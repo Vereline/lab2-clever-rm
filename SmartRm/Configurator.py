@@ -20,27 +20,27 @@ class Configurator():
         self.configure = {}  # сделать конфигурации на 1 раз, если передан параметр
 
 
-    def configure_arguments(self, dict):
-        if dict[0] == '-smrm' or dict[0] == '-smrmr':
-            self.define_removal()
-        elif dict[0] == '-smcc':
-            self.define_change_configure()
-        elif dict[0] == '-smcc':
-            self.define_change_configure()
-            # ...
-        pass
-
-    def define_dry_run(self):
-        pass
-
-    def define_removal(self):
-        pass
-
-    def define_restore(self):
-        pass
-
-    def define_watch_trash(self):
-        pass
-
-    def define_change_configure(self):
-        pass
+    # def configure_arguments(self, dict):
+    #     if dict[0] == '-smrm' or dict[0] == '-smrmr':
+    #         self.define_removal()
+    #     elif dict[0] == '-smcc':
+    #         self.define_change_configure()
+    #     elif dict[0] == '-smcc':
+    #         self.define_change_configure()
+    #         # ...
+    #     pass
+    #
+    # def define_dry_run(self):
+    #     pass
+    #
+    # def define_removal(self):
+    #     pass
+    #
+    # def define_restore(self):
+    #     pass
+    #
+    # def define_watch_trash(self):
+    #     pass
+    #
+    # def define_change_configure(self):
+    #     pass

@@ -1,6 +1,7 @@
 { "path": "/home/victoria/\u0420\u0430\u0431\u043e\u0447\u0438\u0439 \u0441\u0442\u043e\u043b/Trash",
   "trash_log_path":"/home/victoria/\u0420\u0430\u0431\u043e\u0447\u0438\u0439 \u0441\u0442\u043e\u043b/Trash/Trash_log/Trash_log.json",
   "trash_log_path_txt":"/home/victoria/\u0420\u0430\u0431\u043e\u0447\u0438\u0439 \u0441\u0442\u043e\u043b/Trash/Trash_log/Trash_log.txt",
+  "trash_logging_path":"/home/victoria/\u0420\u0430\u0431\u043e\u0447\u0438\u0439 \u0441\u0442\u043e\u043b/Trash/Trash_log/",
   "politics_time":"true",
   "politics_size":"false",
   "max_size":100000,
