@@ -153,6 +153,9 @@ class Logwriter():
     def get_id(self, name):  # not checked
         return self.get_id_by_name(self.file_dict_arr, name)
 
+    def get_id_path(self, path):
+        return self.get_id_by_path(self.file_dict_arr, path)
+
     def delete_by_id(self, array, file_id):  # not checked
         for item in array:
                 if item['id'] == file_id:
