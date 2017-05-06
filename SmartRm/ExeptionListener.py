@@ -11,6 +11,12 @@ class ExceptionListener():
         #  if the size of file is bigger than the size of trash
         return None
 
+    def check_if_exists(path):
+        print 'this file does not exist'
+        #  if the size of file is bigger than the size of trash
+        return None
+
+
     def check_is_system_directory(path):
         print 'deleted file or directory is system'
         #  if the deleted file or directory is system

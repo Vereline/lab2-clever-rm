@@ -18,7 +18,7 @@ def main():
     cmd = argparser.define_command_line()
     outlist = argparser.create_outlist(argparser.args, cmd) # here are all the paths placed
     fdc = File_delete_configurator.File_delete_configurator(argparser, outlist)
-
+    fdc.define_action()
 
 #    print outlist
 

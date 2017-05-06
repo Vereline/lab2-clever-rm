@@ -59,7 +59,7 @@ class Trash():
             #         continue
 
     def watch_trash(self):  # not checked
-        if self.log_writer.file_dict_arr is [] or self.log_writer.file_dict_arr is None:
+        if self.log_writer.file_dict_arr is [] or self.log_writer.file_dict_arr is None or self.log_writer.file_dict_arr.__len__() == 0:
             print 'trash bucket is empty'
         else:
             txt_file = open(self.log_writer.file_dict_path_txt, 'r')
