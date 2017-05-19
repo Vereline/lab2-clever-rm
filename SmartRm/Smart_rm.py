@@ -8,7 +8,8 @@ import Logwriter
 import ExeptionListener
 import re
 
-class Smart_rm():
+
+class SmartRm():
     def __init__(self, path):
         self.trash_path = path
         self.exeption_listener = ExeptionListener.ExceptionListener
@@ -54,5 +55,3 @@ class Smart_rm():
     #
     # def remove_directly(self, path):
     #     return None
-
-

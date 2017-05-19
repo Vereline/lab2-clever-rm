@@ -2,8 +2,6 @@
 # -*- coding: utf-8 -*-
 
 import json
-import argparse
-from argparse import *
 import Smart_rm
 import shutil         #Contains functions for operating files
 import os         #imports the os
@@ -26,7 +24,7 @@ class File_delete_configurator():
         self.argparser = argparser
         self.config = json.load(open('SmartRm/Configure.json', 'r'))
         self.trash = Trash.Trash(self.config['path'], self.config['trash_log_path'], self.config['trash_log_path_txt'], self.config['politics_time'],self.config['politics_size'], self.config['max_capacity'], self.config['max_time'])
-        self.smartrm = Smart_rm.Smart_rm(self.config['path'])
+        self.smartrm = Smart_rm.SmartRm(self.config['path'])
         self.exit_codes = {
              'success': 0,
              'conflict': 1,
@@ -87,7 +85,7 @@ class File_delete_configurator():
 
     def check_file_path(self, path):
         try:
-        # if the file is already doesnt exist
+        # if the file is already not existing
             pass
 
         except:
@@ -99,7 +97,6 @@ class File_delete_configurator():
 
     def find_all_files_by_regular(self):
         pass  # find all [1*].txt files, as
-        
 
     def rename_file_name_to_id(self, path):
         id =self.trash.log_writer.get_id_path(path)

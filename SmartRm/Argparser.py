@@ -8,6 +8,8 @@ import shutil         #Contains functions for operating files
 import os         #imports the os
 import Logwriter
 import sys
+import re
+import logging
 
 class Argparser():
     def __init__(self, arguments_string=''):
@@ -39,6 +41,7 @@ class Argparser():
         parser.add_argument('-d', '-dryrun', dest='dryrun', action='store_true', help='dry-run mode')
 
         parser.add_argument('path', nargs='*', help='path of file or directory')
+        parser.add_argument('--configs', nargs='*', help='configurations for 1 run')  # только для 1 запуска
 
         # -smrm - remove
         # -smrmr - remove regular
@@ -73,8 +76,12 @@ class Argparser():
 
     def create_outlist(self, args, command):
         outlist = []
-        for item in args.path:
-            outlist.append(self.define_path(item))
+        if args.remove_regular is not None:
+            for item in args.path:
+                outlist.append(self.define_regular_path(item))
+        else:
+            for item in args.path:
+                outlist.append(self.define_path(item))
         # outlist.append(command)
         # if args.remove:
         # # if command[0] == 'remove' or (command[0] == 'trash' and (command[1] == 'clean' or command[1] == 'restore')):
@@ -94,3 +101,51 @@ class Argparser():
         #      # else:
         #         # outlist.append(args.show_options)
         return outlist
+
+    def define_regular_path(self, path):
+        regular_expressions = self.validate_regular(path)
+        #items = os.walk(os.path.abspath(os.curdir))
+        dir_paths = os.path.abspath(os.getcwd())
+        files, dirs = self.get_data_from_directory(dir_paths, regular_expressions)
+        correct_regular_expressions = self.filter_items_by_regular(files, regular_expressions)
+        correct_regular_expressions_dirs = self.filter_items_by_regular(dirs, regular_expressions)
+        correct_regular_expressions.extend(correct_regular_expressions_dirs)
+        return correct_regular_expressions
+
+    def validate_regular(self, regular_expression):
+
+        correct_regular_expression = []
+        try:
+            re.compile(regular_expression)
+            correct_regular_expression.append(regular_expression)
+        except:
+            logging.error("Invalid regular expression {regexp}".format(regexp=regular_expression))
+
+        return correct_regular_expression
+
+    def filter_items_by_regular(self, items, regular_expressions):
+        filtered_items = []
+
+        for item in items:
+            item_name = os.path.basename(item)
+            for regular_expression in regular_expressions:
+                if re.search(regular_expression, item_name) is not None:
+                    filtered_items.append(item)
+                    break
+
+        return filtered_items
+
+    def get_data_from_directory(self, directory, goto_links=False, info=False):
+        files_in_directory = []
+        dirs_in_directory = []
+
+        for root, directories, files in os.walk(directory, topdown=goto_links):
+            if info:
+                 logging.info('Scanning directory {directory_name}'.format(directory_name=root))
+            for name in files:
+               files_in_directory.append(os.path.abspath(os.path.join(root, name)))
+            for name in directories:
+                dirs_in_directory.append(os.path.abspath(os.path.join(root, name)))
+
+        return files_in_directory, dirs_in_directory
+
