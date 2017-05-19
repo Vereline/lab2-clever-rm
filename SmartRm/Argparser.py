@@ -41,7 +41,7 @@ class Argparser():
         parser.add_argument('-d', '-dryrun', dest='dryrun', action='store_true', help='dry-run mode')
 
         parser.add_argument('path', nargs='*', help='path of file or directory')
-        parser.add_argument('--configs', nargs='*', help='configurations for 1 run')  # только для 1 запуска
+        parser.add_argument('--configs', dest='configs', nargs='*', help='configurations for 1 run')  # только для 1 запуска
 
         # -smrm - remove
         # -smrmr - remove regular

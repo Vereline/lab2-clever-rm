@@ -5,11 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="69e705f1-a8a3-48ec-9ea3-5f55d5647bfe" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SmartRm/Argparser.py" afterPath="$PROJECT_DIR$/SmartRm/Argparser.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SmartRm/File_delete_configurator.py" afterPath="$PROJECT_DIR$/SmartRm/File_delete_configurator.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SmartRm/Logger.py" afterPath="$PROJECT_DIR$/SmartRm/Logger.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SmartRm/Smart_rm.py" afterPath="$PROJECT_DIR$/SmartRm/Smart_rm.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -23,8 +20,9 @@
     <SUITE FILE_PATH="coverage/lab2$lab2.coverage" NAME="lab2 Coverage Results" MODIFIED="1491935444478" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/lab2$Clever_rm.coverage" NAME="Clever_rm Coverage Results" MODIFIED="1491552317294" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/CleverRm" />
     <SUITE FILE_PATH="coverage/lab2$Unnamed.coverage" NAME="Unnamed Coverage Results" MODIFIED="1493937017853" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/" />
+    <SUITE FILE_PATH="coverage/lab2$Main_tester.coverage" NAME="Main tester Coverage Results" MODIFIED="1495229577082" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/" />
     <SUITE FILE_PATH="coverage/lab2$Unnamed__1_.coverage" NAME="check configuration Coverage Results" MODIFIED="1494065525552" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/" />
-    <SUITE FILE_PATH="coverage/lab2$check_configuration.coverage" NAME="check configuration Coverage Results" MODIFIED="1495188231320" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/" />
+    <SUITE FILE_PATH="coverage/lab2$check_configuration.coverage" NAME="check configuration Coverage Results" MODIFIED="1495230205004" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/" />
   </component>
   <component name="CreatePatchCommitExecutor">
     <option name="PATCH_PATH" value="" />
@@ -40,13 +38,12 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Main.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Main.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/SmartRm/Main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="270">
-              <caret line="18" column="0" lean-forward="false" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
+            <state relative-caret-position="198">
+              <caret line="20" column="23" lean-forward="true" selection-start-line="20" selection-start-column="23" selection-end-line="20" selection-end-column="23" />
               <folding>
-                <element signature="e#47#58#0" expanded="true" />
                 <element signature="e#580#598#0" expanded="false" />
               </folding>
             </state>
@@ -56,12 +53,12 @@
       <file leaf-file-name="Argparser.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/SmartRm/Argparser.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="192">
-              <caret line="20" column="0" lean-forward="false" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
+            <state relative-caret-position="228">
+              <caret line="43" column="57" lean-forward="false" selection-start-line="43" selection-start-column="57" selection-end-line="43" selection-end-column="57" />
               <folding>
                 <element signature="e#47#62#0" expanded="true" />
-                <element signature="e#2467#2483#0" expanded="false" />
-                <element signature="e#3591#3616#0" expanded="false" />
+                <element signature="e#2483#2499#0" expanded="false" />
+                <element signature="e#3607#3632#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -77,26 +74,27 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="File_delete_configurator.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/SmartRm/File_delete_configurator.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="210">
-              <caret line="49" column="0" lean-forward="false" selection-start-line="49" selection-start-column="0" selection-end-line="49" selection-end-column="0" />
-              <folding>
-                <element signature="e#47#58#0" expanded="true" />
-                <element signature="e#3636#3929#0" expanded="false" />
-                <element signature="e#3973#4152#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="ExeptionListener.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/SmartRm/ExeptionListener.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="0">
               <caret line="0" column="21" lean-forward="false" selection-start-line="0" selection-start-column="21" selection-end-line="0" selection-end-column="21" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="File_delete_configurator.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/SmartRm/File_delete_configurator.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-1364">
+              <caret line="25" column="0" lean-forward="false" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
+              <folding>
+                <element signature="e#47#58#0" expanded="true" />
+                <element signature="e#3410#3449#0" expanded="false" />
+                <element signature="e#3966#4259#0" expanded="false" />
+                <element signature="e#4303#4482#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -152,9 +150,9 @@
         <option value="$PROJECT_DIR$/SmartRm/Main.py" />
         <option value="$PROJECT_DIR$/SmartRm/Trash.py" />
         <option value="$PROJECT_DIR$/SmartRm/Smart_rm.py" />
-        <option value="$PROJECT_DIR$/SmartRm/File_delete_configurator.py" />
         <option value="$PROJECT_DIR$/SmartRm/Logger.py" />
         <option value="$PROJECT_DIR$/SmartRm/Argparser.py" />
+        <option value="$PROJECT_DIR$/SmartRm/File_delete_configurator.py" />
       </list>
     </option>
   </component>
@@ -530,16 +528,35 @@
       <module name="lab2" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/SmartRm/Main.py" />
-      <option name="PARAMETERS" value="-smrm   -f testflder/lection001.pdf testflde  --configs max_capacity=120 poltics_time=False" />
+      <option name="PARAMETERS" value="-smrm   -f testfolder/lection001.pdf testflde  --configs max_size=120 politics_time=False" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <method />
     </configuration>
-    <list size="5">
+    <configuration default="false" name="Main tester" type="PythonConfigurationType" factoryName="Python">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="/usr/bin/python2.7" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="lab2" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/SmartRm/Main.py" />
+      <option name="PARAMETERS" value="-smrm testfolder/lection001.pdf" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <method />
+    </configuration>
+    <list size="6">
       <item index="0" class="java.lang.String" itemvalue="Python.watch the main functions" />
       <item index="1" class="java.lang.String" itemvalue="Python.check configuration" />
-      <item index="2" class="java.lang.String" itemvalue="Python.lab2" />
-      <item index="3" class="java.lang.String" itemvalue="Python.lab2_task4" />
-      <item index="4" class="java.lang.String" itemvalue="Python.Clever_rm" />
+      <item index="2" class="java.lang.String" itemvalue="Python.Main tester" />
+      <item index="3" class="java.lang.String" itemvalue="Python.lab2" />
+      <item index="4" class="java.lang.String" itemvalue="Python.lab2_task4" />
+      <item index="5" class="java.lang.String" itemvalue="Python.Clever_rm" />
     </list>
     <recent_temporary>
       <list size="3">
@@ -573,7 +590,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="55" y="54" width="1301" height="686" extended-state="0" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.15889329" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32847896" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -585,7 +602,7 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24701196" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32847896" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="true" anchor="bottom" auto_hide="true" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.42857143" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="true" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.42857143" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -626,6 +643,11 @@
           <line>135</line>
           <option name="timeStamp" value="69" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/SmartRm/File_delete_configurator.py</url>
+          <line>25</line>
+          <option name="timeStamp" value="70" />
+        </line-breakpoint>
       </breakpoints>
       <breakpoints-dialog>
         <breakpoints-dialog />
@@ -637,11 +659,12 @@
           </properties>
         </breakpoint>
       </default-breakpoints>
-      <option name="time" value="70" />
+      <option name="time" value="71" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="PythonConfigurationType">
         <watch expression="argparser.args" language="Python" />
+        <watch expression="argparser.parser" />
       </configuration>
     </watches-manager>
   </component>
@@ -980,14 +1003,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/SmartRm/ExeptionListener.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="21" lean-forward="false" selection-start-line="0" selection-start-column="21" selection-end-line="0" selection-end-column="21" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/SmartRm/Configure.json">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="126">
@@ -996,37 +1011,45 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/SmartRm/File_delete_configurator.py">
+    <entry file="file://$PROJECT_DIR$/SmartRm/ExeptionListener.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="49" column="0" lean-forward="false" selection-start-line="49" selection-start-column="0" selection-end-line="49" selection-end-column="0" />
-          <folding>
-            <element signature="e#47#58#0" expanded="true" />
-            <element signature="e#3636#3929#0" expanded="false" />
-            <element signature="e#3973#4152#0" expanded="false" />
-          </folding>
+        <state relative-caret-position="0">
+          <caret line="0" column="21" lean-forward="false" selection-start-line="0" selection-start-column="21" selection-end-line="0" selection-end-column="21" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/SmartRm/Argparser.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="192">
-          <caret line="20" column="0" lean-forward="false" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
+        <state relative-caret-position="228">
+          <caret line="43" column="57" lean-forward="false" selection-start-line="43" selection-start-column="57" selection-end-line="43" selection-end-column="57" />
           <folding>
             <element signature="e#47#62#0" expanded="true" />
-            <element signature="e#2467#2483#0" expanded="false" />
-            <element signature="e#3591#3616#0" expanded="false" />
+            <element signature="e#2483#2499#0" expanded="false" />
+            <element signature="e#3607#3632#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/SmartRm/Main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="18" column="0" lean-forward="false" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
+        <state relative-caret-position="198">
+          <caret line="20" column="23" lean-forward="true" selection-start-line="20" selection-start-column="23" selection-end-line="20" selection-end-column="23" />
+          <folding>
+            <element signature="e#580#598#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SmartRm/File_delete_configurator.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1364">
+          <caret line="25" column="0" lean-forward="false" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
           <folding>
             <element signature="e#47#58#0" expanded="true" />
-            <element signature="e#580#598#0" expanded="false" />
+            <element signature="e#3410#3449#0" expanded="false" />
+            <element signature="e#3966#4259#0" expanded="false" />
+            <element signature="e#4303#4482#0" expanded="false" />
           </folding>
         </state>
       </provider>

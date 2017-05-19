@@ -23,6 +23,7 @@ class File_delete_configurator():
     def __init__(self, argparser, paths):
         self.argparser = argparser
         self.config = json.load(open('SmartRm/Configure.json', 'r'))
+        self.change_configure()
         self.trash = Trash.Trash(self.config['path'], self.config['trash_log_path'], self.config['trash_log_path_txt'], self.config['politics_time'],self.config['politics_size'], self.config['max_capacity'], self.config['max_time'])
         self.smartrm = Smart_rm.SmartRm(self.config['path'])
         self.exit_codes = {
@@ -59,7 +60,14 @@ class File_delete_configurator():
                 self.smartrm.remove_to_trash_file(item, self.dry_run)
 
         elif self.argparser.args.remove_regular is not None:
+            for item in self.paths:
+                # check if this file exists
+                # . . .
+                self.trash.log_writer.write_file_dict(item)
+                self.rename_file_name_to_id(item)
+                self.smartrm.remove_to_trash_file(item, self.dry_run)
             pass
+
         elif self.argparser.args.clean is not None:
             self.trash.delete_automatically()
 
@@ -92,11 +100,11 @@ class File_delete_configurator():
             ExeptionListener.ExceptionListener.check_if_exists()
         # ...
 
-    def find_all_files_by_bit_mask(self):
-        pass # find all *.txt files, as example
-
-    def find_all_files_by_regular(self):
-        pass  # find all [1*].txt files, as
+    # def find_all_files_by_bit_mask(self):
+    #     pass # find all *.txt files, as example
+    #
+    # def find_all_files_by_regular(self):
+    #     pass  # find all [1*].txt files, as
 
     def rename_file_name_to_id(self, path):
         id =self.trash.log_writer.get_id_path(path)
@@ -124,3 +132,9 @@ class File_delete_configurator():
         else:
             # raise system directory exception
             return self.exit_codes['error']
+
+    def change_configure(self):
+        if self.argparser.args.configs is not None:
+            for config in self.argparser.args.configs:
+                arr = config.split('=')
+                self.config[arr[0]] = arr[1]
