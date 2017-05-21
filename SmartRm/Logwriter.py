@@ -6,7 +6,7 @@ import os
 from datetime import datetime
 
 
-class Logwriter(object):
+class Logwriter(object):  # all class works
     def __init__(self, path, txt_path):
         self.file_dict_arr = []  # what's in the trash
         self.file_dict = {}  # for temporary issues

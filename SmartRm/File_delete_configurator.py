@@ -108,7 +108,7 @@ class File_delete_configurator():
             ExeptionListener.ExceptionListener.check_if_exists()
         # ...
 
-    def rename_file_name_to_id(self, path):
+    def rename_file_name_to_id(self, path):  # works
         _id = self.trash.log_writer.get_id_path(path)
         index = 0
         for i in reversed(range(len(path))):
@@ -136,7 +136,7 @@ class File_delete_configurator():
             # write this in logger
             return self.exit_codes['error']
 
-    def change_configure(self):
+    def change_configure(self):  # works
         if self.argparser.args.configs is not None:
             for config in self.argparser.args.configs:
                 arr = config.split('=')

@@ -59,7 +59,7 @@ class Trash(object):
             if file_id in subpath:
                 return subpath
 
-    def watch_trash(self):  # not checked
+    def watch_trash(self):  # works
         if self.log_writer.file_dict_arr is [] or self.log_writer.file_dict_arr is None or self.log_writer.file_dict_arr.__len__() == 0:
             print 'trash bucket is empty'
         else:

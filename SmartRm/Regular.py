@@ -16,6 +16,4 @@ import Argparser
 # is not need
 class Regular(object):
     def __init__(self, dict):
-        self.dry_run = False
-        self.silent = False
-        self.configure = {}  # сделать конфигурации на 1 раз, если передан параметр
+        pass
