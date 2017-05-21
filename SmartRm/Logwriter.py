@@ -6,12 +6,12 @@ import os
 from datetime import datetime
 
 
-class Logwriter():
+class Logwriter(object):
     def __init__(self, path, txt_path):
         self.file_dict_arr = []  # what's in the trash
         self.file_dict = {}  # for temporary issues
         self.file_dict_path = path
-        self.file_dict_path_txt = txt_path # redo for path from config
+        self.file_dict_path_txt = txt_path  # redo for path from config
         self.load_from_json()
 
     def create_file_dict(self, path):
@@ -19,11 +19,9 @@ class Logwriter():
         self.file_dict_arr.append(self.file_dict)
 
     def write_file_dict(self, path):
-        file_dict = {}
-        file_dict['path'] = path
-        file_dict['id'] = str(path.__hash__())
-        file_dict['date'] = datetime.strftime(datetime.now(), '%Y.%m.%d %H:%M:%S')
-        file_dict['size'] = os.path.getsize(path)
+        file_dict = {'path': path, 'id': str(datetime.now().__hash__()),
+                     'date': datetime.strftime(datetime.now(), '%Y-%m-%d'),
+                     'size': os.path.getsize(path)}
         if not os.path.isdir(path):
             name = os.path.split(path)
             file_dict['name'] = name[1]
@@ -44,11 +42,11 @@ class Logwriter():
                 if os.path.isdir(subpath):
                     subfile = self.write_file_dict(subpath)
                     file_list.append(subfile)
-                    # print subfile
+
                 elif not os.path.isdir(subpath):
                     subdict = self.write_file_dict(subpath)
                     file_list.append(subdict)
-                    # print subdict
+
             # tree = os.walk(path)
             # for d in tree:
             #     print ('\n')
@@ -67,49 +65,6 @@ class Logwriter():
             #             print subdict
             file_dict['content'] = file_list
         return file_dict
-    # def write_json_log(self, file_path):
-    #     print 'trying to write log'
-    #     file_dict = {}
-    #
-    #     path = os.path.abspath(file_path)
-    #     date = datetime.strftime(datetime.now(), '%Y.%m.%d %H:%M:%S')
-    #     name = os.path.split(file_path)
-    #     file_size = os.path.getsize(file_path)
-    #
-    #     file_dict['name'] = name[1]
-    #     file_dict['path'] = path
-    #     file_dict['date'] = date
-    #     file_dict['size'] = file_size
-    #     file_dict['name_and_path'] = os.path.split(file_path)
-    #
-    #     filename = unicode(datetime.strftime(datetime.now(), '%Y.%m.%d'))
-    #
-    #     json.dump(file_dict, open(filename, 'a'))
-    #     print 'succeed'
-    #
-    # # make restructure of this function, in order not to repeat json func
-    # def write_txt_log(self, file_path):
-    #     print 'trying to write log'
-    #     file_dict = {}
-    #
-    #     path = os.path.abspath(file_path)
-    #     date = datetime.strftime(datetime.now(), '%Y.%m.%d %H:%M:%S')
-    #     name = os.path.split(file_path)
-    #     file_size = os.path.getsize(file_path)
-    #
-    #     file_dict['name'] = name[1]
-    #     file_dict['path'] = path
-    #     file_dict['date'] = date
-    #     file_dict['size'] = file_size
-    #     file_dict['name_and_path'] = os.path.split(file_path)
-    #
-    #     filename = unicode(datetime.strftime(datetime.now(), '%Y.%m.%d'))
-    #
-    #     txt_file = open(filename+'.txt', 'w')
-    #     for item in file_dict.values():
-    #         txt_file.write(str(item)+'\n')
-    #     txt_file.close()
-    #     print 'succeed'
 
     def load_from_json(self):
         if os.path.exists(self.file_dict_path):
@@ -118,14 +73,15 @@ class Logwriter():
                     self.file_dict_arr = json.load(json_data)
         else:
             self.file_dict_arr = []
-            newpath = os.path.split(self.file_dict_path)
-            if not os.path.exists(newpath[0]):
-                os.makedirs(newpath[0])
+            new_path = os.path.split(self.file_dict_path)
+            if not os.path.exists(new_path[0]):
+                os.makedirs(new_path[0])
             open(self.file_dict_path, 'w')
 
     def write_to_json(self):
         json.dump(self.file_dict_arr, open(self.file_dict_path, 'w'))
 
+    # ubrat eto
     def get_id_by_name(self, array, name):  # not checked
         file_id = ''
 
@@ -138,6 +94,7 @@ class Logwriter():
 
         return file_id
 
+    # ubrat eto
     def get_id_by_path(self, array, path):  # not checked
         file_id = ''
 
@@ -156,6 +113,7 @@ class Logwriter():
     def get_id_path(self, path):
         return self.get_id_by_path(self.file_dict_arr, path)
 
+    # ubrat eto
     def delete_by_id(self, array, file_id):  # not checked
         for item in array:
                 if item['id'] == file_id:
@@ -170,6 +128,7 @@ class Logwriter():
     def get_path(self, file_id):  # not checked
         return self.get_path_by_id(self.file_dict_arr, file_id)
 
+    # ubrat eto
     def get_path_by_id(self, array, file_id):  # not checked
         path = ''
         for item in array:
@@ -181,6 +140,7 @@ class Logwriter():
     def get_name(self, file_id):  # not checked
         return self.get_name_by_id(self.file_dict_arr, file_id)
 
+    # ubrat eto
     def get_name_by_id(self, array, file_id):  # not checked
         path = ''
         for item in array:
@@ -192,6 +152,7 @@ class Logwriter():
     def get_date(self, file_id):  # not checked
         return self.get_date_by_id(self.file_dict_arr, file_id)
 
+    # ubrat eto
     def get_date_by_id(self, array, file_id):  # not checked
         path = ''
         for item in array:
@@ -209,12 +170,3 @@ class Logwriter():
             txt_file.write('Date:' + item['date']+'\n')
             txt_file.write('\n')
         txt_file.close()
-            # if item['content'] is not None:
-            #     self.write_to_txt(item['content'])
-
-    # def rewrite_json(self):
-    #     self.write_to_json(self)
-    #     pass
-    #
-    # def rewrite_txt(self):
-    #     pass

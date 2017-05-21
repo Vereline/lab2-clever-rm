@@ -2,16 +2,14 @@
 # -*- coding: utf-8 -*-
 
 import argparse
-from argparse import *
-import Smart_rm
+
 import shutil         #Contains functions for operating files
 import os         #imports the os
-import Logwriter
 import sys
 import re
 import logging
 
-class Argparser():
+class Argparser(object):
     def __init__(self, arguments_string=''):
         self.parser = self.add_parser()
         if arguments_string != '':
@@ -22,18 +20,17 @@ class Argparser():
 
     def add_parser(self):
         parser = argparse.ArgumentParser()
-        # subparsers = parser.add_subparsers()
-        # nargs поменять и см, как это правильно сделать
-        parser.add_argument('-smrm', nargs='*', dest='remove', help='remove file or directory(also make a mask type as *.py)')
-        parser.add_argument('-smrmr', nargs='*', dest='remove_regular', help='remove file or directory by regular expression')
+
+        parser.add_argument('-smrm', nargs='*', dest='remove', help='remove file or directory')
+        parser.add_argument('-smrmr', nargs='*', dest='remove_regular', help='remove file or directory by regular')
         parser.add_argument('-smtrc', nargs='*', dest='clean', help='clean trash')
-        parser.add_argument('-smtrr', nargs='*', dest='restore', help='restore trash')
+        parser.add_argument('-smtrr', nargs='*', dest='restore', help='restore 1 item in trash')
+        parser.add_argument('-smtrra', nargs='*', dest='restore_all', help='restore all items in trash')
         parser.add_argument('-smtrrm', nargs='*', dest='remove_from_trash', help='remove from trash')
         parser.add_argument('-smtrs', nargs='*', dest='show_trash', help='show trash')
         parser.add_argument('-smcs', nargs='*', dest='show_config', help='show config')
-        parser.add_argument('-smcc', nargs='*', dest='change_config', help='change config and delete')  # только для 1 запуска
 
-        # интерактивно спрашивает, хочешь удалить или нет
+        # интерактивно спрашивает, удалить или нет
         parser.add_argument('-i', '-interactive', dest='interactive', action='store_true', help='interactive mode')
         parser.add_argument('-f', '-force', dest='force', action='store_true', help='force mode')  # ничего не спрашивает
         parser.add_argument('-v', '-verbose', dest='verbose', action='store_true', help='verbose mode')  # отображает состояние текущее программы(противоположно сайленту)
@@ -49,7 +46,6 @@ class Argparser():
         # -smtrr - trash restore
         # -smtrs - trash show
         # -smcs  - config show
-        # -smcc  - config change
         #
         # -i - interactive
         # -v - verbose
@@ -58,6 +54,7 @@ class Argparser():
         # -d - dryrun
         #
         # path - path of file/directory
+        # configs - change configs for 1 time
 
         return parser
 
@@ -76,11 +73,11 @@ class Argparser():
 
     def create_outlist(self, args, command):
         outlist = []
-        if args.remove_regular is not None:
+        if args.remove_regular:
             for item in args.path:
                 outlist.append(self.define_regular_path(item))
-        else:
-            for item in args.path:
+        elif args.remove:
+            for item in args.remove:
                 outlist.append(self.define_path(item))
         # outlist.append(command)
         # if args.remove:
@@ -104,7 +101,7 @@ class Argparser():
 
     def define_regular_path(self, path):
         regular_expressions = self.validate_regular(path)
-        #items = os.walk(os.path.abspath(os.curdir))
+        # items = os.walk(os.path.abspath(os.curdir))
         dir_paths = os.path.abspath(os.getcwd())
         files, dirs = self.get_data_from_directory(dir_paths, regular_expressions)
         correct_regular_expressions = self.filter_items_by_regular(files, regular_expressions)
@@ -112,8 +109,8 @@ class Argparser():
         correct_regular_expressions.extend(correct_regular_expressions_dirs)
         return correct_regular_expressions
 
+    # перенести regular methods в отдельный файл
     def validate_regular(self, regular_expression):
-
         correct_regular_expression = []
         try:
             re.compile(regular_expression)
