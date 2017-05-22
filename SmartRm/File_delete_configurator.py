@@ -58,29 +58,47 @@ class File_delete_configurator():
     def define_action(self):
         if self.argparser.args.remove is not None:
             for item in self.paths:
-                # check if this file exists
-                # . . .
-                self.trash.log_writer.create_file_dict(item)
-                item = self.rename_file_name_to_id(item)
+                exists = self.check_file_path(item)
+                if not exists:
+                    pass
+                    # exception
+                access = self.check_access(item)
+                if access == self.exit_codes['error']:
+                    pass
+                    # exception
+                self.trash.log_writer.create_file_dict(item, self.dry_run)
+                item = self.rename_file_name_to_id(item, self.dry_run)
                 self.smartrm.remove_to_trash_file(item, self.dry_run)
 
             self.trash.log_writer.write_to_json()
             self.trash.log_writer.write_to_txt()
+
         elif self.argparser.args.remove_regular is not None:
+            # do here regular check
+
             for item in self.paths:
-                # check if this file exists
-                # . . .
-                self.trash.log_writer.write_file_dict(item)
-                self.rename_file_name_to_id(item)
+                exists = self.check_file_path(item)
+                if not exists:
+                    pass
+                    # exception
+                access = self.check_access(item)
+                if access == self.exit_codes['error']:
+                    pass
+                    # exception
+                self.trash.log_writer.create_file_dict(item, self.dry_run)
+                item = self.rename_file_name_to_id(item, self.dry_run)
                 self.smartrm.remove_to_trash_file(item, self.dry_run)
+
+            self.trash.log_writer.write_to_json()
+            self.trash.log_writer.write_to_txt()
             pass
 
         elif self.argparser.args.clean is not None:
-            self.trash.delete_automatically()
+            self.trash.delete_automatically(self.dry_run)
 
         elif self.argparser.args.restore is not None:
             for item in self.paths:
-                self.trash.restore_trash_manually(item)  # проверить на правильность путей
+                self.trash.restore_trash_manually(item, self.dry_run)  # проверить на правильность путей
 
         elif self.argparser.args.restore_all is not None:
             # for item in self.paths:
@@ -93,22 +111,20 @@ class File_delete_configurator():
                 self.trash.delete_manually(item)  # проверить на правильность путей
 
         elif self.argparser.args.show_trash is not None:
-            self.trash.watch_trash()
+            self.trash.watch_trash(self.dry_run)
 
         elif self.argparser.args.show_config is not None:
             # print self.config
             pprint.pprint(self.config)
 
     def check_file_path(self, path):
-        try:
-        # if the file is already not existing
-            pass
+        # if the file is already not existing for the delete function or the file exists for restore
+        if os.path.exists(path):
+            return True
+        else:
+            return False
 
-        except:
-            ExeptionListener.ExceptionListener.check_if_exists()
-        # ...
-
-    def rename_file_name_to_id(self, path):  # works
+    def rename_file_name_to_id(self, path, dry_run):  # works
         _id = self.trash.log_writer.get_id_path(path)
         index = 0
         for i in reversed(range(len(path))):
@@ -117,7 +133,10 @@ class File_delete_configurator():
                 break
 
         directory_name = path[:(index+1)] + _id
-        os.rename(path, directory_name)
+        if dry_run:
+            print 'rename file name to id'
+        else:
+            os.rename(path, directory_name)
         return directory_name
 
     def ask_for_confirmation(self):

@@ -21,26 +21,30 @@ class Trash(object):
         self.max_capacity = capacity  # the max quantity of files in trash
         self.max_time = time
 
-    def delete_automatically(self):  # works
+    def delete_automatically(self, dry_run):  # works
         # delete the whole trash
-        d = os.listdir(self.path)
-        for item in d:
-            subpath = os.path.join(self.path, item)  # формирование адреса
-            dict_contains = False
-            for _dict in self.log_writer.file_dict_arr:
-                if _dict['id'] == item:
-                    dict_contains = True
-                    break
-            if dict_contains:
-                if os.path.isdir(subpath):
-                    shutil.rmtree(subpath)
-                elif not os.path.isdir(subpath):
-                    os.remove(subpath)
+        if dry_run:
+            print 'clean trash'
+        else:
+            d = os.listdir(self.path)
+            for item in d:
+                subpath = os.path.join(self.path, item)  # form the address
+                dict_contains = False
+                for _dict in self.log_writer.file_dict_arr:
+                    if _dict['id'] == item:
+                        dict_contains = True
+                        break
 
-        clean_json = open(self.log_writer.file_dict_path, 'w')
-        clean_json.close()
-        clean_txt = open(self.log_writer.file_dict_path_txt, 'w')
-        clean_txt.close()
+                if dict_contains:
+                    if os.path.isdir(subpath):
+                        shutil.rmtree(subpath)
+                    elif not os.path.isdir(subpath):
+                        os.remove(subpath)
+
+            clean_json = open(self.log_writer.file_dict_path, 'w')
+            clean_json.close()
+            clean_txt = open(self.log_writer.file_dict_path_txt, 'w')
+            clean_txt.close()
 
     def delete_manually(self, path):  # not checked
         # delete one file manually
@@ -55,16 +59,19 @@ class Trash(object):
     def get_path_by_id(self, file_id, path):  # not checked
         d = os.listdir(path)
         for item in d:
-            subpath = os.path.join(path, item)  # формирование адреса
+            subpath = os.path.join(path, item)  # form the address
             if file_id in subpath:
                 return subpath
 
-    def watch_trash(self):  # works
-        if self.log_writer.file_dict_arr is [] or self.log_writer.file_dict_arr is None or self.log_writer.file_dict_arr.__len__() == 0:
-            print 'trash bucket is empty'
+    def watch_trash(self, dry_run):  # works
+        if dry_run:
+            print 'show trash'
         else:
-            txt_file = open(self.log_writer.file_dict_path_txt, 'r')
-            print(txt_file.read())
+            if self.log_writer.file_dict_arr is [] or self.log_writer.file_dict_arr is None or self.log_writer.file_dict_arr.__len__() == 0:
+                print 'trash bucket is empty'
+            else:
+                txt_file = open(self.log_writer.file_dict_path_txt, 'r')
+                print(txt_file.read())
 
     def restore_trash_automatically(self):  # not done
         # restore the the whole trash

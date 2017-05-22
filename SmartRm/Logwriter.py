@@ -14,9 +14,12 @@ class Logwriter(object):  # all class works
         self.file_dict_path_txt = txt_path  # redo for path from config
         self.load_from_json()
 
-    def create_file_dict(self, path):
-        self.file_dict = self.write_file_dict(path)
-        self.file_dict_arr.append(self.file_dict)
+    def create_file_dict(self, path, dry_run):
+        if dry_run:
+            print 'write data to json'
+        else:
+            self.file_dict = self.write_file_dict(path)
+            self.file_dict_arr.append(self.file_dict)
 
     def write_file_dict(self, path):
         file_dict = {'path': path, 'id': str(datetime.now().__hash__()),
