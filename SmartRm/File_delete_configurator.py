@@ -114,8 +114,10 @@ class File_delete_configurator():
             self.trash.watch_trash(self.dry_run)
 
         elif self.argparser.args.show_config is not None:
-            # print self.config
-            pprint.pprint(self.config)
+            if self.dry_run:
+                print 'show config'
+            else:
+                pprint.pprint(self.config)
 
     def check_file_path(self, path):
         # if the file is already not existing for the delete function or the file exists for restore

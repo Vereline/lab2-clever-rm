@@ -39,7 +39,7 @@ class Logwriter(object):  # all class works
             file_dict['name'] = dirname
             file_list = []  # просто хранить, но не использовать content
             d = os.listdir(path)
-            print d
+            # print d
             for item in d:
                 subpath = os.path.join(path, item)  # формирование адреса
                 if os.path.isdir(subpath):
@@ -167,9 +167,9 @@ class Logwriter(object):  # all class works
     def write_to_txt(self):  # not checked
         txt_file = open(self.file_dict_path_txt, 'w')
         for item in self.file_dict_arr:
-            txt_file.write('Name:' + item['name']+'\n')
-            txt_file.write('Id:' + item['id']+'\n')
-            txt_file.write('Path:' + item['path']+'\n')
-            txt_file.write('Date:' + item['date']+'\n')
+            txt_file.write(('Name:' + item['name']+'\n').encode('utf-8'))
+            txt_file.write(('Id:' + item['id']+'\n').encode('utf-8'))
+            txt_file.write(('Path:' + item['path']+'\n').encode('utf-8'))
+            txt_file.write(('Date:' + item['date']+'\n').encode('utf-8'))
             txt_file.write('\n')
         txt_file.close()

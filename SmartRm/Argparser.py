@@ -79,6 +79,9 @@ class Argparser(object):
         elif args.remove:
             for item in args.remove:
                 outlist.append(self.define_path(item))
+        elif args.restore:
+            for item in args.restore:
+                outlist.append(item)
         # outlist.append(command)
         # if args.remove:
         # # if command[0] == 'remove' or (command[0] == 'trash' and (command[1] == 'clean' or command[1] == 'restore')):

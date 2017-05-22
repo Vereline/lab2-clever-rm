@@ -99,8 +99,9 @@ class Trash(object):
     #         new_name = self.log_writer.get_name(dir_name)
     #         os.rename(path, path[:path.__sizeof__() - (index+1)]+new_name)
 
-    def restore_trash_manually(self, path):  # not checked
+    def restore_trash_manually(self, path, dry_run):  # works
         # restore one file in the trash
+        # check if the path already exists
         file_id = self.log_writer.get_id(path)
         clean_path = self.get_path_by_id(file_id, self.path)
         destination_path = self.log_writer.get_path(file_id)
@@ -112,12 +113,15 @@ class Trash(object):
                 index = i
                 break
         dirname = clean_path[:(index+1)] + new_name
-
-        os.rename(clean_path, dirname)
-        shutil.move(dirname, destination_path)
-        self.log_writer.delete_elem_by_id(file_id)
-        self.log_writer.write_to_json()
-        self.log_writer.write_to_txt()
+        if dry_run:
+            print 'rename file and move to original directory'
+            print 'clean record from json'
+        else:
+            os.rename(clean_path, dirname)
+            shutil.move(dirname, destination_path)
+            self.log_writer.delete_elem_by_id(file_id)
+            self.log_writer.write_to_json()
+            self.log_writer.write_to_txt()
         return None
 
     def check_policy(self, path):  # not checked(redo to check the whole bucket)
