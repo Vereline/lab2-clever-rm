@@ -73,31 +73,32 @@ class Trash(object):
                 txt_file = open(self.log_writer.file_dict_path_txt, 'r')
                 print(txt_file.read())
 
-    def restore_trash_automatically(self):  # not done
+    def restore_trash_automatically(self, dry_run):  # not tested
         # restore the the whole trash
-        # the same strategy as delete
-        self.rename_all_directory_content(self.path)
-        allfiles = os.listdir(self.path)
-        for f in allfiles:
-            if not os.path.isdir(self.path+f):
-                new_name = self.log_writer.get_name(f)
-        return None
+        if dry_run:
+            print 'restore the whole trash'
+        else:
+            d = os.listdir(self.path)
+            for item in d:
+                subpath = os.path.join(self.path, item)  # form the address
+                dict_contains = False
+                for _dict in self.log_writer.file_dict_arr:
+                    if _dict['id'] == item:
+                        dict_contains = True
+                        break
 
-    # def rename_all_directory_content(self, path):  # not checked
-    #
-    #     if not os.path.isdir(path):
-    #         name = os.path.split(path)
-    #         new_name = self.log_writer.get_name(name[1])
-    #         os.rename(path, name[0]+new_name)
-    #     elif os.path.isdir(path):
-    #         index = 0
-    #         for i in reversed(range(len(path))):
-    #             if path[i] == '/':
-    #                 index = i
-    #                 break
-    #         dir_name = path[index + 1:]
-    #         new_name = self.log_writer.get_name(dir_name)
-    #         os.rename(path, path[:path.__sizeof__() - (index+1)]+new_name)
+                if dict_contains:
+                    subpath = os.path.split(subpath)  # ???
+                    subpath = self.get_path_by_id(subpath[1])  # ???
+                    self.restore_trash_manually(subpath, dry_run)
+                    # if os.path.isdir(subpath):
+                    #     shutil.rmtree(subpath)
+                    # elif not os.path.isdir(subpath):
+                    #     os.remove(subpath)
+            clean_json = open(self.log_writer.file_dict_path, 'w')
+            clean_json.close()
+            clean_txt = open(self.log_writer.file_dict_path_txt, 'w')
+            clean_txt.close()
 
     def restore_trash_manually(self, path, dry_run):  # works
         # restore one file in the trash
@@ -124,13 +125,14 @@ class Trash(object):
             self.log_writer.write_to_txt()
         return None
 
-    def check_policy(self, path):  # not checked(redo to check the whole bucket)
+    def check_policy(self, path,dry_run):  # not checked(redo to check the whole bucket)
         if self.policy_time:
             confirm = self.check_date_if_overflow(path)
             if confirm:
                 self.delete_manually(path)
-        elif self.policy_size:
-            print 'size'
+        if self.policy_size:
+            self.count_size(dry_run)
+            pass
 
     def count_days(self, path):
         name = os.path.split(path)
@@ -152,5 +154,39 @@ class Trash(object):
         else:
             return False
 
-    def check_size(self):
-        return None
+    def check_size(self, dry_run):
+        if self.max_size - self.count_size(dry_run) <= 0:
+            if dry_run:
+                print ' not enough trash space'
+            else:
+                self.delete_automatically(dry_run)
+
+    def count_size(self, dry_run):  # not tested
+        total_size = 0
+        if dry_run:
+            print 'count real size of the whole trash'
+        else:
+            d = os.listdir(self.path)
+            for item in d:
+                subpath = os.path.join(self.path, item)  # form the address
+                dict_contains = False
+                for _dict in self.log_writer.file_dict_arr:
+                    if _dict['id'] == item:
+                        dict_contains = True
+                        break
+
+                if dict_contains:
+                    if os.path.isdir(subpath):
+                        total_size += self.get_size(subpath)
+                    elif not os.path.isdir(subpath):
+                        total_size += os.path.getsize(subpath)
+
+        return total_size
+
+    def get_size(self, start_path='.'):
+        total_size = 0
+        for dirpath, dirnames, filenames in os.walk(start_path):
+            for f in filenames:
+                fp = os.path.join(dirpath, f)
+                total_size += os.path.getsize(fp)
+        return total_size
