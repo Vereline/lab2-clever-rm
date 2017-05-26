@@ -64,15 +64,15 @@ class File_delete_configurator():
             for item in self.paths:
                 exists = self.check_file_path(item)
                 if not exists:
-                    pass
-                    # exception
-                access = self.check_access(item)
-                if access == self.exit_codes['error']:
-                    pass
-                    # exception
-                self.trash.log_writer.create_file_dict(item, self.dry_run)
-                item = self.rename_file_name_to_id(item, self.dry_run)
-                self.smartrm.remove_to_trash_file(item, self.dry_run)
+                    self.logger.logger.error('File {file} does not exist'.format(file=item))
+                else:
+                    access = self.check_access(item)
+                    if access == self.exit_codes['error']:
+                        self.logger.logger.error('Item {file} is a system unit'.format(file=item))
+                    else:
+                        self.trash.log_writer.create_file_dict(item, self.dry_run)
+                        item = self.rename_file_name_to_id(item, self.dry_run)
+                        self.smartrm.remove_to_trash_file(item, self.dry_run, self.logger)
 
             self.trash.log_writer.write_to_json()
             self.trash.log_writer.write_to_txt()
@@ -85,19 +85,20 @@ class File_delete_configurator():
                 for item in items:
                     exists = self.check_file_path(item)
                     if not exists:
-                        pass
+                        self.logger.logger.error('File {file} does not exist'.format(file=item))
                         # exception
-                    access = self.check_access(item)
-                    if access == self.exit_codes['error']:
-                        pass
-                        # exception
-                    self.trash.log_writer.create_file_dict(item, self.dry_run)
-                    item = self.rename_file_name_to_id(item, self.dry_run)
-                    self.smartrm.remove_to_trash_file(item, self.dry_run)
+                    else:
+                        access = self.check_access(item)
+                        if access == self.exit_codes['error']:
+                            self.logger.logger.error('Item {file} is a system unit'.format(file=item))
+                            # exception
+                        else:
+                            self.trash.log_writer.create_file_dict(item, self.dry_run)
+                            item = self.rename_file_name_to_id(item, self.dry_run)
+                            self.smartrm.remove_to_trash_file(item, self.dry_run)
 
                 self.trash.log_writer.write_to_json()
                 self.trash.log_writer.write_to_txt()
-                pass
 
         elif self.argparser.args.clean is not None:
             self.trash.delete_automatically(self.dry_run)
@@ -108,10 +109,6 @@ class File_delete_configurator():
 
         elif self.argparser.args.restore_all is not None:
             self.trash.restore_trash_automatically(self.dry_run)
-            # for item in self.paths:
-            #     self.trash.restore_trash_manually(item)  # проверить на правильность путей
-            #
-            pass
 
         elif self.argparser.args.remove_from_trash is not None:
             for item in self.paths:
@@ -127,6 +124,7 @@ class File_delete_configurator():
                 pprint.pprint(self.config)
 
     def check_file_path(self, path):
+        self.logger.logger('Check if the path is correct')
         # if the file is already not existing for the delete function or the file exists for restore
         if os.path.exists(path):
             return True
@@ -134,6 +132,7 @@ class File_delete_configurator():
             return False
 
     def rename_file_name_to_id(self, path, dry_run):  # works
+        self.logger.logger.info('Rename item with id')
         _id = self.trash.log_writer.get_id_path(path)
         index = 0
         for i in reversed(range(len(path))):
@@ -157,9 +156,11 @@ class File_delete_configurator():
             self.ask_for_confirmation()
 
     def check_access(self, path):
+        self.logger.logger.info('Check {file} access'.format(file=path))
         if os.access(path, os.R_OK):
             return self.exit_codes['success']
         else:
+            self.logger.logger.error('This is a system unit')
             # raise system directory exception
             # write this in logger
             return self.exit_codes['error']

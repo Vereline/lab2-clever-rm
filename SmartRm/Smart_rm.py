@@ -7,6 +7,7 @@ import json
 import Logwriter
 import ExeptionListener
 import re
+import Logger
 
 
 class SmartRm(object):
@@ -27,7 +28,7 @@ class SmartRm(object):
     # def search_all_by_regular(self, path):
     #     pass
 
-    def remove_to_trash_file(self, path, dry_run):  # works
+    def remove_to_trash_file(self, path, dry_run, logger):  # works
 
         try:
             if not dry_run:
@@ -38,7 +39,8 @@ class SmartRm(object):
             else:
                 print 'remove file'
         except:
-            self.exception_listener.check_capacity()
+            logger.logger.error('An error occurred')
+            # self.exception_listener.check_capacity()
             # self.exeption_listener.check_cycles()
             # self.exeption_listener.check_if_conflict()
             # self.exeption_listener.check_is_system_directory()
