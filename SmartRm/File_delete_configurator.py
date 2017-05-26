@@ -12,6 +12,7 @@ import Trash
 import re
 import ExeptionListener
 import pprint
+import Regular
 
 # тут обрабатывать декораторы dry-run + i,v,f
 # redo and refactor all the code
@@ -75,23 +76,25 @@ class File_delete_configurator():
 
         elif self.argparser.args.remove_regular is not None:
             # do here regular check
+            for element in self.paths:
+                items = Regular.define_regular_path(element)
+                # NOT CHECKED
+                for item in items:
+                    exists = self.check_file_path(item)
+                    if not exists:
+                        pass
+                        # exception
+                    access = self.check_access(item)
+                    if access == self.exit_codes['error']:
+                        pass
+                        # exception
+                    self.trash.log_writer.create_file_dict(item, self.dry_run)
+                    item = self.rename_file_name_to_id(item, self.dry_run)
+                    self.smartrm.remove_to_trash_file(item, self.dry_run)
 
-            for item in self.paths:
-                exists = self.check_file_path(item)
-                if not exists:
-                    pass
-                    # exception
-                access = self.check_access(item)
-                if access == self.exit_codes['error']:
-                    pass
-                    # exception
-                self.trash.log_writer.create_file_dict(item, self.dry_run)
-                item = self.rename_file_name_to_id(item, self.dry_run)
-                self.smartrm.remove_to_trash_file(item, self.dry_run)
-
-            self.trash.log_writer.write_to_json()
-            self.trash.log_writer.write_to_txt()
-            pass
+                self.trash.log_writer.write_to_json()
+                self.trash.log_writer.write_to_txt()
+                pass
 
         elif self.argparser.args.clean is not None:
             self.trash.delete_automatically(self.dry_run)
@@ -101,6 +104,7 @@ class File_delete_configurator():
                 self.trash.restore_trash_manually(item, self.dry_run)  # проверить на правильность путей
 
         elif self.argparser.args.restore_all is not None:
+            self.trash.restore_trash_automatically(self.dry_run)
             # for item in self.paths:
             #     self.trash.restore_trash_manually(item)  # проверить на правильность путей
             #

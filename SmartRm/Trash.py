@@ -125,7 +125,7 @@ class Trash(object):
             self.log_writer.write_to_txt()
         return None
 
-    def check_policy(self, path,dry_run):  # not checked(redo to check the whole bucket)
+    def check_policy(self, path, dry_run):  # not checked(redo to check the whole bucket)
         if self.policy_time:
             confirm = self.check_date_if_overflow(path)
             if confirm:
