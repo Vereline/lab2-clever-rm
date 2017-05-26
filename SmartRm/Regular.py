@@ -1,5 +1,3 @@
-# обрабатывать тут все аргументы(кроме i , v, f)
-
 #! usr/bin/env python
 # -*- coding: utf-8 -*-
 
@@ -20,7 +18,7 @@ def define_regular_path(path):
     return correct_regular_expressions
 
 
-def validate_regular( regular_expression):
+def validate_regular(regular_expression):
     correct_regular_expression = []
     try:
         re.compile(regular_expression)

@@ -13,6 +13,7 @@ import re
 import ExeptionListener
 import pprint
 import Regular
+import Logger
 
 # тут обрабатывать декораторы dry-run + i,v,f
 # redo and refactor all the code
@@ -30,6 +31,7 @@ class File_delete_configurator():
                                  self.config['policy_time'], self.config['policy_size'], self.config['max_size'],
                                  self.config['current_size'], self.config['max_capacity'], self.config['max_time'])
         self.smartrm = Smart_rm.SmartRm(self.config['path'])
+        self.logger = Logger.Logger(self.config['trash_logging_path'])
         self.exit_codes = {
              'success': 0,
              'conflict': 1,
@@ -57,6 +59,7 @@ class File_delete_configurator():
         self.paths = paths
 
     def define_action(self):
+        self.logger.logger.info('define action')
         if self.argparser.args.remove is not None:
             for item in self.paths:
                 exists = self.check_file_path(item)

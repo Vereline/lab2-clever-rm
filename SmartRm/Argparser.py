@@ -74,7 +74,7 @@ class Argparser(object):
     def create_outlist(self, args, command):
         outlist = []
         if args.remove_regular:
-            for item in args.path:
+            for item in args.remove_regular:
                 outlist.append(item)
                 # outlist.append(self.define_regular_path(item))
         elif args.remove:

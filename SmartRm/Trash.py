@@ -89,7 +89,7 @@ class Trash(object):
 
                 if dict_contains:
                     subpath = os.path.split(subpath)  # ???
-                    subpath = self.get_path_by_id(subpath[1])  # ???
+                    subpath = self.get_path_by_id(subpath[1], subpath[0])  # ???
                     self.restore_trash_manually(subpath, dry_run)
                     # if os.path.isdir(subpath):
                     #     shutil.rmtree(subpath)
@@ -103,7 +103,8 @@ class Trash(object):
     def restore_trash_manually(self, path, dry_run):  # works
         # restore one file in the trash
         # check if the path already exists
-        file_id = self.log_writer.get_id(path)
+        # file_id = self.log_writer.get_id(path)
+        file_id = os.path.split(path)[1]
         clean_path = self.get_path_by_id(file_id, self.path)
         destination_path = self.log_writer.get_path(file_id)
         new_name = self.log_writer.get_name(file_id)
