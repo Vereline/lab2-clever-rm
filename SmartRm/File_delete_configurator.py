@@ -30,13 +30,21 @@ class File_delete_configurator():
         self.config = json.load(open('SmartRm/Configure.json', 'r'))
         self.change_configure()
 
+        self.logger = Logger.Logger(self.config['trash_logging_path'], self.silent)
+        self.exit_codes = {
+            'success': 0,
+            'conflict': 1,
+            'error': 2,
+            'no_file': 3
+        }
+
         self.dry_run = False
         self.silent = False
         self.interactive = False
         self.verbose = False
         self.force = False
 
-        if argparser.args.interactive:  # если нету интерэктив, спрашиваем только если прав не хватает
+        if argparser.args.interactive:  # if there is no interactive, ask only if you have no roots
             self.interactive = True
         if argparser.args.silent:
             self.silent = True
@@ -47,23 +55,26 @@ class File_delete_configurator():
         if argparser.args.dryrun:
             self.dry_run = True
 
-        self.trash = Trash.Trash(self.config['path'], self.config['trash_log_path'], self.config['trash_log_path_txt'],
-                                 self.config['policy_time'], self.config['policy_size'], self.config['max_size'],
-                                 self.config['current_size'], self.config['max_capacity'], self.config['max_time'])
-        self.smartrm = Smart_rm.SmartRm(self.config['path'])
-        self.logger = Logger.Logger(self.config['trash_logging_path'], self.silent)
-        self.exit_codes = {
-             'success': 0,
-             'conflict': 1,
-             'error': 2,
-             'no_file': 3
-        }
+        try:
+            self.trash = Trash.Trash(self.config['path'], self.config['trash_log_path'], self.config['trash_log_path_txt'],
+                                     self.config['policy_time'], self.config['policy_size'], self.config['max_size'],
+                                     self.config['current_size'], self.config['max_capacity'], self.config['max_time'])
+        except:
+            logging.error('Unable to load trash')
+            sys.exit(self.exit_codes['error'])
+        try:
+            self.smartrm = Smart_rm.SmartRm(self.config['path'])
+        except:
+            logging.error('Unable to load smart rm')
+            sys.exit(self.exit_codes['error'])
 
         self.paths = paths
 
     def define_action(self):
         logging.info('Define action')
         if self.argparser.args.remove is not None:
+            if self.interactive:
+                self.ask_for_confirmation()
             for item in self.paths:
                 exists = self.check_file_path(item)
                 if not exists:
@@ -83,6 +94,8 @@ class File_delete_configurator():
         elif self.argparser.args.remove_regular is not None:
             # do here regular check
             for element in self.paths:
+                if self.interactive:
+                    self.ask_for_confirmation()
                 items = Regular.define_regular_path(element)
                 for item in items:
                     exists = self.check_file_path(item)
@@ -103,23 +116,35 @@ class File_delete_configurator():
                 self.trash.log_writer.write_to_txt()
 
         elif self.argparser.args.clean is not None:
+            if self.interactive:
+                self.ask_for_confirmation()
             self.trash.delete_automatically(self.dry_run)
 
         elif self.argparser.args.restore is not None:
+            if self.interactive:
+                self.ask_for_confirmation()
             for item in self.paths:
                 self.trash.restore_trash_manually(item, self.dry_run)  # проверить на правильность путей
 
         elif self.argparser.args.restore_all is not None:
+            if self.interactive:
+                self.ask_for_confirmation()
             self.trash.restore_trash_automatically(self.dry_run)
 
         elif self.argparser.args.remove_from_trash is not None:
+            if self.interactive:
+                self.ask_for_confirmation()
             for item in self.paths:
                 self.trash.delete_manually(item)  # проверить на правильность путей
 
         elif self.argparser.args.show_trash is not None:
+            if self.interactive:
+                self.ask_for_confirmation()
             self.trash.watch_trash(self.dry_run)
 
         elif self.argparser.args.show_config is not None:
+            if self.interactive:
+                self.ask_for_confirmation()
             if self.dry_run:
                 print 'show config'
             else:
@@ -152,7 +177,7 @@ class File_delete_configurator():
         return directory_name
 
     def ask_for_confirmation(self):
-        answer = input('Are you sure? [y/n]\n')
+        answer = raw_input('Are you sure? [y/n]\n')
         if answer == 'n' or answer == 'N':
             print('Operation canceled')
             sys.exit(self.exit_codes['success'])
