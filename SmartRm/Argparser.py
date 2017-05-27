@@ -64,6 +64,8 @@ class Argparser(object):
         return command
 
     def define_path(self, rm_file):
+        if os.path.exists(rm_file):
+            return rm_file
         if rm_file.find('/') == -1:
             path = os.path.abspath(rm_file)
             # path = os.path.abspath(os.getcwd()+'/()'.format(rm_file))

@@ -8,6 +8,7 @@ import Logwriter
 import ExeptionListener
 import re
 import Logger
+import logging
 
 
 class SmartRm(object):
@@ -28,8 +29,8 @@ class SmartRm(object):
     # def search_all_by_regular(self, path):
     #     pass
 
-    def remove_to_trash_file(self, path, dry_run, logger):  # works
-
+    def remove_to_trash_file(self, path, dry_run):  # works
+        logging.info('Remove {path}'.format(path=path))
         try:
             if not dry_run:
                 # head, tail = os.path.split(path)
@@ -39,7 +40,7 @@ class SmartRm(object):
             else:
                 print 'remove file'
         except:
-            logger.logger.error('An error occurred')
+            logging.error('An error occurred')
             # self.exception_listener.check_capacity()
             # self.exeption_listener.check_cycles()
             # self.exeption_listener.check_if_conflict()
