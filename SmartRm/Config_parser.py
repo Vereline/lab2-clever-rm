@@ -5,6 +5,7 @@
 import ConfigParser
 import logging
 import ExeptionListener
+import sys
 
 
 class ConfParser(object):
@@ -19,7 +20,13 @@ class ConfParser(object):
         options = self.parser.options(section)
         for option in options:
             try:
-                self.dict[option] = self.parser.get(section, option)
+
+                # tut logging ne rabotaet/ opredelit ego poranshe
+                # print self.parser.get(section, option)
+                # print self.parser.get(section, option).decode('utf8')
+                # print self.parser.get(section, option).encode('utf8')
+
+                self.dict[option] = self.parser.get(section, option).decode('utf8')
                 if self.dict[option] == -1:
                     logging.DEBUG("skip: %s" % option)
                     # DebugPrint("skip: %s" % option)

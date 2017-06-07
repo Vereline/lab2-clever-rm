@@ -28,6 +28,23 @@ class FileDeleteConfigurator(object):
     def __init__(self, argparser, paths):
         self.argparser = argparser
 
+        self.dry_run = False
+        self.silent = False
+        self.interactive = False
+        self.verbose = False
+        self.force = False
+
+        if argparser.args.interactive:  # if there is no interactive, ask only if you have no roots
+            self.interactive = True  # if there are many files, ask for every file
+        if argparser.args.silent:
+            self.silent = True
+        if argparser.args.force:
+            self.force = True
+        if argparser.args.verbose:
+            self.verbose = True
+        if argparser.args.dryrun:
+            self.dry_run = True
+
         self.exit_codes = {
             'success': 0,
             'conflict': 1,
@@ -47,6 +64,8 @@ class FileDeleteConfigurator(object):
             print ex
             sys.exit(self.exit_codes['no_file'])
 
+        self.logger = Logger.Logger(self.config['trash_logging_path'], self.silent)
+
         try:
             self.config_parser = Config_parser.ConfParser(user_txt_path)
         except ExeptionListener.FileDoesNotExistException as ex:
@@ -56,25 +75,6 @@ class FileDeleteConfigurator(object):
 
         self.change_configure_by_user_config()  # change config by the txt file
         self.change_configure()  # change config by the parsed command line
-
-        self.logger = Logger.Logger(self.config['trash_logging_path'], self.silent)
-
-        self.dry_run = False
-        self.silent = False
-        self.interactive = False
-        self.verbose = False
-        self.force = False
-
-        if argparser.args.interactive:  # if there is no interactive, ask only if you have no roots
-            self.interactive = True  # if there are many files, ask for every file
-        if argparser.args.silent:
-            self.silent = True
-        if argparser.args.force:
-            self.force = True
-        if argparser.args.verbose:
-            self.verbose = True
-        if argparser.args.dryrun:
-            self.dry_run = True
 
         try:
             # if critical - exit
@@ -232,7 +232,7 @@ class FileDeleteConfigurator(object):
                     self.config[arr[0]] = arr[1]
 
     def change_configure_by_user_config(self):
-        for key in self.config.keys:
+        for key in self.config.keys():
             try:
                 if self.config_parser.dict[key] is not None:
                     self.config[key] = self.config_parser.dict[key]
