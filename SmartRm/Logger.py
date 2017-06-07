@@ -2,14 +2,14 @@ import logging
 import datetime
 import os
 
-class Logger():
+
+class Logger(object):
     def __init__(self, path, silent):
         self.logger = logging.getLogger()
 
         if not check_file_path(path):
             f = open(path, 'w')
             f.close()
-        #     pyrm.directory.create_directory(os.path.abspath(os.path.dirname(logger_config['log_file'])))
 
         self.logger.setLevel(logging.DEBUG)
         formatter = logging.Formatter('%(asctime)s %(levelname)s in \'%(module)s\' at line %(lineno)d: %(message)s',

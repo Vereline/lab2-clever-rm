@@ -59,3 +59,9 @@ class CheckIfConflictException(ExceptionListener):
         self.msg = msg
 # if in restore path this file already exists
 # print 'conflict is detected'
+
+
+class WrongItemException(ExceptionListener):
+    def __init__(self, msg):
+        self.msg = msg
+# if the item /string is not correct

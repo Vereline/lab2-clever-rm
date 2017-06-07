@@ -15,6 +15,7 @@ import pprint
 import Regular
 import Logger
 import logging
+import Config_parser
 
 # тут обрабатывать декораторы dry-run + i,v,f
 # redo and refactor all the code
@@ -26,19 +27,37 @@ import logging
 class FileDeleteConfigurator(object):
     def __init__(self, argparser, paths):
         self.argparser = argparser
-        # ???????
-        # make this config as default and make load (right path) in the setup.py
-        # load txt version as a user config after
-        self.config = json.load(open('SmartRm/Configure.json', 'r'))
-        self.change_configure()
 
-        self.logger = Logger.Logger(self.config['trash_logging_path'], self.silent)
         self.exit_codes = {
             'success': 0,
             'conflict': 1,
             'error': 2,
             'no_file': 3
         }
+
+        # ???????
+        # make this config as default and make load (right path) in the setup.py
+        # load txt version as a user config after
+
+        user_txt_path = 'SmartRm/Configure.txt'  # put this into setup.py
+        try:
+            self.config = json.load(open('SmartRm/Configure.json', 'r')) # put this into setup.py
+        except ExeptionListener.FileDoesNotExistException as ex:
+            # logging.error(ex)  # check if this works before constructor
+            print ex
+            sys.exit(self.exit_codes['no_file'])
+
+        try:
+            self.config_parser = Config_parser.ConfParser(user_txt_path)
+        except ExeptionListener.FileDoesNotExistException as ex:
+            # logging.error(ex)
+            print ex
+            sys.exit(self.exit_codes['no_file'])
+
+        self.change_configure_by_user_config()  # change config by the txt file
+        self.change_configure()  # change config by the parsed command line
+
+        self.logger = Logger.Logger(self.config['trash_logging_path'], self.silent)
 
         self.dry_run = False
         self.silent = False
@@ -64,15 +83,17 @@ class FileDeleteConfigurator(object):
                                      self.config['trash_log_path_txt'],
                                      self.config['policy_time'], self.config['policy_size'], self.config['max_size'],
                                      self.config['current_size'], self.config['max_capacity'], self.config['max_time'])
-        except:
+        except ExeptionListener.FileDoesNotExistException as ex:
             # do not so broad exception
             # do closer exception
             logging.error('Unable to load trash')
+            logging.error(ex)
             sys.exit(self.exit_codes['error'])
         try:
             self.smartrm = Smart_rm.SmartRm(self.config['path'])
-        except:
+        except ExeptionListener.FileDoesNotExistException as ex:
             logging.error('Unable to load smart rm')
+            logging.error(ex)
             sys.exit(self.exit_codes['error'])
 
         self.paths = paths
@@ -209,3 +230,11 @@ class FileDeleteConfigurator(object):
                 arr = config.split('=')
                 if arr[0] in self.config.keys:
                     self.config[arr[0]] = arr[1]
+
+    def change_configure_by_user_config(self):
+        for key in self.config.keys:
+            try:
+                if self.config_parser.dict[key] is not None:
+                    self.config[key] = self.config_parser.dict[key]
+            except ExeptionListener.WrongItemException as ex:
+                logging.ERROR(ex)
