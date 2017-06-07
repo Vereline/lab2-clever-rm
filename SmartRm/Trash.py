@@ -95,6 +95,7 @@ class Trash(object):
                     #     shutil.rmtree(subpath)
                     # elif not os.path.isdir(subpath):
                     #     os.remove(subpath)
+            # with
             clean_json = open(self.log_writer.file_dict_path, 'w')
             clean_json.close()
             clean_txt = open(self.log_writer.file_dict_path_txt, 'w')

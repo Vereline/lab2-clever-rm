@@ -17,9 +17,6 @@ class Logger():
         fh = logging.FileHandler(path)
         fh.setLevel(logging.DEBUG)
 
-        # if silent:
-        #     self.fh.setLevel(logging.ERROR)
-
         fh.setFormatter(formatter)
         self.logger.addHandler(fh)
 
@@ -31,7 +28,6 @@ class Logger():
         if silent:
             self.logger.setLevel(logging.ERROR)  # shows only error
             # self.logger.setLevel(logging.DEBUG)  # shows info and debug and error
-            # ch.setLevel(logging.ERROR)
 
         logging.debug('This is a test log message.')
 

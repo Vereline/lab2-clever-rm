@@ -15,10 +15,7 @@ class SmartRm(object):
     def __init__(self, path):
         self.trash_path = path
         self.exception_listener = ExeptionListener.ExceptionListener
-        # self.config = json.load(open('SmartRm/Configure.json', 'r'))
-        # self.trash_path = self.config['path']
-        # self.trash_log_path = self.config['trash_log_path']
-        # self.logwriter = Logwriter.Logwriter(self.trash_log_path)
+
 
     # def remove_by_regular(self, path, dryrun):
     #     regular_arr = self.search_all_by_regular()

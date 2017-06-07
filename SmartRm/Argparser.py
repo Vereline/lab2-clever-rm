@@ -59,9 +59,7 @@ class Argparser(object):
         return parser
 
     def define_command_line(self):
-        command = sys.argv
-        command.pop(0)
-        return command
+        return sys.argv[1:]
 
     def define_path(self, rm_file):
         if os.path.exists(rm_file):

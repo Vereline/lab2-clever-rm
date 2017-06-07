@@ -17,7 +17,7 @@ def main():
     argparser = Argparser.Argparser()
     cmd = argparser.define_command_line()
     out_list = argparser.create_outlist(argparser.args, cmd)  # here are all the paths placed
-    fdc = File_delete_configurator.File_delete_configurator(argparser, out_list)
+    fdc = File_delete_configurator.FileDeleteConfigurator(argparser, out_list)
     fdc.define_action()
 
 if __name__ == '__main__':

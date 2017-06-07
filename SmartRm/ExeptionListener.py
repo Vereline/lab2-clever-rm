@@ -4,42 +4,58 @@
 import  logging
 import Logger
 
-class ExceptionListener():
 
-    def __init__(self):
-        self.exception = ''
+class ExceptionListener(Exception):
+    pass
+# if critical - do the exit
+# if not critical - do smth, for example - do the
+# def __init__(self):
+# self.msg = ''
 
-    def check_size(path):
-        print 'size of file is bigger than the size of trash'
-        #  if the size of file is bigger than the size of trash
-        return None
 
-    def check_if_exists(path):
-        print 'this file does not exist'
-        #  if the size of file is bigger than the size of trash
-        return None
+class InvalidSizeError(ExceptionListener):
+    def __init__(self, msg):
+        self.msg = msg
+# print 'size of file is bigger than the size of trash'
+#  if the size of file is bigger than the size of trash
 
-    def check_is_system_directory(path):
-        print 'deleted file or directory is system'
-        #  if the deleted file or directory is system
-        return None
 
-    def check_capacity(path):
-        #  if the trash is full/else(not enough disk space)
-        print 'not enough disk space'
-        return None
+class FileDoesNotExistException(ExceptionListener):
+    def __init__(self, msg):
+        self.msg = msg
+# print 'this file does not exist'
+#  if the size of file is bigger than the size of trash
 
-    def check_quantity_of_files(path):
-        #  checks if the quantity of files is big/bigger than in config
-        print 'too many files in trash'
-        return None
 
-    def check_cycles(path):
-        print 'cycles detected'
-        return None
+class ThisIsSystemDirectoryException(ExceptionListener):
+    def __init__(self, msg):
+        self.msg = msg
+# print 'deleted file or directory is system'
+#  if the deleted file or directory is system
 
-    def check_if_conflict(path):
-        # if in restore path this file already exists
-        print 'conflict is detected'
-        return None
 
+class OverrideCapacityException(ExceptionListener):
+    def __init__(self, msg):
+        self.msg = msg
+#  if the trash is full/else(not enough disk space)
+# print 'not enough disk space'
+
+
+class OverrideQuantityOfFilesException(ExceptionListener):
+    def __init__(self, msg):
+        self.msg = msg
+#  checks if the quantity of files is big/bigger than in config
+# print 'too many files in trash'
+
+
+class DetectedCyclesException(ExceptionListener):
+    def __init__(self, msg):
+        self.msg = msg
+# print 'cycles detected'
+
+
+class CheckIfConflictException(ExceptionListener):
+    def __init__(self, msg):
+        self.msg = msg
+# if in restore path this file already exists
+# print 'conflict is detected'

@@ -23,10 +23,12 @@ import logging
 # -i - confirm every your deletion / restore
 
 
-class File_delete_configurator():
+class FileDeleteConfigurator(object):
     def __init__(self, argparser, paths):
         self.argparser = argparser
         # ???????
+        # make this config as default and make load (right path) in the setup.py
+        # load txt version as a user config after
         self.config = json.load(open('SmartRm/Configure.json', 'r'))
         self.change_configure()
 
@@ -45,7 +47,7 @@ class File_delete_configurator():
         self.force = False
 
         if argparser.args.interactive:  # if there is no interactive, ask only if you have no roots
-            self.interactive = True
+            self.interactive = True  # if there are many files, ask for every file
         if argparser.args.silent:
             self.silent = True
         if argparser.args.force:
@@ -56,10 +58,15 @@ class File_delete_configurator():
             self.dry_run = True
 
         try:
-            self.trash = Trash.Trash(self.config['path'], self.config['trash_log_path'], self.config['trash_log_path_txt'],
+            # if critical - exit
+            # if not critical - default settings(work in exceptionListener)
+            self.trash = Trash.Trash(self.config['path'], self.config['trash_log_path'],
+                                     self.config['trash_log_path_txt'],
                                      self.config['policy_time'], self.config['policy_size'], self.config['max_size'],
                                      self.config['current_size'], self.config['max_capacity'], self.config['max_time'])
         except:
+            # do not so broad exception
+            # do closer exception
             logging.error('Unable to load trash')
             sys.exit(self.exit_codes['error'])
         try:
@@ -78,12 +85,13 @@ class File_delete_configurator():
             for item in self.paths:
                 exists = self.check_file_path(item)
                 if not exists:
-                    logging.error('File {file} does not exist'.format(file=item))
+                    logging.error('File % does not exist', item)
                 else:
                     access = self.check_access(item)
                     if access == self.exit_codes['error']:
                         logging.error('Item {file} is a system unit'.format(file=item))
                     else:
+                        # remove all the check to the trash or to the smart rm
                         self.trash.log_writer.create_file_dict(item, self.dry_run)
                         item = self.rename_file_name_to_id(item, self.dry_run)
                         self.smartrm.remove_to_trash_file(item, self.dry_run)
@@ -159,9 +167,9 @@ class File_delete_configurator():
         else:
             return False
 
+# remove this thing to smart rm or to the trash
     def rename_file_name_to_id(self, path, dry_run):  # works
-        if not self.silent:
-            logging.info('Rename item with id')
+        logging.info('Rename item with id')
         _id = self.trash.log_writer.get_id_path(path)
         index = 0
         for i in reversed(range(len(path))):
@@ -179,7 +187,8 @@ class File_delete_configurator():
     def ask_for_confirmation(self):
         answer = raw_input('Are you sure? [y/n]\n')
         if answer == 'n' or answer == 'N':
-            print('Operation canceled')
+            if self.silent:
+                print('Operation canceled')
             sys.exit(self.exit_codes['success'])
         elif answer != 'y' and answer != 'n' and answer != 'N' and answer != 'Y':
             self.ask_for_confirmation()
