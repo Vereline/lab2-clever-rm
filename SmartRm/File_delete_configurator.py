@@ -176,7 +176,7 @@ class FileDeleteConfigurator(object):
                 self.ask_for_confirmation()
             if self.dry_run:
                 print 'show config'
-            else:
+            else:  # do here text version, not json!!!!!!!!!!
                 pprint.pprint(self.config)
 
     def check_file_path(self, path):
