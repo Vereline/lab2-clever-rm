@@ -101,9 +101,12 @@ class FileDeleteConfigurator(object):
     def define_action(self):
         logging.info('Define action')
         if self.argparser.args.remove is not None:
-            if self.interactive:
-                self.ask_for_confirmation()
+
             for item in self.paths:
+                if self.interactive:
+                    answer = self.ask_for_confirmation(item)   # DO INDIVIDUALLY
+                    if not answer:
+                        continue
                 exists = self.check_file_path(item)
                 if not exists:
                     logging.error('File % does not exist', item)
@@ -123,10 +126,12 @@ class FileDeleteConfigurator(object):
         elif self.argparser.args.remove_regular is not None:
             # do here regular check
             for element in self.paths:
-                if self.interactive:
-                    self.ask_for_confirmation()
                 items = Regular.define_regular_path(element)
                 for item in items:
+                    if self.interactive:
+                        answer = self.ask_for_confirmation(item)   # DO INDIVIDUALLY
+                        if not answer:
+                            continue
                     exists = self.check_file_path(item)
                     if not exists:
                         logging.error('File {file} does not exist'.format(file=item))
@@ -146,38 +151,47 @@ class FileDeleteConfigurator(object):
 
         elif self.argparser.args.clean is not None:
             if self.interactive:
-                self.ask_for_confirmation()
-            self.trash.delete_automatically(self.dry_run)
+                answer = self.ask_for_confirmation('trash')   # DO INDIVIDUALLY
+                if answer:
+                    self.trash.delete_automatically(self.dry_run)
 
         elif self.argparser.args.restore is not None:
-            if self.interactive:
-                self.ask_for_confirmation()
             for item in self.paths:
+                if self.interactive:
+                    answer = self.ask_for_confirmation(item)   # DO INDIVIDUALLY
+                    if not answer:
+                        continue
                 self.trash.restore_trash_manually(item, self.dry_run)  # проверить на правильность путей
 
         elif self.argparser.args.restore_all is not None:
             if self.interactive:
-                self.ask_for_confirmation()
-            self.trash.restore_trash_automatically(self.dry_run)
+                answer = self.ask_for_confirmation('trash')
+                if answer:
+                    self.trash.restore_trash_automatically(self.dry_run)
 
         elif self.argparser.args.remove_from_trash is not None:
-            if self.interactive:
-                self.ask_for_confirmation()
+
             for item in self.paths:
+                if self.interactive:
+                    answer = self.ask_for_confirmation(item)  # DO INDIVIDUALLY
+                    if not answer:
+                        continue
                 self.trash.delete_manually(item)  # проверить на правильность путей
 
         elif self.argparser.args.show_trash is not None:
             if self.interactive:
-                self.ask_for_confirmation()
-            self.trash.watch_trash(self.dry_run)
+                answer = self.ask_for_confirmation('trash')
+                if answer:
+                    self.trash.watch_trash(self.dry_run)
 
         elif self.argparser.args.show_config is not None:
             if self.interactive:
-                self.ask_for_confirmation()
-            if self.dry_run:
-                print 'show config'
-            else:  # do here text version, not json!!!!!!!!!!
-                pprint.pprint(self.config)
+                answer = self.ask_for_confirmation('config')
+                if answer:
+                    if self.dry_run:
+                        print 'show config'
+                    else:  # do here text version, not json!!!!!!!!!!
+                        pprint.pprint(self.config)
 
     def check_file_path(self, path):
         if not self.silent:
@@ -205,14 +219,19 @@ class FileDeleteConfigurator(object):
             os.rename(path, directory_name)
         return directory_name
 
-    def ask_for_confirmation(self):
-        answer = raw_input('Are you sure? [y/n]\n')
+    def ask_for_confirmation(self, filename):
+        answer = raw_input('Operation with {filename}. Are you sure? [y/n]\n'.format(filename=filename))
         if answer == 'n' or answer == 'N':
-            if self.silent:
+            if not self.silent:
                 print('Operation canceled')
-            sys.exit(self.exit_codes['success'])
+            return False
+        elif answer == 'y' or answer == 'Y':
+            if not self.silent:
+                print('Operation continued')
+            return True
+            # sys.exit(self.exit_codes['success'])
         elif answer != 'y' and answer != 'n' and answer != 'N' and answer != 'Y':
-            self.ask_for_confirmation()
+            self.ask_for_confirmation(filename)
 
     def check_access(self, path):
         logging.info('Check {file} access'.format(file=path))
