@@ -30,6 +30,9 @@ class Argparser(object):
         parser.add_argument('-smtrs', nargs='*', dest='show_trash', help='show trash')
         parser.add_argument('-smcs', nargs='*', dest='show_config', help='show config')
 
+        parser.add_argument('-smtrcr', nargs='*', dest='clean_regular', help='clean from trash by regular')
+        parser.add_argument('-smtrrr', nargs='*', dest='restore_regular', help='restore from trash by regular')
+
         # интерактивно спрашивает, удалить или нет
         parser.add_argument('-i', '-interactive', dest='interactive', action='store_true', help='interactive mode')
         parser.add_argument('-f', '-force', dest='force', action='store_true', help='force mode')  # ничего не спрашивает
@@ -78,16 +81,36 @@ class Argparser(object):
                 outlist.append(item)
             for item in args.path:
                 outlist.append(item)
+
         elif args.remove is not None:
             for item in args.remove:
                 outlist.append(self.define_path(item))
             for item in args.path:
                 outlist.append(self.define_path(item))
+
         elif args.restore is not None:
             for item in args.restore:
                 outlist.append(item)
             for item in args.path:
                 outlist.append(item)
+
+        elif args.restore_regular is not None:
+            for item in args.restore_regular:
+                outlist.append(item)
+            for item in args.path:
+                outlist.append(item)
+
+        elif args.clean_regular is not None:
+                for item in args.clean_regular:
+                    outlist.append(item)
+                for item in args.path:
+                    outlist.append(item)
+
+        elif args.remove_from_trash is not None:
+                for item in args.remove_from_trash:
+                    outlist.append(item)
+                for item in args.path:
+                    outlist.append(item)
 
         # outlist.append(command)
         # if args.remove:

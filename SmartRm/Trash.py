@@ -7,6 +7,8 @@ import os         # imports the os
 import Logwriter
 from datetime import datetime
 import logging
+import Regular
+import re
 
 # new procedure if trash does not exist ( create new trash)
 
@@ -112,9 +114,16 @@ class Trash(object):
             clean_txt = open(self.log_writer.file_dict_path_txt, 'w')
             clean_txt.close()
 
-    def restore_trash_manually(self, path, dry_run, interactive):  # works
+    def restore_trash_manually(self, path, dry_run):  # works
         # restore one file in the trash
         # check if the path already exists
+
+        files_id = self.search_for_all_files_with_this_name(path)
+        if len(files_id) > 1:
+            logging.warning('Found more than 1 file with this name')
+        elif len(files_id) <= 0:
+            logging.warning('There is no such file or directory')
+        # обработать это (когда их больще 1 и меньше 1)
 
         # находит первый попавшийся файл, но не ищет, есть ли еще, предотвратить политику конфликтов
         file_id = self.log_writer.get_id(path)
@@ -217,10 +226,38 @@ class Trash(object):
                 total_size += os.path.getsize(fp)
         return total_size
 
-    def search_for_all_files_with_this_name(self, name):
+    def search_for_all_files_with_this_name(self, name):  # not tested
         files_id = []
         for file_dict in self.log_writer.file_dict_arr:
             if file_dict['name'] == name:
                 files_id.append(file_dict['id'])
 
         return files_id
+
+    def get_names_by_regular(self, regex):  # not tested
+        suitable_names = []
+        suitable_id = []
+        names = []
+        files_id = []
+        for file_dict in self.log_writer.file_dict_arr:
+            names.append(file_dict['name'])
+            files_id.append(file_dict['id'])
+        try:
+            re.compile(regex)
+            # for name in names:
+            #     if re.search(regex, name) is not None:
+            #         suitable_names.append(name)
+            for i in range(len(names)):
+                if re.compile(regex, names[i]) is not None:
+                    suitable_names.append(names[i])
+                    suitable_id.append(files_id[i])
+        except:
+            logging.error("Invalid regular expression {regexp}".format(regexp=regex))
+
+        return suitable_names, suitable_id
+
+    def restore_by_regular(self):
+        pass
+
+    def clean_by_regular(self):
+        pass

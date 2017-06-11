@@ -56,7 +56,6 @@ class FileDeleteConfigurator(object):
             'no_file': 3
         }
 
-        # ???????
         # make this config as default and make load (right path) in the setup.py
         # load txt version as a user config after
         # user_txt_path = '~/Configure.txt'
@@ -194,7 +193,6 @@ class FileDeleteConfigurator(object):
                 if self.verbose:
                     print 'trash restored'
 
-
         elif self.argparser.args.remove_from_trash is not None:
 
             for item in self.paths:
@@ -205,6 +203,27 @@ class FileDeleteConfigurator(object):
                 self.trash.delete_manually(item)  # проверить на правильность путей
                 if self.verbose:
                     print item + ' removed'
+
+        elif self.argparser.args.clean_regular is not None:
+            for item in self.paths:
+                common_names, common_id = self.trash.get_names_by_regular(item)
+                if len(common_names) <= 0:
+                    logging.warning('Regular expression {reg} does not suit to anything in trash'.format(reg={item}))
+                    continue#  do the removal by id or put all this into 1 function in the trash
+            return
+
+        elif self.argparser.args.restore_regular is not None:
+            for item in self.paths:
+                common_names, common_id = self.trash.get_names_by_regular(item)
+                if len(common_names) <= 0:
+                    logging.warning('Regular expression {reg} does not suit to anything in trash'.format(reg={item}))
+                    continue
+                for file_id in common_id:
+                    #  do the removal by id or put all this into 1 function in the trash
+                    pass
+
+
+            return
 
         elif self.argparser.args.show_trash is not None:
             if self.interactive:
@@ -238,6 +257,7 @@ class FileDeleteConfigurator(object):
             return False
 
 # remove this thing to smart rm or to the trash
+
     def rename_file_name_to_id(self, path, dry_run):  # works
         logging.info('Rename item with id')
         _id = self.trash.log_writer.get_id_path(path)
