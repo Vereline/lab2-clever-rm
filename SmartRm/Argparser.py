@@ -63,7 +63,7 @@ class Argparser(object):
 
     def define_path(self, rm_file):
         if os.path.exists(rm_file):
-            return rm_file
+            return os.path.abspath(os.path.expanduser(rm_file)) #  rm_file
         if rm_file.find('/') == -1:
             path = os.path.abspath(rm_file)
             # path = os.path.abspath(os.getcwd()+'/()'.format(rm_file))
@@ -73,16 +73,22 @@ class Argparser(object):
 
     def create_outlist(self, args, command):
         outlist = []
-        if args.remove_regular:
+        if args.remove_regular is not None:
             for item in args.remove_regular:
                 outlist.append(item)
-                # outlist.append(self.define_regular_path(item))
-        elif args.remove:
+            for item in args.path:
+                outlist.append(item)
+        elif args.remove is not None:
             for item in args.remove:
                 outlist.append(self.define_path(item))
-        elif args.restore:
+            for item in args.path:
+                outlist.append(self.define_path(item))
+        elif args.restore is not None:
             for item in args.restore:
                 outlist.append(item)
+            for item in args.path:
+                outlist.append(item)
+
         # outlist.append(command)
         # if args.remove:
         # # if command[0] == 'remove' or (command[0] == 'trash' and (command[1] == 'clean' or command[1] == 'restore')):

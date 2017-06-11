@@ -6,7 +6,7 @@ import shutil         # Contains functions for operating files
 import os         # imports the os
 import Logwriter
 from datetime import datetime
-
+import logging
 
 # new procedure if trash does not exist ( create new trash)
 
@@ -23,6 +23,7 @@ class Trash(object):
 
     def delete_automatically(self, dry_run):  # works
         # delete the whole trash
+        logging.info("Clean the whole trash".format())
         if dry_run:
             print 'clean trash'
         else:
@@ -40,7 +41,7 @@ class Trash(object):
                         shutil.rmtree(subpath)
                     elif not os.path.isdir(subpath):
                         os.remove(subpath)
-
+            logging.info("Clean information about files".format())
             clean_json = open(self.log_writer.file_dict_path, 'w')
             clean_json.close()
             clean_txt = open(self.log_writer.file_dict_path_txt, 'w')
@@ -52,8 +53,10 @@ class Trash(object):
         clean_path = self.get_path_by_id(file_id, self.path)
 
         if os.path.isdir(clean_path):
+            logging.info("Remove directory".format())
             shutil.rmtree(clean_path)
         elif not os.path.isdir(clean_path):
+            logging.info("Remove file".format())
             os.remove(clean_path)
 
     def get_path_by_id(self, file_id, path):  # not checked
@@ -64,6 +67,7 @@ class Trash(object):
                 return subpath
 
     def watch_trash(self, dry_run):  # works
+        logging.info("Shaw trash".format())
         if dry_run:
             print 'show trash'
         else:
@@ -75,6 +79,8 @@ class Trash(object):
 
     def restore_trash_automatically(self, dry_run):  # not tested
         # restore the the whole trash
+        logging.info("Restore the whole trash".format())
+
         if dry_run:
             print 'restore the whole trash'
         else:
@@ -90,6 +96,7 @@ class Trash(object):
                 if dict_contains:
                     subpath = os.path.split(subpath)  # ???
                     subpath = self.get_path_by_id(subpath[1], subpath[0])  # ???
+                    logging.info("Restore file".format())
                     self.restore_trash_manually(subpath, dry_run)
                     # if os.path.isdir(subpath):
                     #     shutil.rmtree(subpath)
@@ -109,13 +116,15 @@ class Trash(object):
         clean_path = self.get_path_by_id(file_id, self.path)
         destination_path = self.log_writer.get_path(file_id)
         new_name = self.log_writer.get_name(file_id)
-
+        logging.info("Operations with file {file}".format(file=new_name))
         index = 0
         for i in reversed(range(len(clean_path))):
             if clean_path[i] == '/':
                 index = i
                 break
         dirname = clean_path[:(index+1)] + new_name
+        logging.info("Rename {file}".format(file=new_name))
+        logging.info("Move to original directory {file}".format(file=new_name))
         if dry_run:
             print 'rename file and move to original directory'
             print 'clean record from json'
@@ -128,6 +137,7 @@ class Trash(object):
         return None
 
     def check_policy(self, path, dry_run):  # not checked(redo to check the whole bucket)
+        logging.info("Check policies".format())
         if self.policy_time:
             confirm = self.check_date_if_overflow(path)
             if confirm:
@@ -137,6 +147,7 @@ class Trash(object):
             pass
 
     def count_days(self, path):
+        logging.info("Check the time policy".format())
         name = os.path.split(path)
         if name[1] != '':
             file_id = self.log_writer.get_id(name[1])
@@ -157,9 +168,10 @@ class Trash(object):
             return False
 
     def check_size(self, dry_run):
+        logging.info("Check the size policy".format())
         if self.max_size - self.count_size(dry_run) <= 0:
             if dry_run:
-                print ' not enough trash space'
+                print 'not enough trash space'
             else:
                 self.delete_automatically(dry_run)
 
@@ -186,6 +198,7 @@ class Trash(object):
         return total_size
 
     def get_size(self, start_path='.'):
+        logging.info("Get the size of file in the trash".format())
         total_size = 0
         for dirpath, dirnames, filenames in os.walk(start_path):
             for f in filenames:

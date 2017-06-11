@@ -45,6 +45,10 @@ class FileDeleteConfigurator(object):
         if argparser.args.dryrun:
             self.dry_run = True
 
+        if self.force or self.silent:
+            self.interactive = False
+            self.verbose = False
+
         self.exit_codes = {
             'success': 0,
             'conflict': 1,
@@ -55,10 +59,13 @@ class FileDeleteConfigurator(object):
         # ???????
         # make this config as default and make load (right path) in the setup.py
         # load txt version as a user config after
-
-        user_txt_path = 'SmartRm/Configure.txt'  # put this into setup.py
+        # user_txt_path = '~/Configure.txt'
+        #
+        user_txt_path = os.path.split(sys.argv[0])[0] + '/Configure.txt'  # 'SmartRm/Configure.txt'  # put into setup.py
         try:
-            self.config = json.load(open('SmartRm/Configure.json', 'r')) # put this into setup.py
+            path = os.path.split(sys.argv[0])[0] + '/Configure.json'
+            self.config = json.load(open(path, 'r'))  # put this into setup.py
+            # self.config = json.load(open('SmartRm/Configure.json', 'r'))  # put this into setup.py
         except ExeptionListener.FileDoesNotExistException as ex:
             # logging.error(ex)  # check if this works before constructor
             print ex
@@ -109,7 +116,7 @@ class FileDeleteConfigurator(object):
                         continue
                 exists = self.check_file_path(item)
                 if not exists:
-                    logging.error('File % does not exist', item)
+                    logging.error('File {file} does not exist'.format(file=item))
                 else:
                     access = self.check_access(item)
                     if access == self.exit_codes['error']:
@@ -145,6 +152,8 @@ class FileDeleteConfigurator(object):
                             self.trash.log_writer.create_file_dict(item, self.dry_run)
                             item = self.rename_file_name_to_id(item, self.dry_run)
                             self.smartrm.remove_to_trash_file(item, self.dry_run)
+                        if self.verbose:
+                            print item + ' removed'
 
                 self.trash.log_writer.write_to_json()
                 self.trash.log_writer.write_to_txt()
@@ -154,6 +163,8 @@ class FileDeleteConfigurator(object):
                 answer = self.ask_for_confirmation('trash')   # DO INDIVIDUALLY
                 if answer:
                     self.trash.delete_automatically(self.dry_run)
+                    if self.verbose:
+                        print 'trash cleaned'
 
         elif self.argparser.args.restore is not None:
             for item in self.paths:
@@ -162,12 +173,16 @@ class FileDeleteConfigurator(object):
                     if not answer:
                         continue
                 self.trash.restore_trash_manually(item, self.dry_run)  # проверить на правильность путей
+                if self.verbose:
+                    print item + ' restored'
 
         elif self.argparser.args.restore_all is not None:
             if self.interactive:
                 answer = self.ask_for_confirmation('trash')
                 if answer:
                     self.trash.restore_trash_automatically(self.dry_run)
+                    if self.verbose:
+                        print 'trash restored'
 
         elif self.argparser.args.remove_from_trash is not None:
 
@@ -177,6 +192,8 @@ class FileDeleteConfigurator(object):
                     if not answer:
                         continue
                 self.trash.delete_manually(item)  # проверить на правильность путей
+                if self.verbose:
+                    print item + ' removed'
 
         elif self.argparser.args.show_trash is not None:
             if self.interactive:
