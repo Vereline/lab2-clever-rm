@@ -126,6 +126,8 @@ class FileDeleteConfigurator(object):
                         self.trash.log_writer.create_file_dict(item, self.dry_run)
                         item = self.rename_file_name_to_id(item, self.dry_run)
                         self.smartrm.remove_to_trash_file(item, self.dry_run)
+                        if self.verbose:
+                            print item + ' removed'
 
             self.trash.log_writer.write_to_json()
             self.trash.log_writer.write_to_txt()
@@ -165,6 +167,10 @@ class FileDeleteConfigurator(object):
                     self.trash.delete_automatically(self.dry_run)
                     if self.verbose:
                         print 'trash cleaned'
+            else:
+                self.trash.delete_automatically(self.dry_run)
+                if self.verbose:
+                    print 'trash cleaned'
 
         elif self.argparser.args.restore is not None:
             for item in self.paths:
@@ -183,6 +189,11 @@ class FileDeleteConfigurator(object):
                     self.trash.restore_trash_automatically(self.dry_run)
                     if self.verbose:
                         print 'trash restored'
+            else:
+                self.trash.restore_trash_automatically(self.dry_run)
+                if self.verbose:
+                    print 'trash restored'
+
 
         elif self.argparser.args.remove_from_trash is not None:
 
@@ -200,6 +211,8 @@ class FileDeleteConfigurator(object):
                 answer = self.ask_for_confirmation('trash')
                 if answer:
                     self.trash.watch_trash(self.dry_run)
+            else:
+                self.trash.watch_trash(self.dry_run)
 
         elif self.argparser.args.show_config is not None:
             if self.interactive:
@@ -209,6 +222,11 @@ class FileDeleteConfigurator(object):
                         print 'show config'
                     else:  # do here text version, not json!!!!!!!!!!
                         pprint.pprint(self.config)
+            else:
+                if self.dry_run:
+                    print 'show config'
+                else:  # do here text version, not json!!!!!!!!!!
+                    pprint.pprint(self.config)
 
     def check_file_path(self, path):
         if not self.silent:
@@ -264,7 +282,7 @@ class FileDeleteConfigurator(object):
         if self.argparser.args.configs is not None:
             for config in self.argparser.args.configs:
                 arr = config.split('=')
-                if arr[0] in self.config.keys:
+                if arr[0] in self.config.keys():
                     self.config[arr[0]] = arr[1]
 
     def change_configure_by_user_config(self):

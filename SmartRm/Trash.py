@@ -10,9 +10,13 @@ import logging
 
 # new procedure if trash does not exist ( create new trash)
 
+
 class Trash(object):
     def __init__(self, path_trash, path_log_j, path_log_t, policy_time, policy_size, size, cur_size, capacity, time):
         self.path = path_trash
+        if not os.path.exists(self.path):
+            logging.info('Create a new trash in the {path}'.format(path=self.path))
+            os.makedirs(self.path)
         self.log_writer = Logwriter.Logwriter(path_log_j, path_log_t)
         self.policy_time = policy_time
         self.policy_size = policy_size
@@ -67,7 +71,7 @@ class Trash(object):
                 return subpath
 
     def watch_trash(self, dry_run):  # works
-        logging.info("Shaw trash".format())
+        logging.info("Show trash".format())
         if dry_run:
             print 'show trash'
         else:
@@ -108,11 +112,13 @@ class Trash(object):
             clean_txt = open(self.log_writer.file_dict_path_txt, 'w')
             clean_txt.close()
 
-    def restore_trash_manually(self, path, dry_run):  # works
+    def restore_trash_manually(self, path, dry_run, interactive):  # works
         # restore one file in the trash
         # check if the path already exists
-        # file_id = self.log_writer.get_id(path)
-        file_id = os.path.split(path)[1]
+
+        # находит первый попавшийся файл, но не ищет, есть ли еще, предотвратить политику конфликтов
+        file_id = self.log_writer.get_id(path)
+        # file_id = os.path.split(path)[1]
         clean_path = self.get_path_by_id(file_id, self.path)
         destination_path = self.log_writer.get_path(file_id)
         new_name = self.log_writer.get_name(file_id)
@@ -125,6 +131,11 @@ class Trash(object):
         dirname = clean_path[:(index+1)] + new_name
         logging.info("Rename {file}".format(file=new_name))
         logging.info("Move to original directory {file}".format(file=new_name))
+        # находит первый попавшийся файл, но не ищет, есть ли еще, предотвратить политику конфликтов
+        # при восстановлении чтоб смотерл, а вдруг есть уже такой файл в директории выдавать предупреждение
+        if os.path.exists(destination_path):
+            logging.warning('Item with this name already exists.id will be added to real name')
+            dirname += file_id
         if dry_run:
             print 'rename file and move to original directory'
             print 'clean record from json'
@@ -205,3 +216,11 @@ class Trash(object):
                 fp = os.path.join(dirpath, f)
                 total_size += os.path.getsize(fp)
         return total_size
+
+    def search_for_all_files_with_this_name(self, name):
+        files_id = []
+        for file_dict in self.log_writer.file_dict_arr:
+            if file_dict['name'] == name:
+                files_id.append(file_dict['id'])
+
+        return files_id

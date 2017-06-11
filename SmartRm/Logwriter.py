@@ -5,6 +5,7 @@ import json
 import os
 from datetime import datetime
 import sys
+import codecs
 
 class Logwriter(object):  # all class works
     def __init__(self, path, txt_path):
@@ -166,8 +167,8 @@ class Logwriter(object):  # all class works
 
     def write_to_txt(self):  # not checked
         txt_file = open(self.file_dict_path_txt, 'w')
-        # reload(sys)
-        # sys.setdefaultencoding('utf-8')
+        reload(sys)
+        sys.setdefaultencoding('utf-8')
 
         # redo unicode utf-8
         for item in self.file_dict_arr:
