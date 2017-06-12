@@ -26,7 +26,7 @@ class SmartRm(object):
     # def search_all_by_regular(self, path):
     #     pass
 
-    def remove_to_trash_file(self, path, dry_run):  # works
+    def remove_to_trash_file(self, path, dry_run, verbose):  # works
         logging.info('Remove {path}'.format(path=path))
         try:
             if not dry_run:
@@ -36,8 +36,10 @@ class SmartRm(object):
                 # return new_path
             else:
                 print 'remove file'
-        except:
-            logging.error('An error occurred')
+            if verbose:
+                print path + ' removed'
+        except ExeptionListener.WrongItemException as ex:
+            logging.error(ex)
             # self.exception_listener.check_capacity()
             # self.exeption_listener.check_cycles()
             # self.exeption_listener.check_if_conflict()

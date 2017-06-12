@@ -65,3 +65,9 @@ class WrongItemException(ExceptionListener):
     def __init__(self, msg):
         self.msg = msg
 # if the item /string is not correct
+
+
+class TrashError(ExceptionListener):
+    def __init__(self, msg):
+        self.msg = msg
+# errors in trash

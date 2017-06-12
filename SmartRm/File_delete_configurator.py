@@ -124,9 +124,7 @@ class FileDeleteConfigurator(object):
                         # remove all the check to the trash or to the smart rm
                         self.trash.log_writer.create_file_dict(item, self.dry_run)
                         item = self.rename_file_name_to_id(item, self.dry_run)
-                        self.smartrm.remove_to_trash_file(item, self.dry_run)
-                        if self.verbose:
-                            print item + ' removed'
+                        self.smartrm.remove_to_trash_file(item, self.dry_run, self.verbose)
 
             self.trash.log_writer.write_to_json()
             self.trash.log_writer.write_to_txt()
@@ -152,9 +150,9 @@ class FileDeleteConfigurator(object):
                         else:
                             self.trash.log_writer.create_file_dict(item, self.dry_run)
                             item = self.rename_file_name_to_id(item, self.dry_run)
-                            self.smartrm.remove_to_trash_file(item, self.dry_run)
-                        if self.verbose:
-                            print item + ' removed'
+                            self.smartrm.remove_to_trash_file(item, self.dry_run, self.verbose)
+                        # if self.verbose:
+                        #     print item + ' removed'
 
                 self.trash.log_writer.write_to_json()
                 self.trash.log_writer.write_to_txt()
@@ -163,13 +161,10 @@ class FileDeleteConfigurator(object):
             if self.interactive:
                 answer = self.ask_for_confirmation('trash')   # DO INDIVIDUALLY
                 if answer:
-                    self.trash.delete_automatically(self.dry_run)
-                    if self.verbose:
-                        print 'trash cleaned'
+                    self.trash.delete_automatically(self.dry_run, self.verbose)
+
             else:
-                self.trash.delete_automatically(self.dry_run)
-                if self.verbose:
-                    print 'trash cleaned'
+                self.trash.delete_automatically(self.dry_run, self.verbose)
 
         elif self.argparser.args.restore is not None:
             for item in self.paths:
@@ -177,21 +172,19 @@ class FileDeleteConfigurator(object):
                     answer = self.ask_for_confirmation(item)   # DO INDIVIDUALLY
                     if not answer:
                         continue
-                self.trash.restore_trash_manually(item, self.dry_run)  # проверить на правильность путей
-                if self.verbose:
-                    print item + ' restored'
+                self.trash.restore_trash_manually(item, self.dry_run, self.verbose)  # проверить на правильность путей
 
         elif self.argparser.args.restore_all is not None:
             if self.interactive:
                 answer = self.ask_for_confirmation('trash')
                 if answer:
-                    self.trash.restore_trash_automatically(self.dry_run)
-                    if self.verbose:
-                        print 'trash restored'
+                    self.trash.restore_trash_automatically(self.dry_run, self.verbose)
+                    # if self.verbose:
+                    #     print 'trash restored'
             else:
-                self.trash.restore_trash_automatically(self.dry_run)
-                if self.verbose:
-                    print 'trash restored'
+                self.trash.restore_trash_automatically(self.dry_run, self.verbose)
+                # if self.verbose:
+                #     print 'trash restored'
 
         elif self.argparser.args.remove_from_trash is not None:
 
@@ -200,27 +193,30 @@ class FileDeleteConfigurator(object):
                     answer = self.ask_for_confirmation(item)  # DO INDIVIDUALLY
                     if not answer:
                         continue
-                self.trash.delete_manually(item)  # проверить на правильность путей
-                if self.verbose:
-                    print item + ' removed'
+                self.trash.delete_manually(item, self.dry_run, self.verbose)  # проверить на правильность путей
+                # if self.verbose:
+                #     print item + ' removed'
 
         elif self.argparser.args.clean_regular is not None:
-            for item in self.paths:
-                common_names, common_id = self.trash.get_names_by_regular(item)
-                if len(common_names) <= 0:
-                    logging.warning('Regular expression {reg} does not suit to anything in trash'.format(reg={item}))
-                    continue#  do the removal by id or put all this into 1 function in the trash
+            # for item in self.paths:
+            #     common_names, common_id = self.trash.get_names_by_regular(item, self.dry_run)
+            #     if len(common_names) <= 0:
+            #         logging.warning('Regular expression {reg} does not suit to anything in trash'.format(reg={item}))
+            #         continue
+            #         #  do the removal by id or put all this into 1 function in the trash
+
+
             return
 
         elif self.argparser.args.restore_regular is not None:
-            for item in self.paths:
-                common_names, common_id = self.trash.get_names_by_regular(item)
-                if len(common_names) <= 0:
-                    logging.warning('Regular expression {reg} does not suit to anything in trash'.format(reg={item}))
-                    continue
-                for file_id in common_id:
-                    #  do the removal by id or put all this into 1 function in the trash
-                    pass
+            # for item in self.paths:
+            #     common_names, common_id = self.trash.get_names_by_regular(item)
+            #     if len(common_names) <= 0:
+            #         logging.warning('Regular expression {reg} does not suit to anything in trash'.format(reg={item}))
+            #         continue
+            #     for file_id in common_id:
+            #         #  do the removal by id or put all this into 1 function in the trash
+            #         pass
 
 
             return
@@ -239,12 +235,12 @@ class FileDeleteConfigurator(object):
                 if answer:
                     if self.dry_run:
                         print 'show config'
-                    else:  # do here text version, not json!!!!!!!!!!
+                    else:
                         pprint.pprint(self.config)
             else:
                 if self.dry_run:
                     print 'show config'
-                else:  # do here text version, not json!!!!!!!!!!
+                else:
                     pprint.pprint(self.config)
 
     def check_file_path(self, path):
