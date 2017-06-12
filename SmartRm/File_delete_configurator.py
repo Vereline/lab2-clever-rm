@@ -261,6 +261,9 @@ class FileDeleteConfigurator(object):
                 else:
                     pprint.pprint(self.config)
 
+        logging.info('check policies')
+        self.trash.check_policy(self.dry_run, self.verbose)
+
     def check_file_path(self, path):
         if not self.silent:
             logging.info('Check if the path is correct')

@@ -207,18 +207,29 @@ class Trash(object):
                 if verbose:
                     print 'item restored'
 
+    def define_time_policy(self, dry_run, verbose):
+        d = os.listdir(self.path)
+        for item in d:
+            subpath = os.path.join(self.path, item)  # form the address
+            dict_contains = False
+            for _dict in self.log_writer.file_dict_arr:
+                if _dict['id'] == item:
+                    dict_contains = True
+                    break
+            if dict_contains:
+                logging.info('time policy')
+                confirm = self.check_date_if_overflow(subpath)
+                if confirm:
+                    self.delete_manually(subpath, dry_run, verbose)
 
-    def check_policy(self, path, dry_run):  # not checked(redo to check the whole bucket)
+    def check_policy(self, dry_run, verbose):  # not checked(redo to check the whole bucket)
         logging.info("Check policies".format())
         if self.policy_time:
             logging.info('time policy')
-            confirm = self.check_date_if_overflow(path)
-            if confirm:
-                self.delete_manually(path)
+            self.define_time_policy(dry_run, verbose)
         if self.policy_size:
             logging.info('size policy')
-            self.count_size(dry_run)
-            pass
+            self.check_size(dry_run)
 
     def count_days(self, path):
         logging.info("Check the time policy".format())
@@ -253,15 +264,15 @@ class Trash(object):
         total_size = 0
         if dry_run:
             print 'count real size of the whole trash'
-        else:
-            d = os.listdir(self.path)
-            for item in d:
-                subpath = os.path.join(self.path, item)  # form the address
-                dict_contains = False
-                for _dict in self.log_writer.file_dict_arr:
-                    if _dict['id'] == item:
-                        dict_contains = True
-                        break
+
+        d = os.listdir(self.path)
+        for item in d:
+            subpath = os.path.join(self.path, item)  # form the address
+            dict_contains = False
+            for _dict in self.log_writer.file_dict_arr:
+                if _dict['id'] == item:
+                    dict_contains = True
+                    break
 
                 if dict_contains:
                     if os.path.isdir(subpath):
