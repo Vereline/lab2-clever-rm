@@ -63,20 +63,31 @@ class FileDeleteConfigurator(object):
         user_txt_path = os.path.split(sys.argv[0])[0] + '/Configure.txt'  # 'SmartRm/Configure.txt'  # put into setup.py
         try:
             path = os.path.split(sys.argv[0])[0] + '/Configure.json'
+            if not os.path.exists(path):
+                raise ExeptionListener.FileDoesNotExistException('config does not exist')
             self.config = json.load(open(path, 'r'))  # put this into setup.py
             # self.config = json.load(open('SmartRm/Configure.json', 'r'))  # put this into setup.py
         except ExeptionListener.FileDoesNotExistException as ex:
             # logging.error(ex)  # check if this works before constructor
-            print ex
+            print ex.msg
+            sys.exit(self.exit_codes['no_file'])
+        except Exception as ex:
+            logging.error(ex.message)
             sys.exit(self.exit_codes['no_file'])
 
         self.logger = Logger.Logger(self.config['trash_logging_path'], self.silent)
 
         try:
+            if not os.path.exists(user_txt_path):
+                raise ExeptionListener.FileDoesNotExistException('config does not exist')
             self.config_parser = Config_parser.ConfParser(user_txt_path)
         except ExeptionListener.FileDoesNotExistException as ex:
             # logging.error(ex)
-            print ex
+            # print ex.msg
+            logging.error(ex.msg)
+            sys.exit(self.exit_codes['no_file'])
+        except Exception as ex:
+            logging.error(ex.message)
             sys.exit(self.exit_codes['no_file'])
 
         self.change_configure_by_user_config()  # change config by the txt file
@@ -93,13 +104,20 @@ class FileDeleteConfigurator(object):
             # do not so broad exception
             # do closer exception
             logging.error('Unable to load trash')
-            logging.error(ex)
+            logging.error(ex.msg)
             sys.exit(self.exit_codes['error'])
+        except Exception as ex:
+            logging.error(ex.message)
+            sys.exit(self.exit_codes['error'])
+
         try:
             self.smartrm = Smart_rm.SmartRm(self.config['path'])
         except ExeptionListener.FileDoesNotExistException as ex:
             logging.error('Unable to load smart rm')
-            logging.error(ex)
+            logging.error(ex.msg)
+            sys.exit(self.exit_codes['error'])
+        except Exception as ex:
+            logging.error(ex.message)
             sys.exit(self.exit_codes['error'])
 
         self.paths = paths
@@ -204,9 +222,8 @@ class FileDeleteConfigurator(object):
             #         logging.warning('Regular expression {reg} does not suit to anything in trash'.format(reg={item}))
             #         continue
             #         #  do the removal by id or put all this into 1 function in the trash
-
-
-            return
+            for item in self.paths:
+                self.trash.clean_by_regular(item, self.dry_run, self.verbose, self.interactive)
 
         elif self.argparser.args.restore_regular is not None:
             # for item in self.paths:
@@ -217,7 +234,8 @@ class FileDeleteConfigurator(object):
             #     for file_id in common_id:
             #         #  do the removal by id or put all this into 1 function in the trash
             #         pass
-
+            for item in self.paths:
+                self.trash.restore_by_regular(item, self.dry_run, self.interactive, self.verbose)
 
             return
 
@@ -307,4 +325,6 @@ class FileDeleteConfigurator(object):
                 if self.config_parser.dict[key] is not None:
                     self.config[key] = self.config_parser.dict[key]
             except ExeptionListener.WrongItemException as ex:
-                logging.ERROR(ex)
+                logging.ERROR(ex.msg)
+            except Exception as ex:
+                logging.error(ex.message)

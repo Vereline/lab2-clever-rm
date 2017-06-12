@@ -2,14 +2,15 @@
 # -*- coding: utf-8 -*-
 
 
-import shutil         # Contains functions for operating files
-import os         # imports the os
+import shutil  # Contains functions for operating files
+import os  # imports the os
 import Logwriter
 from datetime import datetime
 import logging
 import Regular
 import re
 import ExeptionListener
+
 
 # new procedure if trash does not exist ( create new trash)
 
@@ -52,7 +53,9 @@ class Trash(object):
                     if verbose:
                         print 'trash cleaned'
                 except ExeptionListener.TrashError as ex:
-                    logging.error(ex)
+                    logging.error(ex.msg)
+                except Exception as ex:
+                    logging.error(ex.message)
 
             logging.info("Clean information about files".format())
             clean_json = open(self.log_writer.file_dict_path, 'w')
@@ -67,33 +70,39 @@ class Trash(object):
             logging.warning('Found more than 1 file with this name')
         elif len(files_id) <= 0:
             logging.warning('There is no such file or directory')
-            # обработать это (когда их больще 1 и меньше 1)
+            return
 
-        file_id = self.log_writer.get_id(path)
-        clean_path = self.get_path_by_id(file_id, self.path)
-        # watch if thete are more? than 1 file with this name
-
-        # !!!!!!!!!!!!!!!!!1
-        try:
-            if os.path.isdir(clean_path):
-                logging.info("Remove directory".format())
-                if dry_run:
-                    print 'remove directory'
-                else:
-                    shutil.rmtree(clean_path)
-            elif not os.path.isdir(clean_path):
-                logging.info("Remove file".format())
-                if dry_run:
-                    print 'remove directory'
-                else:
-                    os.remove(clean_path)
-                if verbose:
-                    print 'item removed'
-            self.log_writer.delete_elem_by_id(file_id)
-            self.log_writer.write_to_json()
-            self.log_writer.write_to_txt()
-        except ExeptionListener.TrashError as ex:
-            logging.error(ex)
+        for file_id in files_id:
+            # file_id = self.log_writer.get_id(path)
+            clean_path = self.get_path_by_id(file_id, self.path)
+            ans = True
+            if len(files_id) > 1:
+                logging.info('Restore {name}, id = {id}?'.format(name=path, id=file_id))
+                ans = ask_for_confirmation(path)
+            if not ans:
+                continue
+            try:
+                if os.path.isdir(clean_path):
+                    logging.info("Remove directory".format())
+                    if dry_run:
+                        print 'remove directory'
+                    else:
+                        shutil.rmtree(clean_path)
+                elif not os.path.isdir(clean_path):
+                    logging.info("Remove file".format())
+                    if dry_run:
+                        print 'remove directory'
+                    else:
+                        os.remove(clean_path)
+                    if verbose:
+                        print 'item removed'
+                self.log_writer.delete_elem_by_id(file_id)
+                self.log_writer.write_to_json()
+                self.log_writer.write_to_txt()
+            except ExeptionListener.TrashError as ex:
+                logging.error(ex.msg)
+            except Exception as ex:
+                logging.error(ex.message)
 
     def get_path_by_id(self, file_id, path):  # not checked
         d = os.listdir(path)
@@ -141,7 +150,9 @@ class Trash(object):
                         if verbose:
                             print 'item restored'
                 except ExeptionListener.TrashError as ex:
-                    logging.error(ex)
+                    logging.error(ex.msg)
+                except Exception as ex:
+                    logging.error(ex.message)
             # with
             clean_json = open(self.log_writer.file_dict_path, 'w')
             clean_json.close()
@@ -157,40 +168,45 @@ class Trash(object):
             logging.warning('Found more than 1 file with this name')
         elif len(files_id) <= 0:
             logging.warning('There is no such file or directory')
-        # обработать это (когда их больще 1 и меньше 1)
+            return
 
-        # находит первый попавшийся файл, но не ищет, есть ли еще, предотвратить политику конфликтов
-        file_id = self.log_writer.get_id(path)
+        for file_id in files_id:
+            ans = True
+        # file_id = self.log_writer.get_id(path)
         # file_id = os.path.split(path)[1]
-        clean_path = self.get_path_by_id(file_id, self.path)
-        destination_path = self.log_writer.get_path(file_id)
-        new_name = self.log_writer.get_name(file_id)
-        logging.info("Operations with file {file}".format(file=new_name))
-        index = 0
-        for i in reversed(range(len(clean_path))):
-            if clean_path[i] == '/':
-                index = i
-                break
-        dirname = clean_path[:(index+1)] + new_name
-        logging.info("Rename {file}".format(file=new_name))
-        logging.info("Move to original directory {file}".format(file=new_name))
-        # находит первый попавшийся файл, но не ищет, есть ли еще, предотвратить политику конфликтов
-        # при восстановлении чтоб смотерл, а вдруг есть уже такой файл в директории выдавать предупреждение
-        if os.path.exists(destination_path):
-            logging.warning('Item with this name already exists.id will be added to real name')
-            dirname += file_id
-        if dry_run:
-            print 'rename file and move to original directory'
-            print 'clean record from json'
-        else:
-            os.rename(clean_path, dirname)
-            shutil.move(dirname, destination_path)
-            self.log_writer.delete_elem_by_id(file_id)
-            self.log_writer.write_to_json()
-            self.log_writer.write_to_txt()
-            if verbose:
-                print 'item restored'
-        return None
+            clean_path = self.get_path_by_id(file_id, self.path)
+            destination_path = self.log_writer.get_path(file_id)
+            new_name = self.log_writer.get_name(file_id)
+            if len(files_id) > 1:
+                logging.info('Restore {name}, id = {id}?'.format(name=new_name, id=file_id))
+                ans = ask_for_confirmation(new_name)
+            if not ans:
+                continue
+            logging.info("Operations with file {file}".format(file=new_name))
+            index = 0
+            for i in reversed(range(len(clean_path))):
+                if clean_path[i] == '/':
+                    index = i
+                    break
+            dirname = clean_path[:(index + 1)] + new_name
+            logging.info("Rename {file}".format(file=new_name))
+            logging.info("Move to original directory {file}".format(file=new_name))
+
+            if os.path.exists(destination_path):
+                logging.warning('Item with this name already exists.id will be added to real name')
+                destination_path += '_' + file_id
+            if dry_run:
+                print 'rename file and move to original directory'
+                print 'clean record from json'
+            else:
+                os.rename(clean_path, dirname)
+                shutil.move(dirname, destination_path)
+                self.log_writer.delete_elem_by_id(file_id)
+                self.log_writer.write_to_json()
+                self.log_writer.write_to_txt()
+                if verbose:
+                    print 'item restored'
+
 
     def check_policy(self, path, dry_run):  # not checked(redo to check the whole bucket)
         logging.info("Check policies".format())
@@ -282,19 +298,24 @@ class Trash(object):
             files_id.append(file_dict['id'])
         try:
             re.compile(regex)
+        except:
+            logging.error("Invalid regular expression {regexp}".format(regexp=regex))
             # for name in names:
             #     if re.search(regex, name) is not None:
             #         suitable_names.append(name)
+        try:
             for i in range(len(names)):
-                if re.compile(regex, names[i]) is not None:
+                if re.search(regex, names[i]) is not None:
                     suitable_names.append(names[i])
                     suitable_id.append(files_id[i])
-        except:
-            logging.error("Invalid regular expression {regexp}".format(regexp=regex))
+        except ExeptionListener.TrashError as ex:
+            logging.error(ex.msg)
+        except TypeError as ex:
+            logging.error(ex.message)
 
         return suitable_names, suitable_id
 
-    def restore_by_regular(self, regex, dry_run, interactive, verbose):
+    def restore_by_regular(self, regex, dry_run, interactive, verbose):  # not tested
         names, ids = self.get_names_by_regular(regex)
 
         for file_id in ids:
@@ -313,7 +334,7 @@ class Trash(object):
 
             if os.path.exists(destination_path):
                 logging.warning('Item with this name already exists.id will be added to real name')
-                dirname += file_id
+                destination_path += '_' + file_id
             if dry_run:
                 print 'rename file and move to original directory'
                 print 'clean record from json'
@@ -330,7 +351,9 @@ class Trash(object):
                             if verbose:
                                 print 'item restored'
                         except ExeptionListener.TrashError as ex:
-                            logging.error(ex)
+                            logging.error(ex.msg)
+                        except Exception as ex:
+                            logging.error(ex.message)
                 else:
                     try:
                         os.rename(clean_path, dirname)
@@ -341,15 +364,21 @@ class Trash(object):
                         if verbose:
                             print 'item restored'
                     except ExeptionListener.TrashError as ex:
-                        logging.error(ex)
+                        logging.error(ex.msg)
+                    except Exception as ex:
+                        logging.error(ex.message)
 
-    def clean_by_regular(self, regex, dry_run, verbose):
+    def clean_by_regular(self, regex, dry_run, verbose, interactive):  # not tested
         names, ids = self.get_names_by_regular(regex)
 
         for file_id in ids:
             clean_path = self.get_path_by_id(file_id, self.path)
             name = self.log_writer.get_name(file_id)
-
+            answer = None
+            if interactive:
+                answer = ask_for_confirmation(name)
+            if (answer is not None) and (answer is False):
+                continue
             if os.path.isdir(clean_path):
                 logging.info("Remove directory {item}".format(item=name))
                 if not dry_run:

@@ -39,7 +39,7 @@ class SmartRm(object):
             if verbose:
                 print path + ' removed'
         except ExeptionListener.WrongItemException as ex:
-            logging.error(ex)
+            logging.error(ex.msg)
             # self.exception_listener.check_capacity()
             # self.exeption_listener.check_cycles()
             # self.exeption_listener.check_if_conflict()
