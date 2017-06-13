@@ -22,12 +22,25 @@ class Trash(object):
             logging.info('Create a new trash in the {path}'.format(path=self.path))
             os.makedirs(self.path)
         self.log_writer = Logwriter.Logwriter(path_log_j, path_log_t)
-        self.policy_time = policy_time
-        self.policy_size = policy_size
-        self.max_size = size
-        self.cur_size = cur_size
-        self.max_capacity = capacity  # the max quantity of files in trash
-        self.max_time = time
+        if policy_time == 'True':
+            self.policy_time = True
+        elif policy_time == 'False':
+            self.policy_time = False
+        else:
+            self.policy_time = bool(policy_time)
+
+        if policy_size == 'True':
+            self.policy_size = True
+        elif policy_size == 'False':
+            self.policy_size = False
+        else:
+            self.policy_size = bool(policy_size)
+
+        # self.policy_size = bool(policy_size)
+        self.max_size = int(size)
+        self.cur_size = int(cur_size)
+        self.max_capacity = int(capacity)  # the max quantity of files in trash
+        self.max_time = int(time)
 
     def delete_automatically(self, dry_run, verbose):  # works
         # delete the whole trash
@@ -217,7 +230,7 @@ class Trash(object):
                     dict_contains = True
                     break
             if dict_contains:
-                logging.info('time policy')
+                # logging.info('time policy')
                 confirm = self.check_date_if_overflow(subpath)
                 if confirm:
                     self.delete_manually(subpath, dry_run, verbose)
@@ -256,7 +269,7 @@ class Trash(object):
             return False
 
     def check_size(self, dry_run, verbose):
-        logging.info("Check the size policy".format())
+        # logging.info("Check the size policy".format())
         if int(self.max_size) - self.count_size(dry_run) <= 0:
             if dry_run:
                 print 'not enough trash space'
