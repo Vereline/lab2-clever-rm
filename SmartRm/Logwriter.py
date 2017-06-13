@@ -101,6 +101,8 @@ class Logwriter(object):  # all class works
     # ubrat eto
     def get_id_by_path(self, array, path):  # not checked
         file_id = ''
+        reload(sys)
+        sys.setdefaultencoding('utf-8')
 
         for item in array:
                 if item['path'] == path:
