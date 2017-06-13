@@ -60,13 +60,13 @@ class FileDeleteConfigurator(object):
         # load txt version as a user config after
         # user_txt_path = '~/Configure.txt'
         #
-        user_txt_path = os.path.split(sys.argv[0])[0] + '/Configure.txt'  # 'SmartRm/Configure.txt'  # put into setup.py
+        user_txt_path = os.path.split(sys.argv[0])[0] + '/Configure.txt'  # 'smartrm/Configure.txt'  # put into setup.py
         try:
             path = os.path.split(sys.argv[0])[0] + '/Configure.json'
             if not os.path.exists(path):
                 raise ExeptionListener.FileDoesNotExistException('config does not exist')
             self.config = json.load(open(path, 'r'))  # put this into setup.py
-            # self.config = json.load(open('SmartRm/Configure.json', 'r'))  # put this into setup.py
+            # self.config = json.load(open('smartrm/Configure.json', 'r'))  # put this into setup.py
         except ExeptionListener.FileDoesNotExistException as ex:
             # logging.error(ex)  # check if this works before constructor
             print ex.msg

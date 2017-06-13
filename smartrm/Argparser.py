@@ -17,7 +17,6 @@ class Argparser(object):
             self.args = self.parser.parse_args(splited_arguments_string)
         else:
             self.args = self.parser.parse_args()
-
     def add_parser(self):
         parser = argparse.ArgumentParser()
 
