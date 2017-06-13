@@ -22,6 +22,18 @@ import Config_parser
 
 # rename here deleted file to the id
 # -i - confirm every your deletion / restore
+DEFAULT_CONFIG = {
+  "path": "/home/victoria/Trash",
+  "trash_log_path": "/home/victoria/Trash/Trash_log/Trash_log.json",
+  "trash_log_path_txt": "/home/victoria/Trash/Trash_log/Trash_log.txt",
+  "trash_logging_path": "/home/victoria/Trash/Trash_log/out.log",
+  "policy_time": "True",
+  "policy_size": "False",
+  "max_size": 100000,
+  "current_size": 0,
+  "max_capacity": 1000,
+  "max_time": 7
+}
 
 
 class FileDeleteConfigurator(object):
@@ -58,13 +70,21 @@ class FileDeleteConfigurator(object):
 
         # make this config as default and make load (right path) in the setup.py
         # load txt version as a user config after
-        # user_txt_path = '~/Configure.txt'
+        user_txt_path = '/home/victoria/Configure.txt'
+        path = '/home/victoria/Configure.json'
         #
-        user_txt_path = os.path.split(sys.argv[0])[0] + '/Configure.txt'  # 'smartrm/Configure.txt'  # put into setup.py
+        # user_txt_path = os.path.split(sys.argv[0])[0] + '/Configure.txt'# 'smartrm/Configure.txt'  # put into setup.py
         try:
-            path = os.path.split(sys.argv[0])[0] + '/Configure.json'
+            # path = os.path.split(sys.argv[0])[0] + '/Configure.json'
             if not os.path.exists(path):
-                raise ExeptionListener.FileDoesNotExistException('config does not exist')
+                try:
+                    json_file = open(path, 'w')
+                    json.dump(DEFAULT_CONFIG, json_file)
+                    # raise ExeptionListener.FileDoesNotExistException('config does not exist')
+                except ExeptionListener.FileDoesNotExistException as ex:
+                    # logging.error(ex)  # check if this works before constructor
+                    print ex.msg
+                    sys.exit(self.exit_codes['no_file'])
             self.config = json.load(open(path, 'r'))  # put this into setup.py
             # self.config = json.load(open('smartrm/Configure.json', 'r'))  # put this into setup.py
         except ExeptionListener.FileDoesNotExistException as ex:
@@ -73,13 +93,25 @@ class FileDeleteConfigurator(object):
             sys.exit(self.exit_codes['no_file'])
         except Exception as ex:
             logging.error(ex.message)
+            print ex.message
             sys.exit(self.exit_codes['no_file'])
 
         self.logger = Logger.Logger(self.config['trash_logging_path'], self.silent)
 
         try:
             if not os.path.exists(user_txt_path):
-                raise ExeptionListener.FileDoesNotExistException('config does not exist')
+                try:
+                    f = open(user_txt_path, 'w')
+                    f.write('[Configs]\n')
+                    for key in DEFAULT_CONFIG.keys():
+                        f.write(("{key} = {value}\n".format(key=key, value=DEFAULT_CONFIG[key])))
+                    f.close()
+                    # raise ExeptionListener.FileDoesNotExistException('config does not exist')
+                except ExeptionListener.FileDoesNotExistException as ex:
+                    # logging.error(ex)
+                    # print ex.msg
+                    logging.error(ex.msg)
+                    sys.exit(self.exit_codes['no_file'])
             self.config_parser = Config_parser.ConfParser(user_txt_path)
         except ExeptionListener.FileDoesNotExistException as ex:
             # logging.error(ex)
@@ -331,3 +363,6 @@ class FileDeleteConfigurator(object):
                 logging.ERROR(ex.msg)
             except Exception as ex:
                 logging.error(ex.message)
+
+
+
