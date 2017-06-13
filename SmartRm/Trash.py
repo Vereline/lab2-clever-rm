@@ -229,20 +229,23 @@ class Trash(object):
             self.define_time_policy(dry_run, verbose)
         if self.policy_size:
             logging.info('size policy')
-            self.check_size(dry_run)
+            self.check_size(dry_run, verbose)
 
     def count_days(self, path):
         logging.info("Check the time policy".format())
         name = os.path.split(path)
         if name[1] != '':
-            file_id = self.log_writer.get_id(name[1])
+            # file_id = self.log_writer.get_id(name[1])
+            file_id = name[1]
             file_date = self.log_writer.get_date(file_id)
-            cur_date = datetime.date.today()
-            file_date = file_date.split('-')
-            date_a = datetime.date(int(file_date[0]), int(file_date[1]), int(file_date[2]))
+            # cur_date = datetime.date.today()
+            cur_date = datetime.now()
+            # file_date = file_date.split('-')
+            date_a = datetime.strptime(file_date, "%Y-%m-%d")
+            # date_a = datetime.date(int(file_date[0]), int(file_date[1]), int(file_date[2]))
 
             days = cur_date - date_a
-            days = str(days).split()[0]
+            days = days.days
         return days
 
     def check_date_if_overflow(self, path):
@@ -252,13 +255,13 @@ class Trash(object):
         else:
             return False
 
-    def check_size(self, dry_run):
+    def check_size(self, dry_run, verbose):
         logging.info("Check the size policy".format())
-        if self.max_size - self.count_size(dry_run) <= 0:
+        if int(self.max_size) - self.count_size(dry_run) <= 0:
             if dry_run:
                 print 'not enough trash space'
             else:
-                self.delete_automatically(dry_run)
+                self.delete_automatically(dry_run, verbose)
 
     def count_size(self, dry_run):  # not tested
         total_size = 0
@@ -274,11 +277,11 @@ class Trash(object):
                     dict_contains = True
                     break
 
-                if dict_contains:
-                    if os.path.isdir(subpath):
-                        total_size += self.get_size(subpath)
-                    elif not os.path.isdir(subpath):
-                        total_size += os.path.getsize(subpath)
+            if dict_contains:
+                if os.path.isdir(subpath):
+                    total_size += self.get_size(subpath)
+                elif not os.path.isdir(subpath):
+                    total_size += os.path.getsize(subpath)
 
         return total_size
 
