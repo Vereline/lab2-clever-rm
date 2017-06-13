@@ -145,7 +145,7 @@ class FileDeleteConfigurator(object):
                         self.smartrm.remove_to_trash_file(item, self.dry_run, self.verbose)
 
             self.trash.log_writer.write_to_json()
-            self.trash.log_writer.write_to_txt()
+            self.trash.log_writer.write_to_txt(self.dry_run)
 
         elif self.argparser.args.remove_regular is not None:
             # do here regular check
@@ -173,7 +173,7 @@ class FileDeleteConfigurator(object):
                         #     print item + ' removed'
 
                 self.trash.log_writer.write_to_json()
-                self.trash.log_writer.write_to_txt()
+                self.trash.log_writer.write_to_txt(self.dry_run)
 
         elif self.argparser.args.clean is not None:
             if self.interactive:

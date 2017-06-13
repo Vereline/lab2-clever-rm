@@ -111,7 +111,7 @@ class Trash(object):
                         print 'item removed'
                 self.log_writer.delete_elem_by_id(file_id)
                 self.log_writer.write_to_json()
-                self.log_writer.write_to_txt()
+                self.log_writer.write_to_txt(dry_run)
             except ExeptionListener.TrashError as ex:
                 logging.error(ex.msg)
             except Exception as ex:
@@ -216,7 +216,7 @@ class Trash(object):
                 shutil.move(dirname, destination_path)
                 self.log_writer.delete_elem_by_id(file_id)
                 self.log_writer.write_to_json()
-                self.log_writer.write_to_txt()
+                self.log_writer.write_to_txt(dry_run)
                 if verbose:
                     print 'item restored'
 
@@ -245,12 +245,14 @@ class Trash(object):
             self.check_size(dry_run, verbose)
 
     def count_days(self, path):
-        logging.info("Check the time policy".format())
         name = os.path.split(path)
+
         if name[1] != '':
             # file_id = self.log_writer.get_id(name[1])
             file_id = name[1]
             file_date = self.log_writer.get_date(file_id)
+            file_name = self.log_writer.get_name(file_id)
+            logging.info("Check the time policy of {item}".format(item=file_name))
             # cur_date = datetime.date.today()
             cur_date = datetime.now()
             # file_date = file_date.split('-')
@@ -374,7 +376,7 @@ class Trash(object):
                             shutil.move(dirname, destination_path)
                             self.log_writer.delete_elem_by_id(file_id)
                             self.log_writer.write_to_json()
-                            self.log_writer.write_to_txt()
+                            self.log_writer.write_to_txt(dry_run)
                             if verbose:
                                 print 'item restored'
                         except ExeptionListener.TrashError as ex:
@@ -387,7 +389,7 @@ class Trash(object):
                         shutil.move(dirname, destination_path)
                         self.log_writer.delete_elem_by_id(file_id)
                         self.log_writer.write_to_json()
-                        self.log_writer.write_to_txt()
+                        self.log_writer.write_to_txt(dry_run)
                         if verbose:
                             print 'item restored'
                     except ExeptionListener.TrashError as ex:
@@ -414,7 +416,7 @@ class Trash(object):
                     shutil.rmtree(clean_path)
                     self.log_writer.delete_elem_by_id(file_id)
                     self.log_writer.write_to_json()
-                    self.log_writer.write_to_txt()
+                    self.log_writer.write_to_txt(dry_run)
                 else:
                     print 'remove item'
             elif not os.path.isdir(clean_path):
@@ -425,7 +427,7 @@ class Trash(object):
                     os.remove(clean_path)
                     self.log_writer.delete_elem_by_id(file_id)
                     self.log_writer.write_to_json()
-                    self.log_writer.write_to_txt()
+                    self.log_writer.write_to_txt(dry_run)
                 else:
                     print 'remove item'
 

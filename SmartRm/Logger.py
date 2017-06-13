@@ -8,6 +8,9 @@ class Logger(object):
         self.logger = logging.getLogger()
 
         if not check_file_path(path):
+            dir_path = os.path.split(path)[0]
+            if not os.path.exists(dir_path):
+                os.makedirs(dir_path)
             f = open(path, 'w')
             f.close()
 

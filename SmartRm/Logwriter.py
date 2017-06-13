@@ -6,6 +6,7 @@ import os
 from datetime import datetime
 import sys
 import codecs
+import logging
 
 class Logwriter(object):  # all class works
     def __init__(self, path, txt_path):
@@ -16,6 +17,7 @@ class Logwriter(object):  # all class works
         self.load_from_json()
 
     def create_file_dict(self, path, dry_run):
+        logging.info('Write data to json')
         if dry_run:
             print 'write data to json'
         else:
@@ -167,19 +169,32 @@ class Logwriter(object):  # all class works
                 # elif item['content'] is not None:
                 #     return self.get_path_by_id(item['content'], file_id)
 
-    def write_to_txt(self):  # not checked
-        txt_file = open(self.file_dict_path_txt, 'w')
-        reload(sys)
-        sys.setdefaultencoding('utf-8')
+    def write_to_txt(self, dry_run):  # not checked
+        logging.info('Write to txt')
+        if dry_run:
+            print 'write data'
+        else:
+            try:
+                if not os.path.exists(self.file_dict_path_txt):
+                    dir_path = os.path.split(self.file_dict_path_txt)[0]
+                    if not os.path.exists(dir_path):
+                        os.makedirs(dir_path)
+                txt_file = open(self.file_dict_path_txt, 'w')
+                reload(sys)
+                sys.setdefaultencoding('utf-8')
 
-        # redo unicode utf-8
-        for item in self.file_dict_arr:
-            # str = 'Name:' + item['name']+'\n'
-            txt_file.write(('Name:' + item['name']+'\n').encode('utf-8'))
-            txt_file.write(('Id:' + item['id']+'\n').encode('utf-8'))
-            # str = 'Path:' + item['path'] + '\n'
-            # str = str.decode('utf-8')
-            txt_file.write(('Path:' + item['path']+'\n'))
-            txt_file.write(('Date:' + item['date']+'\n').encode('utf-8'))
-            txt_file.write('\n')
-        txt_file.close()
+                # redo unicode utf-8
+                for item in self.file_dict_arr:
+                    # str = 'Name:' + item['name']+'\n'
+                    txt_file.write(('Name:' + item['name']+'\n').encode('utf-8'))
+                    txt_file.write(('Id:' + item['id']+'\n').encode('utf-8'))
+                    # str = 'Path:' + item['path'] + '\n'
+                    # str = str.decode('utf-8')
+                    txt_file.write(('Path:' + item['path']+'\n'))
+                    txt_file.write(('Date:' + item['date']+'\n').encode('utf-8'))
+                    txt_file.write('\n')
+                txt_file.close()
+            except IOError as io:
+                logging.error(io.message)
+            except Exception as ex:
+                logging.error(ex.message)
