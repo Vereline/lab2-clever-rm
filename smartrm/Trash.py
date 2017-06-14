@@ -155,7 +155,7 @@ class Trash(object):
                         subpath = os.path.split(subpath)  # ???
                         subpath = self.get_path_by_id(subpath[1], subpath[0])  # ???
                         logging.info("Restore item".format())
-                        self.restore_trash_manually(subpath, dry_run)
+                        self.restore_trash_manually(subpath, dry_run, verbose)
                         # if os.path.isdir(subpath):
                         #     shutil.rmtree(subpath)
                         # elif not os.path.isdir(subpath):
