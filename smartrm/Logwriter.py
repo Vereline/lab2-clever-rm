@@ -22,7 +22,9 @@ class Logwriter(object):  # all class works
             print 'write data to json'
         else:
             self.file_dict = self.write_file_dict(path)
+            file_id = self.file_dict['id']
             self.file_dict_arr.append(self.file_dict)
+            return file_id
 
     def write_file_dict(self, path):
         file_dict = {'path': path, 'id': str(datetime.now().__hash__()),

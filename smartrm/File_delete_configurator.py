@@ -172,8 +172,8 @@ class FileDeleteConfigurator(object):
                         logging.error('Item {file} is a system unit'.format(file=item))
                     else:
                         # remove all the check to the trash or to the smart rm
-                        self.trash.log_writer.create_file_dict(item, self.dry_run)
-                        item = self.rename_file_name_to_id(item, self.dry_run)
+                        file_id = self.trash.log_writer.create_file_dict(item, self.dry_run)
+                        item = self.rename_file_name_to_id(item, file_id, self.dry_run)
                         self.smartrm.remove_to_trash_file(item, self.dry_run, self.verbose)
 
             self.trash.log_writer.write_to_json()
@@ -198,8 +198,8 @@ class FileDeleteConfigurator(object):
                             logging.error('Item {file} is a system unit'.format(file=item))
                             # exception
                         else:
-                            self.trash.log_writer.create_file_dict(item, self.dry_run)
-                            item = self.rename_file_name_to_id(item, self.dry_run)
+                            file_id = self.trash.log_writer.create_file_dict(item, self.dry_run)
+                            item = self.rename_file_name_to_id(item, file_id, self.dry_run)
                             self.smartrm.remove_to_trash_file(item, self.dry_run, self.verbose)
                         # if self.verbose:
                         #     print item + ' removed'
@@ -307,9 +307,10 @@ class FileDeleteConfigurator(object):
 
 # remove this thing to smart rm or to the trash
 
-    def rename_file_name_to_id(self, path, dry_run):  # works
+    def rename_file_name_to_id(self, path,file_id, dry_run):  # works
         logging.info('Rename item with id')
-        _id = self.trash.log_writer.get_id_path(path)
+        # _id = self.trash.log_writer.get_id_path(path)
+        _id = file_id
         index = 0
         for i in reversed(range(len(path))):
             if path[i] == '/':
