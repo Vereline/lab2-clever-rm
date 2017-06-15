@@ -12,9 +12,6 @@ import re
 import ExeptionListener
 
 
-# new procedure if trash does not exist ( create new trash)
-
-
 class Trash(object):
     def __init__(self, path_trash, path_log_j, path_log_t, policy_time, policy_size, size, cur_size, capacity, time):
         self.path = path_trash
@@ -70,11 +67,11 @@ class Trash(object):
                 except Exception as ex:
                     logging.error(ex.message)
 
-            logging.info("Clean information about files".format())
-            clean_json = open(self.log_writer.file_dict_path, 'w')
-            clean_json.close()
-            clean_txt = open(self.log_writer.file_dict_path_txt, 'w')
-            clean_txt.close()
+            # logging.info("Clean information about files".format())
+            # clean_json = open(self.log_writer.file_dict_path, 'w')
+            # clean_json.close()
+            # clean_txt = open(self.log_writer.file_dict_path_txt, 'w')
+            # clean_txt.close()
 
     def delete_manually(self, path, dry_run, verbose):  # not checked
         # delete one file manually
@@ -110,7 +107,7 @@ class Trash(object):
                     if verbose:
                         print 'item removed'
                 self.log_writer.delete_elem_by_id(file_id)
-                self.log_writer.write_to_json()
+                self.log_writer.write_to_json(dry_run)
                 self.log_writer.write_to_txt(dry_run)
             except ExeptionListener.TrashError as ex:
                 logging.error(ex.msg)
@@ -152,17 +149,11 @@ class Trash(object):
                         break
                 try:
                     if dict_contains:
-                        subpath = os.path.split(subpath)  # ???
-                        # subpath = self.get_path_by_id(subpath[1], subpath[0])  # ???
+                        subpath = os.path.split(subpath)
+                        # subpath = self.get_path_by_id(subpath[1], subpath[0])
                         logging.info("Restore item".format())
                         path = self.log_writer.get_name(subpath[1])
                         self.restore_trash_manually(path, dry_run, verbose)
-                        # if os.path.isdir(subpath):
-                        #     shutil.rmtree(subpath)
-                        # elif not os.path.isdir(subpath):
-                        #     os.remove(subpath)
-
-                        # chistit json i txt no ne removaet faily????????????????
 
                         if verbose:
                             print 'item restored'
@@ -171,10 +162,10 @@ class Trash(object):
                 except Exception as ex:
                     logging.error(ex.message)
             # with
-            clean_json = open(self.log_writer.file_dict_path, 'w')
-            clean_json.close()
-            clean_txt = open(self.log_writer.file_dict_path_txt, 'w')
-            clean_txt.close()
+            # clean_json = open(self.log_writer.file_dict_path, 'w')
+            # clean_json.close()
+            # clean_txt = open(self.log_writer.file_dict_path_txt, 'w')
+            # clean_txt.close()
 
     def restore_trash_manually(self, path, dry_run, verbose):  # works
         # restore one file in the trash
@@ -219,7 +210,7 @@ class Trash(object):
                 os.rename(clean_path, dirname)
                 shutil.move(dirname, destination_path)
                 self.log_writer.delete_elem_by_id(file_id)
-                self.log_writer.write_to_json()
+                self.log_writer.write_to_json(dry_run)
                 self.log_writer.write_to_txt(dry_run)
                 if verbose:
                     print 'item restored'
@@ -379,7 +370,7 @@ class Trash(object):
                             os.rename(clean_path, dirname)
                             shutil.move(dirname, destination_path)
                             self.log_writer.delete_elem_by_id(file_id)
-                            self.log_writer.write_to_json()
+                            self.log_writer.write_to_json(dry_run)
                             self.log_writer.write_to_txt(dry_run)
                             if verbose:
                                 print 'item restored'
@@ -392,7 +383,7 @@ class Trash(object):
                         os.rename(clean_path, dirname)
                         shutil.move(dirname, destination_path)
                         self.log_writer.delete_elem_by_id(file_id)
-                        self.log_writer.write_to_json()
+                        self.log_writer.write_to_json(dry_run)
                         self.log_writer.write_to_txt(dry_run)
                         if verbose:
                             print 'item restored'
@@ -419,7 +410,7 @@ class Trash(object):
                         print 'remove item'
                     shutil.rmtree(clean_path)
                     self.log_writer.delete_elem_by_id(file_id)
-                    self.log_writer.write_to_json()
+                    self.log_writer.write_to_json(dry_run)
                     self.log_writer.write_to_txt(dry_run)
                 else:
                     print 'remove item'
@@ -430,7 +421,7 @@ class Trash(object):
                         print 'remove item'
                     os.remove(clean_path)
                     self.log_writer.delete_elem_by_id(file_id)
-                    self.log_writer.write_to_json()
+                    self.log_writer.write_to_json(dry_run)
                     self.log_writer.write_to_txt(dry_run)
                 else:
                     print 'remove item'

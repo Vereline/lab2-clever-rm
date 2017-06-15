@@ -32,15 +32,14 @@ class Argparser(object):
         parser.add_argument('-smtrcr', nargs='*', dest='clean_regular', help='clean from trash by regular')
         parser.add_argument('-smtrrr', nargs='*', dest='restore_regular', help='restore from trash by regular')
 
-        # интерактивно спрашивает, удалить или нет
         parser.add_argument('-i', '-interactive', dest='interactive', action='store_true', help='interactive mode')
-        parser.add_argument('-f', '-force', dest='force', action='store_true', help='force mode')  # ничего не спрашивает
-        parser.add_argument('-v', '-verbose', dest='verbose', action='store_true', help='verbose mode')  # отображает состояние текущее программы(противоположно сайленту)
+        parser.add_argument('-f', '-force', dest='force', action='store_true', help='force mode')
+        parser.add_argument('-v', '-verbose', dest='verbose', action='store_true', help='verbose mode')
         parser.add_argument('-s', '-silent', dest='silent', action='store_true', help='silent mode')
         parser.add_argument('-d', '-dryrun', dest='dryrun', action='store_true', help='dry-run mode')
 
         parser.add_argument('path', nargs='*', help='path of file or directory')
-        parser.add_argument('--configs', dest='configs', nargs='*', help='configurations for 1 run')  # только для 1 запуска
+        parser.add_argument('--configs', dest='configs', nargs='*', help='configurations for 1 run')
 
         # -smrm - remove
         # -smrmr - remove regular
@@ -111,23 +110,5 @@ class Argparser(object):
                 for item in args.path:
                     outlist.append(item)
 
-        # outlist.append(command)
-        # if args.remove:
-        # # if command[0] == 'remove' or (command[0] == 'trash' and (command[1] == 'clean' or command[1] == 'restore')):
-        #     outlist.append(self.get_files_arguments(args))
-        # # elif command[0] == 'trash' and command[1] == 'show':
-        # elif command[0] == '-smtrr' or command[0] == '-smtrc' or command[0] == '-smtrs' or command[0] == '-smcs':
-        #     show_keys = []
-        #     for show_key in args.show_trash:
-        #         show_keys.append(show_key)
-        #     outlist.append(show_keys)
-        # elif command[0] == '-smcc':
-        #     # if command[1] == 'setter':
-        #         set_options = []
-        #         for option in args.set_options:
-        #             set_options.append(option)
-        #         outlist.append(set_options)
-        #      # else:
-        #         # outlist.append(args.show_options)
         return outlist
 

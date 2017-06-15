@@ -8,7 +8,8 @@ import sys
 import codecs
 import logging
 
-class Logwriter(object):  # all class works
+
+class Logwriter(object):
     def __init__(self, path, txt_path):
         self.file_dict_arr = []  # what's in the trash
         self.file_dict = {}  # for temporary issues
@@ -16,15 +17,13 @@ class Logwriter(object):  # all class works
         self.file_dict_path_txt = txt_path  # redo for path from config
         self.load_from_json()
 
-    def create_file_dict(self, path, dry_run):
+    def create_file_dict(self, path):
         logging.info('Write data to json')
-        if dry_run:
-            print 'write data to json'
-        else:
-            self.file_dict = self.write_file_dict(path)
-            file_id = self.file_dict['id']
-            self.file_dict_arr.append(self.file_dict)
-            return file_id
+
+        self.file_dict = self.write_file_dict(path)
+        file_id = self.file_dict['id']
+        self.file_dict_arr.append(self.file_dict)
+        return file_id
 
     def write_file_dict(self, path):
         file_dict = {'path': path, 'id': str(datetime.now().__hash__()),
@@ -42,11 +41,11 @@ class Logwriter(object):  # all class works
                     break
             dirname = path[index+1:]
             file_dict['name'] = dirname
-            file_list = []  # просто хранить, но не использовать content
+            file_list = []
             d = os.listdir(path)
             # print d
             for item in d:
-                subpath = os.path.join(path, item)  # формирование адреса
+                subpath = os.path.join(path, item)
                 if os.path.isdir(subpath):
                     subfile = self.write_file_dict(subpath)
                     file_list.append(subfile)
@@ -86,8 +85,11 @@ class Logwriter(object):  # all class works
                 os.makedirs(new_path[0])
             open(self.file_dict_path, 'w')
 
-    def write_to_json(self):
-        json.dump(self.file_dict_arr, open(self.file_dict_path, 'w'))
+    def write_to_json(self, dry_run):
+        if dry_run:
+            print 'write data to json'
+        else:
+            json.dump(self.file_dict_arr, open(self.file_dict_path, 'w'))
 
     # ubrat eto
     def get_id_by_name(self, array, name):  # not checked
@@ -187,12 +189,9 @@ class Logwriter(object):  # all class works
 
                 # redo unicode utf-8
                 for item in self.file_dict_arr:
-                    # str = 'Name:' + item['name']+'\n'
                     txt_file.write(('Name:' + item['name']+'\n').encode('utf-8'))
                     txt_file.write(('Id:' + item['id']+'\n').encode('utf-8'))
-                    # str = 'Path:' + item['path'] + '\n'
-                    # str = str.decode('utf-8')
-                    txt_file.write(('Path:' + item['path']+'\n'))
+                    txt_file.write(('Path:' + item['path']+'\n').encode('utf-8'))
                     txt_file.write(('Date:' + item['date']+'\n').encode('utf-8'))
                     txt_file.write('\n')
                 txt_file.close()

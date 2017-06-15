@@ -17,22 +17,20 @@ import Logger
 import logging
 import Config_parser
 
-# тут обрабатывать декораторы dry-run + i,v,f
-# redo and refactor all the code
 
 # rename here deleted file to the id
 # -i - confirm every your deletion / restore
 DEFAULT_CONFIG = {
-  "path": "/home/vereline/Trash",
-  "trash_log_path": "/home/vereline/Trash/Trash_log/Trash_log.json",
-  "trash_log_path_txt": "/home/vereline/Trash/Trash_log/Trash_log.txt",
-  "trash_logging_path": "/home/vereline/Trash/Trash_log/out.log",
-  "policy_time": "True",
-  "policy_size": "False",
-  "max_size": 100000,
-  "current_size": 0,
-  "max_capacity": 1000,
-  "max_time": 7
+    "path": "/home/vereline/Trash",
+    "trash_log_path": "/home/vereline/Trash/Trash_log/Trash_log.json",
+    "trash_log_path_txt": "/home/vereline/Trash/Trash_log/Trash_log.txt",
+    "trash_logging_path": "/home/vereline/Trash/Trash_log/out.log",
+    "policy_time": "True",
+    "policy_size": "False",
+    "max_size": 100000,
+    "current_size": 0,
+    "max_capacity": 1000,
+    "max_time": 7
 }
 
 
@@ -68,25 +66,24 @@ class FileDeleteConfigurator(object):
             'no_file': 3
         }
 
-        # make this config as default and make load (right path) in the setup.py
         # load txt version as a user config after
         user_txt_path = '/home/vereline/Configure.txt'
         path = '/home/vereline/Configure.json'
         #
-        # user_txt_path = os.path.split(sys.argv[0])[0] + '/Configure.txt'# 'smartrm/Configure.txt'  # put into setup.py
+        # user_txt_path = os.path.split(sys.argv[0])[0] + '/Configure.txt'# 'smartrm/Configure.txt'
         try:
             # path = os.path.split(sys.argv[0])[0] + '/Configure.json'
             if not os.path.exists(path):
                 try:
                     json_file = open(path, 'w')
                     json.dump(DEFAULT_CONFIG, json_file)
+                    json_file.close()
                     # raise ExeptionListener.FileDoesNotExistException('config does not exist')
                 except ExeptionListener.FileDoesNotExistException as ex:
-                    # logging.error(ex)  # check if this works before constructor
                     print ex.msg
                     sys.exit(self.exit_codes['no_file'])
-            self.config = json.load(open(path, 'r'))  # put this into setup.py
-            # self.config = json.load(open('smartrm/Configure.json', 'r'))  # put this into setup.py
+            self.config = json.load(open(path, 'r'))
+            # self.config = json.load(open('smartrm/Configure.json', 'r'))
         except ExeptionListener.FileDoesNotExistException as ex:
             # logging.error(ex)  # check if this works before constructor
             print ex.msg
@@ -108,14 +105,10 @@ class FileDeleteConfigurator(object):
                     f.close()
                     # raise ExeptionListener.FileDoesNotExistException('config does not exist')
                 except ExeptionListener.FileDoesNotExistException as ex:
-                    # logging.error(ex)
-                    # print ex.msg
                     logging.error(ex.msg)
                     sys.exit(self.exit_codes['no_file'])
             self.config_parser = Config_parser.ConfParser(user_txt_path)
         except ExeptionListener.FileDoesNotExistException as ex:
-            # logging.error(ex)
-            # print ex.msg
             logging.error(ex.msg)
             sys.exit(self.exit_codes['no_file'])
         except Exception as ex:
@@ -160,7 +153,7 @@ class FileDeleteConfigurator(object):
 
             for item in self.paths:
                 if self.interactive:
-                    answer = self.ask_for_confirmation(item)   # DO INDIVIDUALLY
+                    answer = self.ask_for_confirmation(item)
                     if not answer:
                         continue
                 exists = self.check_file_path(item)
@@ -172,11 +165,11 @@ class FileDeleteConfigurator(object):
                         logging.error('Item {file} is a system unit'.format(file=item))
                     else:
                         # remove all the check to the trash or to the smart rm
-                        file_id = self.trash.log_writer.create_file_dict(item, self.dry_run)
+                        file_id = self.trash.log_writer.create_file_dict(item)
                         item = self.rename_file_name_to_id(item, file_id, self.dry_run)
                         self.smartrm.remove_to_trash_file(item, self.dry_run, self.verbose)
 
-            self.trash.log_writer.write_to_json()
+            self.trash.log_writer.write_to_json(self.dry_run)
             self.trash.log_writer.write_to_txt(self.dry_run)
 
         elif self.argparser.args.remove_regular is not None:
@@ -185,7 +178,7 @@ class FileDeleteConfigurator(object):
                 items = Regular.define_regular_path(element)
                 for item in items:
                     if self.interactive:
-                        answer = self.ask_for_confirmation(item)   # DO INDIVIDUALLY
+                        answer = self.ask_for_confirmation(item)
                         if not answer:
                             continue
                     exists = self.check_file_path(item)
@@ -198,18 +191,18 @@ class FileDeleteConfigurator(object):
                             logging.error('Item {file} is a system unit'.format(file=item))
                             # exception
                         else:
-                            file_id = self.trash.log_writer.create_file_dict(item, self.dry_run)
+                            file_id = self.trash.log_writer.create_file_dict(item)
                             item = self.rename_file_name_to_id(item, file_id, self.dry_run)
                             self.smartrm.remove_to_trash_file(item, self.dry_run, self.verbose)
                         # if self.verbose:
                         #     print item + ' removed'
 
-                self.trash.log_writer.write_to_json()
+                self.trash.log_writer.write_to_json(self.dry_run)
                 self.trash.log_writer.write_to_txt(self.dry_run)
 
         elif self.argparser.args.clean is not None:
             if self.interactive:
-                answer = self.ask_for_confirmation('trash')   # DO INDIVIDUALLY
+                answer = self.ask_for_confirmation('trash')
                 if answer:
                     self.trash.delete_automatically(self.dry_run, self.verbose)
 
@@ -219,10 +212,10 @@ class FileDeleteConfigurator(object):
         elif self.argparser.args.restore is not None:
             for item in self.paths:
                 if self.interactive:
-                    answer = self.ask_for_confirmation(item)   # DO INDIVIDUALLY
+                    answer = self.ask_for_confirmation(item)
                     if not answer:
                         continue
-                self.trash.restore_trash_manually(item, self.dry_run, self.verbose)  # проверить на правильность путей
+                self.trash.restore_trash_manually(item, self.dry_run, self.verbose)
 
         elif self.argparser.args.restore_all is not None:
             if self.interactive:
@@ -240,32 +233,19 @@ class FileDeleteConfigurator(object):
 
             for item in self.paths:
                 if self.interactive:
-                    answer = self.ask_for_confirmation(item)  # DO INDIVIDUALLY
+                    answer = self.ask_for_confirmation(item)
                     if not answer:
                         continue
-                self.trash.delete_manually(item, self.dry_run, self.verbose)  # проверить на правильность путей
+                self.trash.delete_manually(item, self.dry_run, self.verbose)
                 # if self.verbose:
                 #     print item + ' removed'
 
         elif self.argparser.args.clean_regular is not None:
-            # for item in self.paths:
-            #     common_names, common_id = self.trash.get_names_by_regular(item, self.dry_run)
-            #     if len(common_names) <= 0:
-            #         logging.warning('Regular expression {reg} does not suit to anything in trash'.format(reg={item}))
-            #         continue
-            #         #  do the removal by id or put all this into 1 function in the trash
             for item in self.paths:
                 self.trash.clean_by_regular(item, self.dry_run, self.verbose, self.interactive)
 
         elif self.argparser.args.restore_regular is not None:
-            # for item in self.paths:
-            #     common_names, common_id = self.trash.get_names_by_regular(item)
-            #     if len(common_names) <= 0:
-            #         logging.warning('Regular expression {reg} does not suit to anything in trash'.format(reg={item}))
-            #         continue
-            #     for file_id in common_id:
-            #         #  do the removal by id or put all this into 1 function in the trash
-            #         pass
+
             for item in self.paths:
                 self.trash.restore_by_regular(item, self.dry_run, self.interactive, self.verbose)
 
@@ -307,7 +287,7 @@ class FileDeleteConfigurator(object):
 
 # remove this thing to smart rm or to the trash
 
-    def rename_file_name_to_id(self, path,file_id, dry_run):  # works
+    def rename_file_name_to_id(self, path, file_id, dry_run):  # works
         logging.info('Rename item with id')
         # _id = self.trash.log_writer.get_id_path(path)
         _id = file_id

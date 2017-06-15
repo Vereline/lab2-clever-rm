@@ -21,11 +21,6 @@ class ConfParser(object):
         for option in options:
             try:
 
-                # tut logging ne rabotaet/ opredelit ego poranshe
-                # print self.parser.get(section, option)
-                # print self.parser.get(section, option).decode('utf8')
-                # print self.parser.get(section, option).encode('utf8')
-
                 self.dict[option] = self.parser.get(section, option).decode('utf8')
                 if self.dict[option] == -1:
                     logging.DEBUG("skip: %s" % option)
@@ -33,5 +28,6 @@ class ConfParser(object):
             except ExeptionListener.WrongItemException as ex:
                 logging.ERROR(ex)
                 # logging.ERROR("exception on %s!" % option)
-                # print("exception on %s!" % option)
                 self.dict[option] = None
+            except Exception as ex:
+                logging.error(ex)

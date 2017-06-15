@@ -2,10 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="69e705f1-a8a3-48ec-9ea3-5f55d5647bfe" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Setup.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Tester.py" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/lab2.iml" afterPath="$PROJECT_DIR$/.idea/lab2.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/smartrm/Argparser.py" afterPath="$PROJECT_DIR$/smartrm/Argparser.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/smartrm/Config_parser.py" afterPath="$PROJECT_DIR$/smartrm/Config_parser.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/smartrm/ExeptionListener.py" afterPath="$PROJECT_DIR$/smartrm/ExeptionListener.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/smartrm/File_delete_configurator.py" afterPath="$PROJECT_DIR$/smartrm/File_delete_configurator.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/smartrm/Logwriter.py" afterPath="$PROJECT_DIR$/smartrm/Logwriter.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/smartrm/Smart_rm.py" afterPath="$PROJECT_DIR$/smartrm/Smart_rm.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/smartrm/Trash.py" afterPath="$PROJECT_DIR$/smartrm/Trash.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tester.py" afterPath="$PROJECT_DIR$/tester.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -17,6 +22,7 @@
   <component name="CoverageDataManager">
     <SUITE FILE_PATH="coverage/lab2$lab2_task4.coverage" NAME="lab2_task4 Coverage Results" MODIFIED="1490216377481" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/lab2$Unnamed__1_.coverage" NAME="check configuration Coverage Results" MODIFIED="1494065525552" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/" />
+    <SUITE FILE_PATH="coverage/lab2-clever-rm$watch_the_main_functions.coverage" NAME="watch the main functions Coverage Results" MODIFIED="1497544526386" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/" />
     <SUITE FILE_PATH="coverage/lab2$Clever_rm.coverage" NAME="Clever_rm Coverage Results" MODIFIED="1491552317294" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/CleverRm" />
     <SUITE FILE_PATH="coverage/lab2$Unnamed.coverage" NAME="Unnamed Coverage Results" MODIFIED="1493937017853" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/" />
     <SUITE FILE_PATH="coverage/lab2$check_configuration.coverage" NAME="check configuration Coverage Results" MODIFIED="1495371058129" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/" />
@@ -42,38 +48,29 @@
       <file leaf-file-name="Main.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/smartrm/Main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="252">
-              <caret line="23" column="0" lean-forward="false" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
+            <state relative-caret-position="198">
+              <caret line="20" column="0" lean-forward="false" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Argparser.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/smartrm/Argparser.py">
+      <file leaf-file-name="Regular.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/smartrm/Regular.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="414">
-              <caret line="29" column="66" lean-forward="false" selection-start-line="29" selection-start-column="66" selection-end-line="29" selection-end-column="66" />
+            <state relative-caret-position="196">
+              <caret line="23" column="38" lean-forward="false" selection-start-line="23" selection-start-column="38" selection-end-line="23" selection-end-column="38" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="File_delete_configurator.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/smartrm/File_delete_configurator.py">
+      <file leaf-file-name="Smart_rm.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/smartrm/Smart_rm.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="4446">
-              <caret line="296" column="0" lean-forward="false" selection-start-line="296" selection-start-column="0" selection-end-line="296" selection-end-column="0" />
-              <folding>
-                <element signature="e#8493#8511#0" expanded="false" />
-                <element signature="e#8788#8958#0" expanded="false" />
-                <element signature="e#10103#10464#0" expanded="false" />
-                <element signature="e#10538#10563#0" expanded="false" />
-                <element signature="e#11154#11179#0" expanded="false" />
-                <element signature="e#12151#12577#0" expanded="false" />
-                <element signature="e#12724#13046#0" expanded="false" />
-                <element signature="e#14248#14575#0" expanded="false" />
-              </folding>
+            <state relative-caret-position="70">
+              <caret line="17" column="0" lean-forward="false" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -81,27 +78,45 @@
       <file leaf-file-name="Trash.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/smartrm/Trash.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
+            <state relative-caret-position="141">
+              <caret line="18" column="32" lean-forward="false" selection-start-line="18" selection-start-column="32" selection-end-line="18" selection-end-column="32" />
               <folding>
-                <element signature="e#6232#6260#0" expanded="false" />
-                <element signature="e#7499#7539#0" expanded="false" />
-                <element signature="e#12177#12477#0" expanded="false" />
-                <element signature="e#12558#12743#0" expanded="false" />
-                <element signature="e#12810#13739#0" expanded="false" />
-                <element signature="e#13835#16329#0" expanded="false" />
-                <element signature="e#17869#18377#0" expanded="false" />
+                <element signature="e#2414#2470#0" expanded="false" />
+                <element signature="e#6434#6440#0" expanded="false" />
+                <element signature="e#7151#7191#0" expanded="false" />
+                <element signature="e#11836#12136#0" expanded="false" />
+                <element signature="e#12217#12402#0" expanded="false" />
+                <element signature="e#12857#12877#0" expanded="false" />
+                <element signature="e#17556#18064#0" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="tester.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="tester.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/tester.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="126">
-              <caret line="7" column="0" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
-              <folding />
+            <state relative-caret-position="274">
+              <caret line="45" column="36" lean-forward="false" selection-start-line="45" selection-start-column="36" selection-end-line="45" selection-end-column="36" />
+              <folding>
+                <element signature="e#47#62#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="File_delete_configurator.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/smartrm/File_delete_configurator.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-1515">
+              <caret line="238" column="76" lean-forward="false" selection-start-line="238" selection-start-column="76" selection-end-line="238" selection-end-column="76" />
+              <folding>
+                <element signature="e#8046#8064#0" expanded="false" />
+                <element signature="e#8316#8598#0" expanded="false" />
+                <element signature="e#9226#9244#0" expanded="false" />
+                <element signature="e#9836#9854#0" expanded="false" />
+                <element signature="e#11262#11584#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -110,26 +125,16 @@
         <entry file="file://$PROJECT_DIR$/smartrm/Configure.txt">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="72">
-              <caret line="4" column="48" lean-forward="false" selection-start-line="4" selection-start-column="48" selection-end-line="4" selection-end-column="48" />
+              <caret line="4" column="35" lean-forward="false" selection-start-line="4" selection-start-column="35" selection-end-line="4" selection-end-column="35" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="setup.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/setup.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Logger.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Logger.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/smartrm/Logger.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="468">
+            <state relative-caret-position="306">
               <caret line="28" column="22" lean-forward="false" selection-start-line="28" selection-start-column="22" selection-end-line="28" selection-end-column="22" />
               <folding />
             </state>
@@ -139,27 +144,36 @@
       <file leaf-file-name="Logwriter.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/smartrm/Logwriter.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2628">
-              <caret line="197" column="0" lean-forward="false" selection-start-line="197" selection-start-column="0" selection-end-line="197" selection-end-column="0" />
+            <state relative-caret-position="36">
+              <caret line="19" column="35" lean-forward="false" selection-start-line="19" selection-start-column="35" selection-end-line="19" selection-end-column="35" />
               <folding>
-                <element signature="e#2015#2037#0" expanded="false" />
-                <element signature="e#3522#3821#0" expanded="false" />
-                <element signature="e#4549#4802#0" expanded="false" />
-                <element signature="e#4854#4900#0" expanded="false" />
-                <element signature="e#4958#5013#0" expanded="false" />
-                <element signature="e#5100#5345#0" expanded="false" />
-                <element signature="e#5403#5458#0" expanded="false" />
-                <element signature="e#5545#5790#0" expanded="false" />
+                <element signature="e#743#2655#0" expanded="false" />
+                <element signature="e#1831#1853#0" expanded="false" />
+                <element signature="e#2695#3154#0" expanded="false" />
+                <element signature="e#3424#3723#0" expanded="false" />
+                <element signature="e#3807#4166#0" expanded="false" />
+                <element signature="e#3924#4142#0" expanded="false" />
+                <element signature="e#4219#4271#0" expanded="false" />
+                <element signature="e#4314#4366#0" expanded="false" />
+                <element signature="e#4451#4704#0" expanded="false" />
+                <element signature="e#4756#4802#0" expanded="false" />
+                <element signature="e#4860#4915#0" expanded="false" />
+                <element signature="e#5002#5247#0" expanded="false" />
+                <element signature="e#5305#5360#0" expanded="false" />
+                <element signature="e#5447#5692#0" expanded="false" />
+                <element signature="e#5750#5805#0" expanded="false" />
+                <element signature="e#5892#6137#0" expanded="false" />
+                <element signature="e#6199#7321#0" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Configure.json" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/smartrm/Configure.json">
+      <file leaf-file-name="ExeptionListener.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/smartrm/ExeptionListener.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="162">
-              <caret line="9" column="14" lean-forward="false" selection-start-line="0" selection-start-column="2" selection-end-line="9" selection-end-column="14" />
+              <caret line="10" column="0" lean-forward="false" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -179,7 +193,10 @@
       <find>datetime</find>
       <find>os.ma</find>
       <find>write_to_txt</find>
+      <find>vi</find>
+      <find>write_to</find>
       <find>create_file</find>
+      <find>create_file_dict</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -218,11 +235,16 @@
         <option value="$PROJECT_DIR$/SmartRm/Logwriter.py" />
         <option value="$PROJECT_DIR$/SmartRm/Logger.py" />
         <option value="$PROJECT_DIR$/SmartRm/Trash.py" />
-        <option value="$PROJECT_DIR$/smartrm/Argparser.py" />
         <option value="$PROJECT_DIR$/smartrm/Main.py" />
-        <option value="$PROJECT_DIR$/smartrm/File_delete_configurator.py" />
+        <option value="$PROJECT_DIR$/smartrm/Configure.txt" />
+        <option value="$PROJECT_DIR$/smartrm/Configure.json" />
+        <option value="$PROJECT_DIR$/smartrm/Argparser.py" />
+        <option value="$PROJECT_DIR$/smartrm/Config_parser.py" />
+        <option value="$PROJECT_DIR$/smartrm/Smart_rm.py" />
+        <option value="$PROJECT_DIR$/smartrm/ExeptionListener.py" />
         <option value="$PROJECT_DIR$/smartrm/Logwriter.py" />
         <option value="$PROJECT_DIR$/smartrm/Trash.py" />
+        <option value="$PROJECT_DIR$/smartrm/File_delete_configurator.py" />
         <option value="$PROJECT_DIR$/tester.py" />
       </list>
     </option>
@@ -254,6 +276,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -266,9 +289,22 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lab2-clever-rm" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lab2-clever-rm" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="smartrm" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
-      <pane id="Scratches" />
       <pane id="Scope" />
     </panes>
   </component>
@@ -566,7 +602,7 @@
       <module name="lab2" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/smartrm/Main.py" />
-      <option name="PARAMETERS" value="-smtrra -i -v" />
+      <option name="PARAMETERS" value="-smrm -i -v -d 1" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <method />
     </configuration>
@@ -667,26 +703,26 @@
     <frame x="57" y="21" width="1309" height="747" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.19174942" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32817337" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32718894" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19100237" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32771823" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32771823" sideWeight="0.50276244" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32862645" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32817337" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32817337" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32771823" sideWeight="0.49723756" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32771823" sideWeight="0.49723756" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3374613" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24664031" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.41167435" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2618683" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="true" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4027565" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3374613" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="3" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32817337" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Concurrent Activities Diagram" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32972136" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="true" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.40402478" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
@@ -724,7 +760,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/smartrm/Trash.py</url>
-          <line>52</line>
+          <line>49</line>
           <option name="timeStamp" value="103" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
@@ -734,93 +770,73 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/smartrm/File_delete_configurator.py</url>
-          <line>200</line>
+          <line>193</line>
           <option name="timeStamp" value="130" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/smartrm/Trash.py</url>
-          <line>207</line>
+          <line>198</line>
           <option name="timeStamp" value="131" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/smartrm/Logwriter.py</url>
-          <line>183</line>
+          <line>185</line>
           <option name="timeStamp" value="138" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/smartrm/Smart_rm.py</url>
-          <line>40</line>
+          <line>30</line>
           <option name="timeStamp" value="146" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/smartrm/Logwriter.py</url>
-          <line>111</line>
+          <line>113</line>
           <option name="timeStamp" value="149" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/smartrm/File_delete_configurator.py</url>
-          <line>319</line>
+          <line>299</line>
           <option name="timeStamp" value="150" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/smartrm/File_delete_configurator.py</url>
-          <line>295</line>
+          <line>275</line>
           <option name="timeStamp" value="152" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/smartrm/Trash.py</url>
-          <line>255</line>
+          <line>246</line>
           <option name="timeStamp" value="155" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/smartrm/Trash.py</url>
-          <line>278</line>
+          <line>269</line>
           <option name="timeStamp" value="157" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/smartrm/Trash.py</url>
-          <line>242</line>
+          <line>233</line>
           <option name="timeStamp" value="158" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/smartrm/File_delete_configurator.py</url>
-          <line>178</line>
+          <line>171</line>
           <option name="timeStamp" value="168" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/smartrm/Trash.py</url>
-          <line>193</line>
+          <line>184</line>
           <option name="timeStamp" value="170" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/smartrm/Trash.py</url>
-          <line>182</line>
+          <line>173</line>
           <option name="timeStamp" value="171" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/smartrm/Trash.py</url>
-          <line>156</line>
-          <option name="timeStamp" value="172" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/smartrm/Trash.py</url>
-          <line>158</line>
-          <option name="timeStamp" value="173" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/smartrm/Trash.py</url>
-          <line>154</line>
-          <option name="timeStamp" value="174" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/smartrm/Trash.py</url>
-          <line>155</line>
-          <option name="timeStamp" value="175" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/smartrm/Trash.py</url>
-          <line>153</line>
-          <option name="timeStamp" value="176" />
+          <line>420</line>
+          <option name="timeStamp" value="178" />
         </line-breakpoint>
       </breakpoints>
       <breakpoints-dialog>
@@ -833,7 +849,7 @@
           </properties>
         </breakpoint>
       </default-breakpoints>
-      <option name="time" value="177" />
+      <option name="time" value="179" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -1029,61 +1045,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Tester.py" />
-    <entry file="file://$PROJECT_DIR$/smartrm/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/smartrm/Smart_rm.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="216">
-          <caret line="43" column="36" lean-forward="false" selection-start-line="43" selection-start-column="36" selection-end-line="43" selection-end-column="36" />
-          <folding>
-            <element signature="e#385#429#0" expanded="false" />
-            <element signature="e#1313#1355#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/smartrm/Regular.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="522">
-          <caret line="41" column="25" lean-forward="false" selection-start-line="41" selection-start-column="25" selection-end-line="41" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/smartrm/ExeptionListener.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1048">
-          <caret line="72" column="17" lean-forward="false" selection-start-line="72" selection-start-column="17" selection-end-line="72" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/smartrm/Config_parser.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="202">
-          <caret line="16" column="0" lean-forward="false" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/smartrm/Configure.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="162">
-          <caret line="9" column="14" lean-forward="false" selection-start-line="0" selection-start-column="2" selection-end-line="9" selection-end-column="14" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/smartrm/Argparser.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="414">
-          <caret line="29" column="66" lean-forward="false" selection-start-line="29" selection-start-column="66" selection-end-line="29" selection-end-column="66" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Setup.py" />
     <entry file="file://$PROJECT_DIR$/setup.py">
       <provider selected="true" editor-type-id="text-editor">
@@ -1093,68 +1054,34 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/smartrm/Logwriter.py">
+    <entry file="file://$PROJECT_DIR$/smartrm/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2628">
-          <caret line="197" column="0" lean-forward="false" selection-start-line="197" selection-start-column="0" selection-end-line="197" selection-end-column="0" />
-          <folding>
-            <element signature="e#2015#2037#0" expanded="false" />
-            <element signature="e#3522#3821#0" expanded="false" />
-            <element signature="e#4549#4802#0" expanded="false" />
-            <element signature="e#4854#4900#0" expanded="false" />
-            <element signature="e#4958#5013#0" expanded="false" />
-            <element signature="e#5100#5345#0" expanded="false" />
-            <element signature="e#5403#5458#0" expanded="false" />
-            <element signature="e#5545#5790#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/smartrm/File_delete_configurator.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4446">
-          <caret line="296" column="0" lean-forward="false" selection-start-line="296" selection-start-column="0" selection-end-line="296" selection-end-column="0" />
-          <folding>
-            <element signature="e#8493#8511#0" expanded="false" />
-            <element signature="e#8788#8958#0" expanded="false" />
-            <element signature="e#10103#10464#0" expanded="false" />
-            <element signature="e#10538#10563#0" expanded="false" />
-            <element signature="e#11154#11179#0" expanded="false" />
-            <element signature="e#12151#12577#0" expanded="false" />
-            <element signature="e#12724#13046#0" expanded="false" />
-            <element signature="e#14248#14575#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/smartrm/Main.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
-          <caret line="23" column="0" lean-forward="false" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/smartrm/Trash.py">
+    <entry file="file://$PROJECT_DIR$/smartrm/Argparser.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
-          <folding>
-            <element signature="e#6232#6260#0" expanded="false" />
-            <element signature="e#7499#7539#0" expanded="false" />
-            <element signature="e#12177#12477#0" expanded="false" />
-            <element signature="e#12558#12743#0" expanded="false" />
-            <element signature="e#12810#13739#0" expanded="false" />
-            <element signature="e#13835#16329#0" expanded="false" />
-            <element signature="e#17869#18377#0" expanded="false" />
-          </folding>
+        <state relative-caret-position="1890">
+          <caret line="111" column="0" lean-forward="false" selection-start-line="111" selection-start-column="0" selection-end-line="111" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tester.py">
+    <entry file="file://$PROJECT_DIR$/smartrm/Config_parser.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="126">
+        <state relative-caret-position="-36">
           <caret line="7" column="0" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/smartrm/Configure.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="11" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -1162,16 +1089,114 @@
     <entry file="file://$PROJECT_DIR$/smartrm/Configure.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="72">
-          <caret line="4" column="48" lean-forward="false" selection-start-line="4" selection-start-column="48" selection-end-line="4" selection-end-column="48" />
+          <caret line="4" column="35" lean-forward="false" selection-start-line="4" selection-start-column="35" selection-end-line="4" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/smartrm/Smart_rm.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="70">
+          <caret line="17" column="0" lean-forward="false" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/smartrm/Logger.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="468">
+        <state relative-caret-position="306">
           <caret line="28" column="22" lean-forward="false" selection-start-line="28" selection-start-column="22" selection-end-line="28" selection-end-column="22" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/smartrm/ExeptionListener.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="162">
+          <caret line="10" column="0" lean-forward="false" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/smartrm/Regular.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="196">
+          <caret line="23" column="38" lean-forward="false" selection-start-line="23" selection-start-column="38" selection-end-line="23" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/smartrm/Main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="20" column="0" lean-forward="false" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/smartrm/Logwriter.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="36">
+          <caret line="19" column="35" lean-forward="false" selection-start-line="19" selection-start-column="35" selection-end-line="19" selection-end-column="35" />
+          <folding>
+            <element signature="e#743#2655#0" expanded="false" />
+            <element signature="e#1831#1853#0" expanded="false" />
+            <element signature="e#2695#3154#0" expanded="false" />
+            <element signature="e#3424#3723#0" expanded="false" />
+            <element signature="e#3807#4166#0" expanded="false" />
+            <element signature="e#3924#4142#0" expanded="false" />
+            <element signature="e#4219#4271#0" expanded="false" />
+            <element signature="e#4314#4366#0" expanded="false" />
+            <element signature="e#4451#4704#0" expanded="false" />
+            <element signature="e#4756#4802#0" expanded="false" />
+            <element signature="e#4860#4915#0" expanded="false" />
+            <element signature="e#5002#5247#0" expanded="false" />
+            <element signature="e#5305#5360#0" expanded="false" />
+            <element signature="e#5447#5692#0" expanded="false" />
+            <element signature="e#5750#5805#0" expanded="false" />
+            <element signature="e#5892#6137#0" expanded="false" />
+            <element signature="e#6199#7321#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/smartrm/Trash.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="141">
+          <caret line="18" column="32" lean-forward="false" selection-start-line="18" selection-start-column="32" selection-end-line="18" selection-end-column="32" />
+          <folding>
+            <element signature="e#2414#2470#0" expanded="false" />
+            <element signature="e#6434#6440#0" expanded="false" />
+            <element signature="e#7151#7191#0" expanded="false" />
+            <element signature="e#11836#12136#0" expanded="false" />
+            <element signature="e#12217#12402#0" expanded="false" />
+            <element signature="e#12857#12877#0" expanded="false" />
+            <element signature="e#17556#18064#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/smartrm/File_delete_configurator.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1515">
+          <caret line="238" column="76" lean-forward="false" selection-start-line="238" selection-start-column="76" selection-end-line="238" selection-end-column="76" />
+          <folding>
+            <element signature="e#8046#8064#0" expanded="false" />
+            <element signature="e#8316#8598#0" expanded="false" />
+            <element signature="e#9226#9244#0" expanded="false" />
+            <element signature="e#9836#9854#0" expanded="false" />
+            <element signature="e#11262#11584#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tester.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="274">
+          <caret line="45" column="36" lean-forward="false" selection-start-line="45" selection-start-column="36" selection-end-line="45" selection-end-column="36" />
+          <folding>
+            <element signature="e#47#62#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

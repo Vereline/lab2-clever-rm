@@ -7,10 +7,6 @@ import Logger
 
 class ExceptionListener(Exception):
     pass
-# if critical - do the exit
-# if not critical - do smth, for example - do the
-# def __init__(self):
-# self.msg = ''
 
 
 class InvalidSizeError(ExceptionListener):
