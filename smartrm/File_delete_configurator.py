@@ -23,10 +23,10 @@ import Config_parser
 # rename here deleted file to the id
 # -i - confirm every your deletion / restore
 DEFAULT_CONFIG = {
-  "path": "/home/victoria/Trash",
-  "trash_log_path": "/home/victoria/Trash/Trash_log/Trash_log.json",
-  "trash_log_path_txt": "/home/victoria/Trash/Trash_log/Trash_log.txt",
-  "trash_logging_path": "/home/victoria/Trash/Trash_log/out.log",
+  "path": "/home/vereline/Trash",
+  "trash_log_path": "/home/vereline/Trash/Trash_log/Trash_log.json",
+  "trash_log_path_txt": "/home/vereline/Trash/Trash_log/Trash_log.txt",
+  "trash_logging_path": "/home/vereline/Trash/Trash_log/out.log",
   "policy_time": "True",
   "policy_size": "False",
   "max_size": 100000,
@@ -70,8 +70,8 @@ class FileDeleteConfigurator(object):
 
         # make this config as default and make load (right path) in the setup.py
         # load txt version as a user config after
-        user_txt_path = '/home/victoria/Configure.txt'
-        path = '/home/victoria/Configure.json'
+        user_txt_path = '/home/vereline/Configure.txt'
+        path = '/home/vereline/Configure.json'
         #
         # user_txt_path = os.path.split(sys.argv[0])[0] + '/Configure.txt'# 'smartrm/Configure.txt'  # put into setup.py
         try:
