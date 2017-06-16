@@ -156,49 +156,14 @@ class FileDeleteConfigurator(object):
                     answer = self.ask_for_confirmation(item)
                     if not answer:
                         continue
-                exists = self.check_file_path(item)
-                if not exists:
-                    logging.error('File {file} does not exist'.format(file=item))
-                else:
-                    access = self.check_access(item)
-                    if access == self.exit_codes['error']:
-                        logging.error('Item {file} is a system unit'.format(file=item))
-                    else:
-                        # remove all the check to the trash or to the smart rm
-                        file_id = self.trash.log_writer.create_file_dict(item)
-                        item = self.rename_file_name_to_id(item, file_id, self.dry_run)
-                        self.smartrm.remove_to_trash_file(item, self.dry_run, self.verbose)
-
-            self.trash.log_writer.write_to_json(self.dry_run)
-            self.trash.log_writer.write_to_txt(self.dry_run)
+                self.smartrm.operate_with_removal(item, self.exit_codes, self.trash, self.dry_run, self.verbose)
+                #############################
 
         elif self.argparser.args.remove_regular is not None:
             # do here regular check
             for element in self.paths:
-                items = Regular.define_regular_path(element)
-                for item in items:
-                    if self.interactive:
-                        answer = self.ask_for_confirmation(item)
-                        if not answer:
-                            continue
-                    exists = self.check_file_path(item)
-                    if not exists:
-                        logging.error('File {file} does not exist'.format(file=item))
-                        # exception
-                    else:
-                        access = self.check_access(item)
-                        if access == self.exit_codes['error']:
-                            logging.error('Item {file} is a system unit'.format(file=item))
-                            # exception
-                        else:
-                            file_id = self.trash.log_writer.create_file_dict(item)
-                            item = self.rename_file_name_to_id(item, file_id, self.dry_run)
-                            self.smartrm.remove_to_trash_file(item, self.dry_run, self.verbose)
-                        # if self.verbose:
-                        #     print item + ' removed'
-
-                self.trash.log_writer.write_to_json(self.dry_run)
-                self.trash.log_writer.write_to_txt(self.dry_run)
+                self.smartrm.operate_with_regex_removal(element, self.interactive, self.trash,
+                                                        self.exit_codes, self.dry_run, self.verbose)
 
         elif self.argparser.args.clean is not None:
             if self.interactive:
@@ -273,36 +238,8 @@ class FileDeleteConfigurator(object):
                 else:
                     pprint.pprint(self.config)
 
-        logging.info('check policies')
+        logging.info('Check policies')
         self.trash.check_policy(self.dry_run, self.verbose)
-
-    def check_file_path(self, path):
-        if not self.silent:
-            logging.info('Check if the path is correct')
-        # if the file is already not existing for the delete function or the file exists for restore
-        if os.path.exists(path):
-            return True
-        else:
-            return False
-
-# remove this thing to smart rm or to the trash
-
-    def rename_file_name_to_id(self, path, file_id, dry_run):  # works
-        logging.info('Rename item with id')
-        # _id = self.trash.log_writer.get_id_path(path)
-        _id = file_id
-        index = 0
-        for i in reversed(range(len(path))):
-            if path[i] == '/':
-                index = i
-                break
-
-        directory_name = path[:(index+1)] + _id
-        if dry_run:
-            print 'rename file name to id'
-        else:
-            os.rename(path, directory_name)
-        return directory_name
 
     def ask_for_confirmation(self, filename):
         answer = raw_input('Operation with {filename}. Are you sure? [y/n]\n'.format(filename=filename))

@@ -9,6 +9,7 @@ import sys
 import re
 import logging
 
+
 class Argparser(object):
     def __init__(self, arguments_string=''):
         self.parser = self.add_parser()
@@ -17,6 +18,7 @@ class Argparser(object):
             self.args = self.parser.parse_args(splited_arguments_string)
         else:
             self.args = self.parser.parse_args()
+
     def add_parser(self):
         parser = argparse.ArgumentParser()
 

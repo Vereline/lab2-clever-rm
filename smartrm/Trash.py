@@ -77,7 +77,7 @@ class Trash(object):
         # delete one file manually
         files_id = self.search_for_all_files_with_this_name(path)
         if len(files_id) > 1:
-            logging.warning('Found more than 1 file with this name')
+            logging.warning('Found more than 1 file with name {name}'.format(name=path))
         elif len(files_id) <= 0:
             logging.warning('There is no such file or directory')
             return
@@ -97,13 +97,19 @@ class Trash(object):
                     if dry_run:
                         print 'remove directory'
                     else:
-                        shutil.rmtree(clean_path)
+                        if check_file_path(clean_path):
+                            shutil.rmtree(clean_path)
+                        else:
+                            logging.error('File {n} with id {id} does not exist'.format(n=path, id=file_id))
                 elif not os.path.isdir(clean_path):
                     logging.info("Remove file".format())
                     if dry_run:
-                        print 'remove directory'
+                        print 'remove file'
                     else:
-                        os.remove(clean_path)
+                        if check_file_path(clean_path):
+                            os.remove(clean_path)
+                        else:
+                            logging.error('File {n} with id {id} does not exist'.format(n=path, id=file_id))
                     if verbose:
                         print 'item removed'
                 self.log_writer.delete_elem_by_id(file_id)
@@ -154,9 +160,8 @@ class Trash(object):
                         logging.info("Restore item".format())
                         path = self.log_writer.get_name(subpath[1])
                         self.restore_trash_manually(path, dry_run, verbose)
-
-                        if verbose:
-                            print 'item restored'
+                        # if verbose:
+                        #     print 'item restored'
                 except ExeptionListener.TrashError as ex:
                     logging.error(ex.msg)
                 except Exception as ex:
@@ -173,7 +178,7 @@ class Trash(object):
 
         files_id = self.search_for_all_files_with_this_name(path)
         if len(files_id) > 1:
-            logging.warning('Found more than 1 file with this name')
+            logging.warning('Found more than 1 file with name {name}'.format(name=path))
         elif len(files_id) <= 0:
             logging.warning('There is no such file or directory')
             return
@@ -190,8 +195,16 @@ class Trash(object):
                 ans = ask_for_confirmation(new_name)
             if not ans:
                 continue
+
             logging.info("Operations with file {file}".format(file=new_name))
             index = 0
+            if not check_file_path(clean_path):
+                logging.error('File {name} with id {id} does not exist'.format(name=new_name, id=file_id))
+                self.log_writer.delete_elem_by_id(file_id)
+                self.log_writer.write_to_json(dry_run)
+                self.log_writer.write_to_txt(dry_run)
+                continue
+
             for i in reversed(range(len(clean_path))):
                 if clean_path[i] == '/':
                     index = i
@@ -207,8 +220,11 @@ class Trash(object):
                 print 'rename file and move to original directory'
                 print 'clean record from json'
             else:
-                os.rename(clean_path, dirname)
-                shutil.move(dirname, destination_path)
+                if check_file_path(clean_path):
+                    os.rename(clean_path, dirname)
+                    shutil.move(dirname, destination_path)
+                else:
+                    logging.error('File {name} with id {id} does not exist'.format(name=new_name, id=file_id))
                 self.log_writer.delete_elem_by_id(file_id)
                 self.log_writer.write_to_json(dry_run)
                 self.log_writer.write_to_txt(dry_run)
@@ -348,6 +364,13 @@ class Trash(object):
             new_name = self.log_writer.get_name(file_id)
             logging.info("Operations with file {file}".format(file=new_name))
             index = 0
+            if not check_file_path(clean_path):
+                logging.error('File {n} with id {id} does not exist'.format(n=new_name, id=file_id))
+                self.log_writer.delete_elem_by_id(file_id)
+                self.log_writer.write_to_json(dry_run)
+                self.log_writer.write_to_txt(dry_run)
+                continue
+
             for i in reversed(range(len(clean_path))):
                 if clean_path[i] == '/':
                     index = i
@@ -367,8 +390,13 @@ class Trash(object):
                     ans = ask_for_confirmation(new_name)
                     if ans:
                         try:
-                            os.rename(clean_path, dirname)
-                            shutil.move(dirname, destination_path)
+                            if check_file_path(clean_path):
+                                os.rename(clean_path, dirname)
+                                shutil.move(dirname, destination_path)
+                            else:
+                                logging.error('File {n} with id {id} does not exist'.format(n=new_name, id=file_id))
+                            # os.rename(clean_path, dirname)
+                            # shutil.move(dirname, destination_path)
                             self.log_writer.delete_elem_by_id(file_id)
                             self.log_writer.write_to_json(dry_run)
                             self.log_writer.write_to_txt(dry_run)
@@ -380,8 +408,13 @@ class Trash(object):
                             logging.error(ex.message)
                 else:
                     try:
-                        os.rename(clean_path, dirname)
-                        shutil.move(dirname, destination_path)
+                        if check_file_path(clean_path):
+                            os.rename(clean_path, dirname)
+                            shutil.move(dirname, destination_path)
+                        else:
+                            logging.error('File {n} with id {id} does not exist'.format(n=new_name, id=file_id))
+                        # os.rename(clean_path, dirname)
+                        # shutil.move(dirname, destination_path)
                         self.log_writer.delete_elem_by_id(file_id)
                         self.log_writer.write_to_json(dry_run)
                         self.log_writer.write_to_txt(dry_run)
@@ -408,7 +441,10 @@ class Trash(object):
                 if not dry_run:
                     if verbose:
                         print 'remove item'
-                    shutil.rmtree(clean_path)
+                    if check_file_path(clean_path):
+                        shutil.rmtree(clean_path)
+                    else:
+                        logging.error('File {n} with id {id} does not exist'.format(n=name, id=file_id))
                     self.log_writer.delete_elem_by_id(file_id)
                     self.log_writer.write_to_json(dry_run)
                     self.log_writer.write_to_txt(dry_run)
@@ -419,7 +455,10 @@ class Trash(object):
                 if not dry_run:
                     if verbose:
                         print 'remove item'
-                    os.remove(clean_path)
+                    if check_file_path(clean_path):
+                        os.remove(clean_path)
+                    else:
+                        logging.error('File {n} with id {id} does not exist'.format(n=name, id=file_id))
                     self.log_writer.delete_elem_by_id(file_id)
                     self.log_writer.write_to_json(dry_run)
                     self.log_writer.write_to_txt(dry_run)
@@ -440,3 +479,15 @@ def ask_for_confirmation(filename, silent=False):
         # sys.exit(self.exit_codes['success'])
     elif answer != 'y' and answer != 'n' and answer != 'N' and answer != 'Y':
         ask_for_confirmation(filename)
+
+
+def check_file_path(path):
+    # if not self.silent:
+    logging.info('Check if the path is correct')
+    # if the file is already not existing for the delete function or the file exists for restore
+    if path is None:
+        return False
+    if os.path.exists(path):
+        return True
+    else:
+        return False
