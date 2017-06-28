@@ -1,0 +1,3 @@
+[console_scripts]
+smartrm = smartrm.Main:main
+

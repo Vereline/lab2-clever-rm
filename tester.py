@@ -31,14 +31,22 @@ class TestSMART(unittest.TestCase):
         for file_ in more_files:
             with open('%s' % file_, 'w'):
                 pass
+        self.question_for_true = self.q_true
+        self.question_for_false = self.q_false
+
+    def q_true(self, string):
+        return True
+
+    def q_false(self, string):
+        return False
 
     def test_remove_files(self):
         trash = Trash(DEFAULT_CONFIG['path'], DEFAULT_CONFIG['trash_log_path'],
                       DEFAULT_CONFIG['trash_log_path_txt'],
                       DEFAULT_CONFIG['policy_time'], DEFAULT_CONFIG['policy_size'], DEFAULT_CONFIG['max_size'],
-                      DEFAULT_CONFIG['current_size'], DEFAULT_CONFIG['max_capacity'], DEFAULT_CONFIG['max_time'])
+                      DEFAULT_CONFIG['current_size'], DEFAULT_CONFIG['max_capacity'], DEFAULT_CONFIG['max_time'], self.question_for_true)
 
-        smartrm = SmartRm(DEFAULT_CONFIG['path'])
+        smartrm = SmartRm(DEFAULT_CONFIG['path'], self.question_for_true)
         path = os.path.abspath('test_directory/1')
         smartrm.operate_with_removal(path, EXIT_CODES, trash, dry_run=False, verbose=False)
         self.assertFalse(os.path.exists(path))
@@ -50,9 +58,9 @@ class TestSMART(unittest.TestCase):
         trash = Trash(DEFAULT_CONFIG['path'], DEFAULT_CONFIG['trash_log_path'],
                       DEFAULT_CONFIG['trash_log_path_txt'],
                       DEFAULT_CONFIG['policy_time'], DEFAULT_CONFIG['policy_size'], DEFAULT_CONFIG['max_size'],
-                      DEFAULT_CONFIG['current_size'], DEFAULT_CONFIG['max_capacity'], DEFAULT_CONFIG['max_time'])
+                      DEFAULT_CONFIG['current_size'], DEFAULT_CONFIG['max_capacity'], DEFAULT_CONFIG['max_time'], self.question_for_true)
 
-        smartrm = SmartRm(DEFAULT_CONFIG['path'])
+        smartrm = SmartRm(DEFAULT_CONFIG['path'], self.question_for_true)
         path = os.path.abspath('test_directory/1')
         smartrm.operate_with_removal(path, EXIT_CODES, trash, dry_run=False, verbose=False)
         trash.restore_trash_manually('1', dry_run=False, verbose=False)
@@ -65,11 +73,11 @@ class TestSMART(unittest.TestCase):
         trash = Trash(DEFAULT_CONFIG['path'], DEFAULT_CONFIG['trash_log_path'],
                       DEFAULT_CONFIG['trash_log_path_txt'],
                       DEFAULT_CONFIG['policy_time'], DEFAULT_CONFIG['policy_size'], DEFAULT_CONFIG['max_size'],
-                      DEFAULT_CONFIG['current_size'], DEFAULT_CONFIG['max_capacity'], DEFAULT_CONFIG['max_time'])
+                      DEFAULT_CONFIG['current_size'], DEFAULT_CONFIG['max_capacity'], DEFAULT_CONFIG['max_time'], self.question_for_true)
 
-        smartrm = SmartRm(DEFAULT_CONFIG['path'])
+        smartrm = SmartRm(DEFAULT_CONFIG['path'], self.question_for_true)
         path = '^abcd'
-        interactive = True
+        interactive = False
         smartrm.operate_with_regex_removal(path, interactive, trash, EXIT_CODES, dry_run=False, verbose=False)
         self.assertFalse(os.path.exists(os.path.abspath('abcd')))
         self.assertFalse(os.path.exists(os.path.abspath('abcde')))
@@ -86,13 +94,13 @@ class TestSMART(unittest.TestCase):
         trash = Trash(DEFAULT_CONFIG['path'], DEFAULT_CONFIG['trash_log_path'],
                       DEFAULT_CONFIG['trash_log_path_txt'],
                       DEFAULT_CONFIG['policy_time'], DEFAULT_CONFIG['policy_size'], DEFAULT_CONFIG['max_size'],
-                      DEFAULT_CONFIG['current_size'], DEFAULT_CONFIG['max_capacity'], DEFAULT_CONFIG['max_time'])
+                      DEFAULT_CONFIG['current_size'], DEFAULT_CONFIG['max_capacity'], DEFAULT_CONFIG['max_time'], self.question_for_true)
 
-        smartrm = SmartRm(DEFAULT_CONFIG['path'])
+        smartrm = SmartRm(DEFAULT_CONFIG['path'], self.question_for_true)
         path = '^abcd'
-        interactive = True
+        interactive = False
         smartrm.operate_with_regex_removal(path, interactive, trash, EXIT_CODES, dry_run=False, verbose=False)
-        trash.restore_by_regular(path, dry_run=False, interactive=True, verbose=True)
+        trash.restore_by_regular(path, dry_run=False, interactive=False, verbose=True)
         self.assertFalse(not os.path.exists(os.path.abspath('abcd')))
         self.assertFalse(not os.path.exists(os.path.abspath('abcde')))
         self.assertFalse(not os.path.exists(os.path.abspath('abcdef')))
@@ -107,9 +115,9 @@ class TestSMART(unittest.TestCase):
         trash = Trash(DEFAULT_CONFIG['path'], DEFAULT_CONFIG['trash_log_path'],
                       DEFAULT_CONFIG['trash_log_path_txt'],
                       DEFAULT_CONFIG['policy_time'], DEFAULT_CONFIG['policy_size'], DEFAULT_CONFIG['max_size'],
-                      DEFAULT_CONFIG['current_size'], DEFAULT_CONFIG['max_capacity'], DEFAULT_CONFIG['max_time'])
+                      DEFAULT_CONFIG['current_size'], DEFAULT_CONFIG['max_capacity'], DEFAULT_CONFIG['max_time'], self.question_for_true)
 
-        smartrm = SmartRm(DEFAULT_CONFIG['path'])
+        smartrm = SmartRm(DEFAULT_CONFIG['path'], self.question_for_true)
         path = os.path.abspath('test_directory')
         smartrm.operate_with_removal(path, EXIT_CODES, trash, dry_run=False, verbose=False)
         self.assertFalse(os.path.exists(path))
@@ -119,9 +127,9 @@ class TestSMART(unittest.TestCase):
         trash = Trash(DEFAULT_CONFIG['path'], DEFAULT_CONFIG['trash_log_path'],
                       DEFAULT_CONFIG['trash_log_path_txt'],
                       DEFAULT_CONFIG['policy_time'], DEFAULT_CONFIG['policy_size'], DEFAULT_CONFIG['max_size'],
-                      DEFAULT_CONFIG['current_size'], DEFAULT_CONFIG['max_capacity'], DEFAULT_CONFIG['max_time'])
+                      DEFAULT_CONFIG['current_size'], DEFAULT_CONFIG['max_capacity'], DEFAULT_CONFIG['max_time'], self.question_for_true)
 
-        smartrm = SmartRm(DEFAULT_CONFIG['path'])
+        smartrm = SmartRm(DEFAULT_CONFIG['path'], self.question_for_true)
         path = os.path.abspath('test_directory/1')
         smartrm.operate_with_removal(path, EXIT_CODES, trash, dry_run=True, verbose=False)
         self.assertFalse(not os.path.exists(path))
@@ -131,9 +139,9 @@ class TestSMART(unittest.TestCase):
         trash = Trash(DEFAULT_CONFIG['path'], DEFAULT_CONFIG['trash_log_path'],
                       DEFAULT_CONFIG['trash_log_path_txt'],
                       DEFAULT_CONFIG['policy_time'], DEFAULT_CONFIG['policy_size'], DEFAULT_CONFIG['max_size'],
-                      DEFAULT_CONFIG['current_size'], DEFAULT_CONFIG['max_capacity'], DEFAULT_CONFIG['max_time'])
+                      DEFAULT_CONFIG['current_size'], DEFAULT_CONFIG['max_capacity'], DEFAULT_CONFIG['max_time'], self.question_for_true)
 
-        smartrm = SmartRm(DEFAULT_CONFIG['path'])
+        smartrm = SmartRm(DEFAULT_CONFIG['path'], self.question_for_true)
         path = os.path.abspath('test_directory/123')
         smartrm.operate_with_removal(path, EXIT_CODES, trash, dry_run=False, verbose=False)
         trash.restore_trash_manually('123', dry_run=True, verbose=False)
@@ -163,7 +171,7 @@ class TestSMART(unittest.TestCase):
         trash = Trash(DEFAULT_CONFIG['path'], DEFAULT_CONFIG['trash_log_path'],
                       DEFAULT_CONFIG['trash_log_path_txt'],
                       DEFAULT_CONFIG['policy_time'], DEFAULT_CONFIG['policy_size'], DEFAULT_CONFIG['max_size'],
-                      DEFAULT_CONFIG['current_size'], DEFAULT_CONFIG['max_capacity'], DEFAULT_CONFIG['max_time'])
+                      DEFAULT_CONFIG['current_size'], DEFAULT_CONFIG['max_capacity'], DEFAULT_CONFIG['max_time'], self.question_for_true)
 
         self.assertFalse(not os.path.exists(path))
         self.assertTrue(os.path.exists(path))
@@ -172,8 +180,8 @@ class TestSMART(unittest.TestCase):
         trash = Trash(DEFAULT_CONFIG['path'], DEFAULT_CONFIG['trash_log_path'],
                       DEFAULT_CONFIG['trash_log_path_txt'],
                       DEFAULT_CONFIG['policy_time'], DEFAULT_CONFIG['policy_size'], DEFAULT_CONFIG['max_size'],
-                      DEFAULT_CONFIG['current_size'], DEFAULT_CONFIG['max_capacity'], DEFAULT_CONFIG['max_time'])
-        smartrm = SmartRm(DEFAULT_CONFIG['path'])
+                      DEFAULT_CONFIG['current_size'], DEFAULT_CONFIG['max_capacity'], DEFAULT_CONFIG['max_time'], self.question_for_true)
+        smartrm = SmartRm(DEFAULT_CONFIG['path'], self.question_for_true)
         path = os.path.abspath('abcd')
         smartrm.operate_with_removal(path, EXIT_CODES, trash, dry_run=False, verbose=False)
         file = open('abcd', 'w')
@@ -196,8 +204,8 @@ class TestSMART(unittest.TestCase):
         trash = Trash(DEFAULT_CONFIG['path'], DEFAULT_CONFIG['trash_log_path'],
                       DEFAULT_CONFIG['trash_log_path_txt'],
                       DEFAULT_CONFIG['policy_time'], DEFAULT_CONFIG['policy_size'], DEFAULT_CONFIG['max_size'],
-                      DEFAULT_CONFIG['current_size'], DEFAULT_CONFIG['max_capacity'], DEFAULT_CONFIG['max_time'])
-        smartrm = SmartRm(DEFAULT_CONFIG['path'])
+                      DEFAULT_CONFIG['current_size'], DEFAULT_CONFIG['max_capacity'], DEFAULT_CONFIG['max_time'], self.question_for_true)
+        smartrm = SmartRm(DEFAULT_CONFIG['path'], self.question_for_true)
         path = os.path.abspath('abcd')
         smartrm.operate_with_removal(path, EXIT_CODES, trash, dry_run=False, verbose=False)
         file_ = open('abcd', 'w')

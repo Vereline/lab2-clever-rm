@@ -124,8 +124,7 @@ class FileDeleteConfigurator(object):
             self.trash = Trash.Trash(self.config['path'], self.config['trash_log_path'],
                                      self.config['trash_log_path_txt'],
                                      self.config['policy_time'], self.config['policy_size'], self.config['max_size'],
-                                     self.config['current_size'], self.config['max_capacity'], self.config['max_time'],
-                                     self.ask_for_confirmation)
+                                     self.config['current_size'], self.config['max_capacity'], self.config['max_time'])
         except ExeptionListener.FileDoesNotExistException as ex:
             # do not so broad exception
             # do closer exception
@@ -137,7 +136,7 @@ class FileDeleteConfigurator(object):
             sys.exit(self.exit_codes['error'])
 
         try:
-            self.smartrm = Smart_rm.SmartRm(self.config['path'], self.ask_for_confirmation)
+            self.smartrm = Smart_rm.SmartRm(self.config['path'])
         except ExeptionListener.FileDoesNotExistException as ex:
             logging.error('Unable to load smart rm')
             logging.error(ex.msg)

@@ -184,8 +184,8 @@ class Logwriter(object):
                     if not os.path.exists(dir_path):
                         os.makedirs(dir_path)
                 txt_file = open(self.file_dict_path_txt, 'w')
-                # reload(sys)
-                # sys.setdefaultencoding('utf-8')
+                reload(sys)
+                sys.setdefaultencoding('utf-8')
 
                 # redo unicode utf-8
                 for item in self.file_dict_arr:

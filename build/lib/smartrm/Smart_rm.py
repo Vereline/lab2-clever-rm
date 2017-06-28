@@ -13,10 +13,9 @@ import Regular
 
 
 class SmartRm(object):
-    def __init__(self, path, q):
+    def __init__(self, path):
         self.trash_path = path
         self.exception_listener = ExeptionListener.ExceptionListener
-        self.ask_for_confirmation = q
 
     def operate_with_removal(self, item, exit_codes, trash, dry_run, verbose):
         exists = check_file_path(item)
@@ -39,7 +38,7 @@ class SmartRm(object):
         items = Regular.define_regular_path(element)
         for item in items:
             if interactive:
-                answer = self.ask_for_confirmation(item)
+                answer = ask_for_confirmation(item)
                 if not answer:
                     continue
             exists = check_file_path(item)

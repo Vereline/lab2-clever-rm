@@ -1,0 +1,17 @@
+setup.py
+smartrm/Argparser.py
+smartrm/Config_parser.py
+smartrm/ExeptionListener.py
+smartrm/File_delete_configurator.py
+smartrm/Logger.py
+smartrm/Logwriter.py
+smartrm/Main.py
+smartrm/Regular.py
+smartrm/Smart_rm.py
+smartrm/Trash.py
+smartrm/__init__.py
+smartrm.egg-info/PKG-INFO
+smartrm.egg-info/SOURCES.txt
+smartrm.egg-info/dependency_links.txt
+smartrm.egg-info/entry_points.txt
+smartrm.egg-info/top_level.txt

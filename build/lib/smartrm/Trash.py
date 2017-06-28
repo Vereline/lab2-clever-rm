@@ -13,7 +13,7 @@ import ExeptionListener
 
 
 class Trash(object):
-    def __init__(self, path_trash, path_log_j, path_log_t, policy_time, policy_size, size, cur_size, capacity, time, q):
+    def __init__(self, path_trash, path_log_j, path_log_t, policy_time, policy_size, size, cur_size, capacity, time):
         self.path = path_trash
         if not os.path.exists(self.path):
             logging.info('Create a new trash in the {path}'.format(path=self.path))
@@ -38,7 +38,6 @@ class Trash(object):
         self.cur_size = int(cur_size)
         self.max_capacity = int(capacity)  # the max quantity of files in trash
         self.max_time = int(time)
-        self.ask_for_confirmation = q
 
     def delete_automatically(self, dry_run, verbose):  # works
         # delete the whole trash
@@ -89,7 +88,7 @@ class Trash(object):
             ans = True
             if len(files_id) > 1:
                 logging.info('Restore {name}, id = {id}?'.format(name=path, id=file_id))
-                ans = self.ask_for_confirmation(path)
+                ans = ask_for_confirmation(path)
             if not ans:
                 continue
             try:
@@ -193,7 +192,7 @@ class Trash(object):
             new_name = self.log_writer.get_name(file_id)
             if len(files_id) > 1:
                 logging.info('Restore {name}, id = {id}?'.format(name=new_name, id=file_id))
-                ans = self.ask_for_confirmation(new_name)
+                ans = ask_for_confirmation(new_name)
             if not ans:
                 continue
 
@@ -388,7 +387,7 @@ class Trash(object):
                 print 'clean record from json'
             else:
                 if interactive:
-                    ans = self.ask_for_confirmation(new_name)
+                    ans = ask_for_confirmation(new_name)
                     if ans:
                         try:
                             if check_file_path(clean_path):
@@ -434,7 +433,7 @@ class Trash(object):
             name = self.log_writer.get_name(file_id)
             answer = None
             if interactive:
-                answer = self.ask_for_confirmation(name)
+                answer = ask_for_confirmation(name)
             if (answer is not None) and (answer is False):
                 continue
             if os.path.isdir(clean_path):
