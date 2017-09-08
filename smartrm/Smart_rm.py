@@ -19,6 +19,7 @@ class SmartRm(object):
         self.ask_for_confirmation = q
 
     def operate_with_removal(self, item, exit_codes, trash, dry_run, verbose):
+        """remove files into trash by filenames"""
         exists = check_file_path(item)
         if not exists:
             logging.error('File {file} does not exist'.format(file=item))
@@ -36,6 +37,7 @@ class SmartRm(object):
                 trash.log_writer.write_to_txt(dry_run)
 
     def operate_with_regex_removal(self, element, interactive, trash, exit_codes, dry_run, verbose):
+        """remove files into trash by regex"""
         items = Regular.define_regular_path(element)
         for item in items:
             if interactive:

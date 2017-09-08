@@ -14,7 +14,7 @@ class Logwriter(object):
         self.file_dict_arr = []  # what's in the trash
         self.file_dict = {}  # for temporary issues
         self.file_dict_path = path
-        self.file_dict_path_txt = txt_path  # redo for path from config
+        self.file_dict_path_txt = txt_path  
         self.load_from_json()
 
     def create_file_dict(self, path):
@@ -26,6 +26,7 @@ class Logwriter(object):
         return file_id
 
     def write_file_dict(self, path):
+        """white data about file in a special dictionary  """
         file_dict = {'path': path, 'id': str(datetime.now().__hash__()),
                      'date': datetime.strftime(datetime.now(), '%Y-%m-%d'),
                      'size': os.path.getsize(path)}
@@ -91,7 +92,7 @@ class Logwriter(object):
         else:
             json.dump(self.file_dict_arr, open(self.file_dict_path, 'w'))
 
-    # ubrat eto
+    
     def get_id_by_name(self, array, name):  # not checked
         file_id = ''
 
@@ -104,7 +105,7 @@ class Logwriter(object):
 
         return file_id
 
-    # ubrat eto
+    
     def get_id_by_path(self, array, path):  # not checked
         file_id = ''
         reload(sys)
@@ -125,7 +126,7 @@ class Logwriter(object):
     def get_id_path(self, path):
         return self.get_id_by_path(self.file_dict_arr, path)
 
-    # ubrat eto
+    
     def delete_by_id(self, array, file_id):  # not checked
         for item in array:
                 if item['id'] == file_id:
@@ -140,7 +141,7 @@ class Logwriter(object):
     def get_path(self, file_id):  # not checked
         return self.get_path_by_id(self.file_dict_arr, file_id)
 
-    # ubrat eto
+    
     def get_path_by_id(self, array, file_id):  # not checked
         path = ''
         for item in array:
@@ -152,7 +153,7 @@ class Logwriter(object):
     def get_name(self, file_id):  # not checked
         return self.get_name_by_id(self.file_dict_arr, file_id)
 
-    # ubrat eto
+    
     def get_name_by_id(self, array, file_id):  # not checked
         path = ''
         for item in array:
@@ -164,7 +165,7 @@ class Logwriter(object):
     def get_date(self, file_id):  # not checked
         return self.get_date_by_id(self.file_dict_arr, file_id)
 
-    # ubrat eto
+    
     def get_date_by_id(self, array, file_id):  # not checked
         path = ''
         for item in array:

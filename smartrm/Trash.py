@@ -41,7 +41,7 @@ class Trash(object):
         self.ask_for_confirmation = q
 
     def delete_automatically(self, dry_run, verbose):  # works
-        # delete the whole trash
+        """ delete the whole trash """
         logging.info("Clean the whole trash".format())
         if dry_run:
             print 'clean trash'
@@ -68,14 +68,14 @@ class Trash(object):
                 except Exception as ex:
                     logging.error(ex.message)
 
-            # logging.info("Clean information about files".format())
-            # clean_json = open(self.log_writer.file_dict_path, 'w')
-            # clean_json.close()
-            # clean_txt = open(self.log_writer.file_dict_path_txt, 'w')
-            # clean_txt.close()
+             logging.info("Clean information about files".format())
+             clean_json = open(self.log_writer.file_dict_path, 'w')
+             clean_json.close()
+             clean_txt = open(self.log_writer.file_dict_path_txt, 'w')
+             clean_txt.close()
 
     def delete_manually(self, path, dry_run, verbose):  # not checked
-        # delete one file manually
+        """ delete one file manually """
         files_id = self.search_for_all_files_with_this_name(path)
         if len(files_id) > 1:
             logging.warning('Found more than 1 file with name {name}'.format(name=path))
@@ -129,6 +129,7 @@ class Trash(object):
                 return subpath
 
     def watch_trash(self, dry_run):  # works
+    """show all items in the trash"""
         logging.info("Show trash".format())
         if dry_run:
             print 'show trash'
@@ -140,7 +141,7 @@ class Trash(object):
                 print(txt_file.read())
 
     def restore_trash_automatically(self, dry_run, verbose):  # not tested
-        # restore the the whole trash
+        """ restore the the whole trash """
         logging.info("Restore the whole trash".format())
 
         if dry_run:
@@ -167,16 +168,16 @@ class Trash(object):
                     logging.error(ex.msg)
                 except Exception as ex:
                     logging.error(ex.message)
-            # with
-            # clean_json = open(self.log_writer.file_dict_path, 'w')
-            # clean_json.close()
-            # clean_txt = open(self.log_writer.file_dict_path_txt, 'w')
-            # clean_txt.close()
+            
+             clean_json = open(self.log_writer.file_dict_path, 'w')
+             clean_json.close()
+             clean_txt = open(self.log_writer.file_dict_path_txt, 'w')
+             clean_txt.close()
 
     def restore_trash_manually(self, path, dry_run, verbose):  # works
-        # restore one file in the trash
+        """ restores one file in the trash """
+        
         # check if the path already exists
-
         files_id = self.search_for_all_files_with_this_name(path)
         if len(files_id) > 1:
             logging.warning('Found more than 1 file with name {name}'.format(name=path))
@@ -247,7 +248,8 @@ class Trash(object):
                 if confirm:
                     self.delete_manually(subpath, dry_run, verbose)
 
-    def check_policy(self, dry_run, verbose):  # not checked(redo to check the whole bucket)
+    def check_policy(self, dry_run, verbose):
+        """check policies and check files by these policies"""
         logging.info("Check policies".format())
         if self.policy_time:
             logging.info('time policy')
