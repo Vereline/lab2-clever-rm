@@ -553,10 +553,12 @@ class Trash(object):
         return_code = EXIT_CODES['success']
         clean_processes = []
         subpaths = []
-
+        logging.info('start cleaning')
         if len(ids) < 1:
             return_code = EXIT_CODES['error']
-
+        logging.info('len is {}'.format(len(ids)))
+        print 'ids',ids 
+        print 'names',names
         for file_id in ids:
             clean_path = self.get_path_by_id(file_id, self.path)
             name = self.log_writer.get_name(file_id)
@@ -678,6 +680,7 @@ def regular_rmtree(directory):
 def remove_item_from_trash(subpath, dict_contains=True):
     try:
         logging.info('start process in pool')
+        logging.info(multiprocessing.current_process())
         if dict_contains:
             if os.path.isdir(subpath):
                 regular_rmtree(subpath)

@@ -1,16 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="69e705f1-a8a3-48ec-9ea3-5f55d5647bfe" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/smartrm/Config_parser.py" afterPath="$PROJECT_DIR$/smartrm/Config_parser.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/smartrm/Configure.txt" afterPath="$PROJECT_DIR$/smartrm/Configure.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/smartrm/File_delete_configurator.py" afterPath="$PROJECT_DIR$/smartrm/File_delete_configurator.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/smartrm/Logwriter.py" afterPath="$PROJECT_DIR$/smartrm/Logwriter.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/smartrm/Smart_rm.py" afterPath="$PROJECT_DIR$/smartrm/Smart_rm.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/smartrm/Trash.py" afterPath="$PROJECT_DIR$/smartrm/Trash.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tester.py" afterPath="$PROJECT_DIR$/tester.py" />
-    </list>
+    <list default="true" id="69e705f1-a8a3-48ec-9ea3-5f55d5647bfe" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -45,23 +36,11 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Smart_rm.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Smart_rm.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/smartrm/Smart_rm.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="301">
-              <caret line="36" column="0" lean-forward="false" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
-              <folding>
-                <element signature="e#47#103#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="threading_smartrm.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/smartrm/threading_smartrm.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="198">
-              <caret line="11" column="5" lean-forward="false" selection-start-line="11" selection-start-column="5" selection-end-line="11" selection-end-column="5" />
+              <caret line="24" column="0" lean-forward="false" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -70,17 +49,9 @@
       <file leaf-file-name="Trash.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/smartrm/Trash.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="6426">
-              <caret line="388" column="17" lean-forward="false" selection-start-line="388" selection-start-column="17" selection-end-line="388" selection-end-column="17" />
-              <folding>
-                <element signature="e#2455#2511#0" expanded="false" />
-                <element signature="e#6896#6902#0" expanded="false" />
-                <element signature="e#7633#7673#0" expanded="false" />
-                <element signature="e#12862#13162#0" expanded="false" />
-                <element signature="e#13243#13428#0" expanded="false" />
-                <element signature="e#13883#13903#0" expanded="false" />
-                <element signature="e#19987#20495#0" expanded="false" />
-              </folding>
+            <state relative-caret-position="8748">
+              <caret line="493" column="17" lean-forward="false" selection-start-line="493" selection-start-column="17" selection-end-line="493" selection-end-column="17" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -89,7 +60,7 @@
         <entry file="file://$PROJECT_DIR$/tester.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="864">
-              <caret line="48" column="24" lean-forward="true" selection-start-line="48" selection-start-column="24" selection-end-line="48" selection-end-column="24" />
+              <caret line="48" column="24" lean-forward="false" selection-start-line="48" selection-start-column="24" selection-end-line="48" selection-end-column="24" />
               <folding>
                 <element signature="e#47#62#0" expanded="true" />
               </folding>
@@ -101,7 +72,7 @@
         <entry file="file://$PROJECT_DIR$/smartrm/Configure.txt">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="126">
-              <caret line="7" column="12" lean-forward="true" selection-start-line="7" selection-start-column="12" selection-end-line="7" selection-end-column="12" />
+              <caret line="7" column="12" lean-forward="false" selection-start-line="7" selection-start-column="12" selection-end-line="7" selection-end-column="12" />
               <folding />
             </state>
           </provider>
@@ -110,17 +81,9 @@
       <file leaf-file-name="File_delete_configurator.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/smartrm/File_delete_configurator.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1710">
-              <caret line="109" column="0" lean-forward="false" selection-start-line="109" selection-start-column="0" selection-end-line="109" selection-end-column="0" />
-              <folding>
-                <element signature="e#7498#7516#0" expanded="false" />
-                <element signature="e#8108#8126#0" expanded="false" />
-                <element signature="e#9543#10110#0" expanded="false" />
-                <element signature="e#10154#10481#0" expanded="false" />
-                <element signature="e#10532#10768#0" expanded="false" />
-                <element signature="e#10647#10768#0" expanded="false" />
-                <element signature="e#10825#11179#0" expanded="false" />
-              </folding>
+            <state relative-caret-position="1854">
+              <caret line="104" column="0" lean-forward="false" selection-start-line="104" selection-start-column="0" selection-end-line="104" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -140,8 +103,8 @@
       <file leaf-file-name="Regular.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/smartrm/Regular.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="612">
-              <caret line="37" column="67" lean-forward="false" selection-start-line="37" selection-start-column="67" selection-end-line="37" selection-end-column="67" />
+            <state relative-caret-position="792">
+              <caret line="47" column="67" lean-forward="false" selection-start-line="47" selection-start-column="67" selection-end-line="47" selection-end-column="67" />
               <folding />
             </state>
           </provider>
@@ -153,21 +116,23 @@
             <state relative-caret-position="1404">
               <caret line="185" column="0" lean-forward="false" selection-start-line="185" selection-start-column="0" selection-end-line="185" selection-end-column="0" />
               <folding>
-                <element signature="e#743#2655#0" expanded="false" />
-                <element signature="e#1831#1853#0" expanded="false" />
-                <element signature="e#2695#3154#0" expanded="false" />
-                <element signature="e#3424#3723#0" expanded="false" />
-                <element signature="e#3807#4166#0" expanded="false" />
-                <element signature="e#3924#4142#0" expanded="false" />
-                <element signature="e#4219#4271#0" expanded="false" />
-                <element signature="e#4314#4366#0" expanded="false" />
-                <element signature="e#4451#4704#0" expanded="false" />
-                <element signature="e#4756#4802#0" expanded="false" />
-                <element signature="e#4860#4915#0" expanded="false" />
-                <element signature="e#5305#5360#0" expanded="false" />
-                <element signature="e#5447#5692#0" expanded="false" />
-                <element signature="e#5750#5805#0" expanded="false" />
-                <element signature="e#5892#6137#0" expanded="false" />
+                <element signature="e#756#2701#0" expanded="false" />
+                <element signature="e#1877#1899#0" expanded="false" />
+                <element signature="e#2741#3200#0" expanded="false" />
+                <element signature="e#3470#3769#0" expanded="false" />
+                <element signature="e#3853#4212#0" expanded="false" />
+                <element signature="e#3970#4188#0" expanded="false" />
+                <element signature="e#4265#4317#0" expanded="false" />
+                <element signature="e#4360#4412#0" expanded="false" />
+                <element signature="e#4497#4750#0" expanded="false" />
+                <element signature="e#4802#4848#0" expanded="false" />
+                <element signature="e#4906#4961#0" expanded="false" />
+                <element signature="e#5351#5406#0" expanded="false" />
+                <element signature="e#5493#5738#0" expanded="false" />
+                <element signature="e#5796#5851#0" expanded="false" />
+                <element signature="e#5938#6183#0" expanded="false" />
+                <marker date="1504787684048" expanded="true" signature="488:529" ph="..." />
+                <marker date="1504787684048" expanded="true" signature="1829:1863" ph="..." />
               </folding>
             </state>
           </provider>
@@ -257,8 +222,8 @@
         <option value="$PROJECT_DIR$/tester.py" />
         <option value="$PROJECT_DIR$/smartrm/Config_parser.py" />
         <option value="$PROJECT_DIR$/smartrm/Configure.txt" />
-        <option value="$PROJECT_DIR$/smartrm/Smart_rm.py" />
         <option value="$PROJECT_DIR$/smartrm/threading_smartrm.py" />
+        <option value="$PROJECT_DIR$/smartrm/Smart_rm.py" />
       </list>
     </option>
   </component>
@@ -289,7 +254,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -318,6 +282,7 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
       <pane id="Scratches" />
     </panes>
   </component>
@@ -746,7 +711,7 @@
     <frame x="57" y="21" width="1309" height="747" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20047356" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20363063" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32771823" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32771823" sideWeight="0.50276244" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32862645" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -1127,14 +1092,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="162">
           <caret line="10" column="0" lean-forward="false" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/smartrm/Regular.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="612">
-          <caret line="37" column="67" lean-forward="false" selection-start-line="37" selection-start-column="67" selection-end-line="37" selection-end-column="67" />
+        <state relative-caret-position="792">
+          <caret line="47" column="67" lean-forward="false" selection-start-line="47" selection-start-column="67" selection-end-line="47" selection-end-column="67" />
           <folding />
         </state>
       </provider>
@@ -1144,21 +1108,23 @@
         <state relative-caret-position="1404">
           <caret line="185" column="0" lean-forward="false" selection-start-line="185" selection-start-column="0" selection-end-line="185" selection-end-column="0" />
           <folding>
-            <element signature="e#743#2655#0" expanded="false" />
-            <element signature="e#1831#1853#0" expanded="false" />
-            <element signature="e#2695#3154#0" expanded="false" />
-            <element signature="e#3424#3723#0" expanded="false" />
-            <element signature="e#3807#4166#0" expanded="false" />
-            <element signature="e#3924#4142#0" expanded="false" />
-            <element signature="e#4219#4271#0" expanded="false" />
-            <element signature="e#4314#4366#0" expanded="false" />
-            <element signature="e#4451#4704#0" expanded="false" />
-            <element signature="e#4756#4802#0" expanded="false" />
-            <element signature="e#4860#4915#0" expanded="false" />
-            <element signature="e#5305#5360#0" expanded="false" />
-            <element signature="e#5447#5692#0" expanded="false" />
-            <element signature="e#5750#5805#0" expanded="false" />
-            <element signature="e#5892#6137#0" expanded="false" />
+            <element signature="e#756#2701#0" expanded="false" />
+            <element signature="e#1877#1899#0" expanded="false" />
+            <element signature="e#2741#3200#0" expanded="false" />
+            <element signature="e#3470#3769#0" expanded="false" />
+            <element signature="e#3853#4212#0" expanded="false" />
+            <element signature="e#3970#4188#0" expanded="false" />
+            <element signature="e#4265#4317#0" expanded="false" />
+            <element signature="e#4360#4412#0" expanded="false" />
+            <element signature="e#4497#4750#0" expanded="false" />
+            <element signature="e#4802#4848#0" expanded="false" />
+            <element signature="e#4906#4961#0" expanded="false" />
+            <element signature="e#5351#5406#0" expanded="false" />
+            <element signature="e#5493#5738#0" expanded="false" />
+            <element signature="e#5796#5851#0" expanded="false" />
+            <element signature="e#5938#6183#0" expanded="false" />
+            <marker date="1504787684048" expanded="true" signature="488:529" ph="..." />
+            <marker date="1504787684048" expanded="true" signature="1829:1863" ph="..." />
           </folding>
         </state>
       </provider>
@@ -1166,7 +1132,7 @@
     <entry file="file://$PROJECT_DIR$/smartrm/Configure.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="126">
-          <caret line="7" column="12" lean-forward="true" selection-start-line="7" selection-start-column="12" selection-end-line="7" selection-end-column="12" />
+          <caret line="7" column="12" lean-forward="false" selection-start-line="7" selection-start-column="12" selection-end-line="7" selection-end-column="12" />
           <folding />
         </state>
       </provider>
@@ -1181,17 +1147,9 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/smartrm/File_delete_configurator.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1710">
-          <caret line="109" column="0" lean-forward="false" selection-start-line="109" selection-start-column="0" selection-end-line="109" selection-end-column="0" />
-          <folding>
-            <element signature="e#7498#7516#0" expanded="false" />
-            <element signature="e#8108#8126#0" expanded="false" />
-            <element signature="e#9543#10110#0" expanded="false" />
-            <element signature="e#10154#10481#0" expanded="false" />
-            <element signature="e#10532#10768#0" expanded="false" />
-            <element signature="e#10647#10768#0" expanded="false" />
-            <element signature="e#10825#11179#0" expanded="false" />
-          </folding>
+        <state relative-caret-position="1854">
+          <caret line="104" column="0" lean-forward="false" selection-start-line="104" selection-start-column="0" selection-end-line="104" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1208,7 +1166,7 @@
     <entry file="file://$PROJECT_DIR$/tester.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="864">
-          <caret line="48" column="24" lean-forward="true" selection-start-line="48" selection-start-column="24" selection-end-line="48" selection-end-column="24" />
+          <caret line="48" column="24" lean-forward="false" selection-start-line="48" selection-start-column="24" selection-end-line="48" selection-end-column="24" />
           <folding>
             <element signature="e#47#62#0" expanded="true" />
           </folding>
@@ -1217,34 +1175,17 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/smartrm/Trash.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="6426">
-          <caret line="388" column="17" lean-forward="false" selection-start-line="388" selection-start-column="17" selection-end-line="388" selection-end-column="17" />
-          <folding>
-            <element signature="e#2455#2511#0" expanded="false" />
-            <element signature="e#6896#6902#0" expanded="false" />
-            <element signature="e#7633#7673#0" expanded="false" />
-            <element signature="e#12862#13162#0" expanded="false" />
-            <element signature="e#13243#13428#0" expanded="false" />
-            <element signature="e#13883#13903#0" expanded="false" />
-            <element signature="e#19987#20495#0" expanded="false" />
-          </folding>
+        <state relative-caret-position="8748">
+          <caret line="493" column="17" lean-forward="false" selection-start-line="493" selection-start-column="17" selection-end-line="493" selection-end-column="17" />
+          <folding />
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/smartrm/threading_smartrm.py" />
     <entry file="file://$PROJECT_DIR$/smartrm/Smart_rm.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="301">
-          <caret line="36" column="0" lean-forward="false" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
-          <folding>
-            <element signature="e#47#103#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/smartrm/threading_smartrm.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="11" column="5" lean-forward="false" selection-start-line="11" selection-start-column="5" selection-end-line="11" selection-end-column="5" />
+          <caret line="24" column="0" lean-forward="false" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
           <folding />
         </state>
       </provider>
