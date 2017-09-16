@@ -23,7 +23,7 @@ class ConfParser(object):
 
                 self.dict[option] = self.parser.get(section, option).decode('utf8')
                 if self.dict[option] == -1:
-                    logging.DEBUG("skip: %s" % option)
+                    logging.DEBUG("skip: %s", option)
                     # DebugPrint("skip: %s" % option)
             except ExeptionListener.WrongItemException as ex:
                 logging.ERROR(ex)

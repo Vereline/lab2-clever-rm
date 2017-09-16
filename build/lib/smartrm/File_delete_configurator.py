@@ -2,21 +2,16 @@
 # -*- coding: utf-8 -*-
 
 import json
-import Smart_rm
-import shutil         #Contains functions for operating files
-import os
-import sys
-import Logwriter
-import Argparser
-import Trash
-import re
-import ExeptionListener
-import pprint
-import Regular
-import Logger
 import logging
-import Config_parser
+import os
+import pprint
+import sys
 
+import Config_parser
+import ExeptionListener
+import Logger
+import Smart_rm
+import Trash
 
 # rename here deleted file to the id
 # -i - confirm every your deletion / restore
@@ -124,7 +119,8 @@ class FileDeleteConfigurator(object):
             self.trash = Trash.Trash(self.config['path'], self.config['trash_log_path'],
                                      self.config['trash_log_path_txt'],
                                      self.config['policy_time'], self.config['policy_size'], self.config['max_size'],
-                                     self.config['current_size'], self.config['max_capacity'], self.config['max_time'])
+                                     self.config['current_size'], self.config['max_capacity'], self.config['max_time'],
+                                     self.ask_for_confirmation)
         except ExeptionListener.FileDoesNotExistException as ex:
             # do not so broad exception
             # do closer exception
@@ -136,7 +132,7 @@ class FileDeleteConfigurator(object):
             sys.exit(self.exit_codes['error'])
 
         try:
-            self.smartrm = Smart_rm.SmartRm(self.config['path'])
+            self.smartrm = Smart_rm.SmartRm(self.config['path'], self.ask_for_confirmation)
         except ExeptionListener.FileDoesNotExistException as ex:
             logging.error('Unable to load smart rm')
             logging.error(ex.msg)
@@ -151,19 +147,13 @@ class FileDeleteConfigurator(object):
         logging.info('Define action')
         if self.argparser.args.remove is not None:
 
-            for item in self.paths:
-                if self.interactive:
-                    answer = self.ask_for_confirmation(item)
-                    if not answer:
-                        continue
-                self.smartrm.operate_with_removal(item, self.exit_codes, self.trash, self.dry_run, self.verbose)
-                #############################
+                self.smartrm.operate_with_removal(self.paths, self.exit_codes, self.trash, self.dry_run, self.verbose,
+                                                  self.interactive)
 
         elif self.argparser.args.remove_regular is not None:
-            # do here regular check
             for element in self.paths:
-                self.smartrm.operate_with_regex_removal(element, self.interactive, self.trash,
-                                                        self.exit_codes, self.dry_run, self.verbose)
+                self.smartrm.operate_with_regex_removal(element, self.trash,
+                                                        self.exit_codes, self.dry_run, self.verbose, self.interactive)
 
         elif self.argparser.args.clean is not None:
             if self.interactive:
@@ -175,35 +165,30 @@ class FileDeleteConfigurator(object):
                 self.trash.delete_automatically(self.dry_run, self.verbose)
 
         elif self.argparser.args.restore is not None:
-            for item in self.paths:
-                if self.interactive:
-                    answer = self.ask_for_confirmation(item)
-                    if not answer:
-                        continue
-                self.trash.restore_trash_manually(item, self.dry_run, self.verbose)
+            # for item in self.paths:
+            #     if self.interactive:
+            #         answer = self.ask_for_confirmation(item)
+            #         if not answer:
+            #             continue
+            ids =''
+            self.trash.restore_trash_manually(self.paths, ids, dry_run=self.dry_run, verbose=self.verbose, interactive_mode=self.interactive)
 
         elif self.argparser.args.restore_all is not None:
             if self.interactive:
                 answer = self.ask_for_confirmation('trash')
                 if answer:
                     self.trash.restore_trash_automatically(self.dry_run, self.verbose)
-                    # if self.verbose:
-                    #     print 'trash restored'
             else:
                 self.trash.restore_trash_automatically(self.dry_run, self.verbose)
-                # if self.verbose:
-                #     print 'trash restored'
 
         elif self.argparser.args.remove_from_trash is not None:
-
-            for item in self.paths:
-                if self.interactive:
-                    answer = self.ask_for_confirmation(item)
-                    if not answer:
-                        continue
-                self.trash.delete_manually(item, self.dry_run, self.verbose)
-                # if self.verbose:
-                #     print item + ' removed'
+                # for item in self.paths:
+            #     if self.interactive:
+            #         answer = self.ask_for_confirmation(item)
+            #         if not answer:
+            #             continue
+            ids =''
+            self.trash.delete_manually(self.paths, ids, dry_run=self.dry_run, verbose=self.verbose, interactive=self.interactive)
 
         elif self.argparser.args.clean_regular is not None:
             for item in self.paths:
@@ -213,8 +198,6 @@ class FileDeleteConfigurator(object):
 
             for item in self.paths:
                 self.trash.restore_by_regular(item, self.dry_run, self.interactive, self.verbose)
-
-            return
 
         elif self.argparser.args.show_trash is not None:
             if self.interactive:
@@ -281,6 +264,3 @@ class FileDeleteConfigurator(object):
                 logging.ERROR(ex.msg)
             except Exception as ex:
                 logging.error(ex.message)
-
-
-

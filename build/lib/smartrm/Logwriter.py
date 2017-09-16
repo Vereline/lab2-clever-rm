@@ -18,7 +18,7 @@ class Logwriter(object):
         self.load_from_json()
 
     def create_file_dict(self, path):
-        logging.info('Write data to json')
+        logging.info('Write data to json(create dict)')
 
         self.file_dict = self.write_file_dict(path)
         file_id = self.file_dict['id']
@@ -42,17 +42,17 @@ class Logwriter(object):
             dirname = path[index+1:]
             file_dict['name'] = dirname
             file_list = []
-            d = os.listdir(path)
-            # print d
-            for item in d:
-                subpath = os.path.join(path, item)
-                if os.path.isdir(subpath):
-                    subfile = self.write_file_dict(subpath)
-                    file_list.append(subfile)
-
-                elif not os.path.isdir(subpath):
-                    subdict = self.write_file_dict(subpath)
-                    file_list.append(subdict)
+            # d = os.listdir(path)
+            # # print d
+            # for item in d:
+            #     subpath = os.path.join(path, item)
+            #     if os.path.isdir(subpath):
+            #         subfile = self.write_file_dict(subpath)
+            #         file_list.append(subfile)
+            #
+            #     elif not os.path.isdir(subpath):
+            #         subdict = self.write_file_dict(subpath)
+            #         file_list.append(subdict)
 
             # tree = os.walk(path)
             # for d in tree:
@@ -184,8 +184,8 @@ class Logwriter(object):
                     if not os.path.exists(dir_path):
                         os.makedirs(dir_path)
                 txt_file = open(self.file_dict_path_txt, 'w')
-                reload(sys)
-                sys.setdefaultencoding('utf-8')
+                # reload(sys)
+                # sys.setdefaultencoding('utf-8')
 
                 # redo unicode utf-8
                 for item in self.file_dict_arr:
