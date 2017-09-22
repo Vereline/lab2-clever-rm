@@ -27,4 +27,4 @@ Arguments, which can be used in this utility:
          path - path of file/directory
          --configs - change configs for 1 time
 
-To change default configuration, change file Config.txt
+To change default configuration, change file Configure.txt
